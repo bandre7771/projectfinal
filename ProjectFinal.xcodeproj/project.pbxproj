@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		350B40331EA7FC6B00440220 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B40321EA7FC6B00440220 /* Task.swift */; };
+		350B40351EA8008600440220 /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B40341EA8008600440220 /* TaskList.swift */; };
+		350B40371EA8071900440220 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B40361EA8071900440220 /* Group.swift */; };
+		350B40391EA80AF100440220 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B40381EA80AF100440220 /* Note.swift */; };
+		350B403B1EA8113600440220 /* DailyNoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B403A1EA8113600440220 /* DailyNoteList.swift */; };
 		52D591591EA56A5900709E5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D591581EA56A5900709E5B /* AppDelegate.swift */; };
 		52D5915B1EA56A5900709E5B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D5915A1EA56A5900709E5B /* ViewController.swift */; };
 		52D5915E1EA56A5900709E5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52D5915C1EA56A5900709E5B /* Main.storyboard */; };
@@ -15,6 +20,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		350B40321EA7FC6B00440220 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		350B40341EA8008600440220 /* TaskList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
+		350B40361EA8071900440220 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		350B40381EA80AF100440220 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		350B403A1EA8113600440220 /* DailyNoteList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyNoteList.swift; sourceTree = "<group>"; };
 		52D591551EA56A5900709E5B /* ProjectFinal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectFinal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D591581EA56A5900709E5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52D5915A1EA56A5900709E5B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +45,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		350B40311EA7FC3600440220 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				350B40321EA7FC6B00440220 /* Task.swift */,
+				350B40341EA8008600440220 /* TaskList.swift */,
+				350B40361EA8071900440220 /* Group.swift */,
+				350B40381EA80AF100440220 /* Note.swift */,
+				350B403A1EA8113600440220 /* DailyNoteList.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		52D5914C1EA56A5900709E5B = {
 			isa = PBXGroup;
 			children = (
@@ -54,6 +76,7 @@
 		52D591571EA56A5900709E5B /* ProjectFinal */ = {
 			isa = PBXGroup;
 			children = (
+				350B40311EA7FC3600440220 /* Model */,
 				52D591581EA56A5900709E5B /* AppDelegate.swift */,
 				52D5915A1EA56A5900709E5B /* ViewController.swift */,
 				52D5915C1EA56A5900709E5B /* Main.storyboard */,
@@ -137,8 +160,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				350B40351EA8008600440220 /* TaskList.swift in Sources */,
 				52D5915B1EA56A5900709E5B /* ViewController.swift in Sources */,
+				350B403B1EA8113600440220 /* DailyNoteList.swift in Sources */,
+				350B40331EA7FC6B00440220 /* Task.swift in Sources */,
+				350B40371EA8071900440220 /* Group.swift in Sources */,
 				52D591591EA56A5900709E5B /* AppDelegate.swift in Sources */,
+				350B40391EA80AF100440220 /* Note.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +332,7 @@
 				52D591691EA56A5900709E5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
