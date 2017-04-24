@@ -45,6 +45,7 @@ class TaskList {
         // TODO: Search through each task by name for the keyword given.
     }
     
+    // MARK - Public Accessible Variables
     public var TaskList: [Task] {
         return _taskList
     }

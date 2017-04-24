@@ -14,9 +14,9 @@ class Task {
     private var _priority: String
     private var _date: String
     private var _group: Group
-    private var _notes: [Note]
+    private var _notes: Note
     
-    init(title: String, status: String, priority: String, date: String, group: Group, notes: [Note]) {
+    init(title: String, status: String, priority: String, date: String, group: Group, notes: Note) {
         _title = title
         _status = status
         _priority = priority
@@ -31,13 +31,11 @@ class Task {
         _priority = ""
         _date = ""
         _group = Group()
-        _notes = []
+        _notes = Note()
     }
     
-    public func addNote(note: Note) {
-        _notes.append(note)
-    }
     
+    // MARK: Public Accessible Variables
     public var title: String {
         get{
             return _title
@@ -83,7 +81,7 @@ class Task {
         }
     }
     
-    public var notes: [Note] {
+    public var notes: Note {
         get{
             return _notes
         }

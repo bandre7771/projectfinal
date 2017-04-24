@@ -22,6 +22,7 @@ class Note {
         _date = Date()
     }
     
+    // MARK - Public Accessible Variables
     public var text: String {
         get{
             return _text

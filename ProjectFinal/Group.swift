@@ -18,4 +18,14 @@ class Group {
     init() {
         _name = ""
     }
+    
+    // MARK - Public Accessible Variables
+    public var name: String {
+        get{
+            return name
+        }
+        set{
+            _name = name
+        }
+    }
 }

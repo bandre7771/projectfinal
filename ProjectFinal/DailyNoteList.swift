@@ -30,4 +30,9 @@ class DailyNoteList {
     public func searchNotes(word: String) {
         // TODO: add functionality for searching Daily notes for a string
     }
+    
+    // MARK - Public Accessible Variables
+    public var dailyNoteList: [Note]{
+        return _dailyNoteList
+    }
 }
