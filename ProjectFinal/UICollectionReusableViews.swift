@@ -19,6 +19,7 @@ class TimeRowHeader: UICollectionReusableView {
         self._title = UILabel()
         self._title?.backgroundColor = UIColor.clear
         self._title?.font = UIFont.systemFont(ofSize: 12.0)
+        self._title?.text = "No Title"
         self.addSubview(self._title!)
     }
     
@@ -63,9 +64,6 @@ class EventCell: UICollectionViewCell {
         self.layer.shadowRadius = 5.0
         self.layer.shadowOpacity = 0.0
         
-        self._borderView = UIView()
-        self.contentView.addSubview(self._borderView!)
-        
         self._title = UILabel()
         self._title?.numberOfLines = 0
         self._title?.backgroundColor = UIColor.clear
@@ -77,15 +75,9 @@ class EventCell: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
-        let borderWidth: CGFloat = 2.0
-        let contentPadding: UIEdgeInsets = UIEdgeInsets(top: 1.0, left: (borderWidth + 4.0), bottom: 1.0, right: 4.0)
-        
-        self._borderView?.frame = self.frame
-        self._borderView?.frame.size.width = borderWidth
-        
-        self._title?.frame.origin.y = self.frame.minY + contentPadding.top
-        self._title?.frame.origin.x = self.frame.minX + contentPadding.left
-        self._title?.frame.size.width = self.frame.width - contentPadding.left - contentPadding.right
+        super.layoutSubviews()
+        var r: CGRect = bounds
+        (_title!.frame, r) = r.divided(atDistance: r.height, from: .minYEdge)
     }
     
     

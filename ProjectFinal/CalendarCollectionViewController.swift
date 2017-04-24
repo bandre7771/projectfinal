@@ -74,6 +74,7 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
         return cell
     }
     
+        
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath)  -> CGSize {
         _cellSize?.width = collectionView.bounds.width
         var cellSize: CGSize = _cellSize!
@@ -84,7 +85,7 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
         return _sectionInset!
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return -10
     }
     
     
