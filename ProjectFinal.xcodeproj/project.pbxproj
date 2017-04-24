@@ -7,16 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-<<<<<<< HEAD
 		529224C31EABDF22004CC04A /* CalendarCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529224C21EABDF22004CC04A /* CalendarCollectionViewController.swift */; };
 		52D0E6F71EA99D110047801B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52D0E6F61EA99D110047801B /* Default-568h@2x.png */; };
-=======
 		350B40331EA7FC6B00440220 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B40321EA7FC6B00440220 /* Task.swift */; };
 		350B40351EA8008600440220 /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B40341EA8008600440220 /* TaskList.swift */; };
 		350B40371EA8071900440220 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B40361EA8071900440220 /* Group.swift */; };
 		350B40391EA80AF100440220 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B40381EA80AF100440220 /* Note.swift */; };
 		350B403B1EA8113600440220 /* DailyNoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B403A1EA8113600440220 /* DailyNoteList.swift */; };
->>>>>>> e29331fe3bc786c5c0fa3d2da46b3926bf3148c8
 		52D591591EA56A5900709E5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D591581EA56A5900709E5B /* AppDelegate.swift */; };
 		52D5915B1EA56A5900709E5B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D5915A1EA56A5900709E5B /* ViewController.swift */; };
 		52D591601EA56A5900709E5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52D5915F1EA56A5900709E5B /* Assets.xcassets */; };
@@ -25,16 +22,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-<<<<<<< HEAD
 		529224C21EABDF22004CC04A /* CalendarCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewController.swift; sourceTree = "<group>"; };
 		52D0E6F61EA99D110047801B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-=======
 		350B40321EA7FC6B00440220 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		350B40341EA8008600440220 /* TaskList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
 		350B40361EA8071900440220 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		350B40381EA80AF100440220 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		350B403A1EA8113600440220 /* DailyNoteList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyNoteList.swift; sourceTree = "<group>"; };
->>>>>>> e29331fe3bc786c5c0fa3d2da46b3926bf3148c8
 		52D591551EA56A5900709E5B /* ProjectFinal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectFinal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D591581EA56A5900709E5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52D5915A1EA56A5900709E5B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -173,15 +167,12 @@
 			files = (
 				350B40351EA8008600440220 /* TaskList.swift in Sources */,
 				52D5915B1EA56A5900709E5B /* ViewController.swift in Sources */,
-<<<<<<< HEAD
 				52D5916B1EA674FE00709E5B /* Event.swift in Sources */,
 				52D5916D1EA697E700709E5B /* UICollectionReusableViews.swift in Sources */,
 				529224C31EABDF22004CC04A /* CalendarCollectionViewController.swift in Sources */,
-=======
 				350B403B1EA8113600440220 /* DailyNoteList.swift in Sources */,
 				350B40331EA7FC6B00440220 /* Task.swift in Sources */,
 				350B40371EA8071900440220 /* Group.swift in Sources */,
->>>>>>> e29331fe3bc786c5c0fa3d2da46b3926bf3148c8
 				52D591591EA56A5900709E5B /* AppDelegate.swift in Sources */,
 				350B40391EA80AF100440220 /* Note.swift in Sources */,
 			);

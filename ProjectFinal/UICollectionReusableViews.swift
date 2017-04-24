@@ -71,11 +71,6 @@ class EventCell: UICollectionViewCell {
         self._title?.backgroundColor = UIColor.clear
         self.contentView.addSubview(self._title!)
         
-        self._location = UILabel()
-        self._location?.numberOfLines = 0
-        self._location?.backgroundColor = UIColor.clear
-        self.contentView.addSubview(self._location!)
-        
         self._event = Event()
         
         self.updateColors()
@@ -83,17 +78,12 @@ class EventCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         let borderWidth: CGFloat = 2.0
-        let contentMargin: CGFloat = 2.0
         let contentPadding: UIEdgeInsets = UIEdgeInsets(top: 1.0, left: (borderWidth + 4.0), bottom: 1.0, right: 4.0)
         
         self._borderView?.frame = self.frame
         self._borderView?.frame.size.width = borderWidth
         
         self._title?.frame.origin.y = self.frame.minY + contentPadding.top
-        self._title?.frame.origin.x = self.frame.minX + contentPadding.left
-        self._title?.frame.size.width = self.frame.width - contentPadding.left - contentPadding.right
-        
-        self._title?.frame.origin.y = (self._title?.frame.maxY)! + contentMargin
         self._title?.frame.origin.x = self.frame.minX + contentPadding.left
         self._title?.frame.size.width = self.frame.width - contentPadding.left - contentPadding.right
     }
@@ -119,6 +109,7 @@ class EventCell: UICollectionViewCell {
             self.layer.shadowOpacity = 0.0
         }
         self.updateColors()
+        NSLog("setSelected \(selected ? "TRUE" : "FALSE")")
     }
     
     func setEvents(event: Event) {

@@ -12,7 +12,6 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
     
     private var _collectionViewFlowLayout: UICollectionViewFlowLayout? = nil
     private var _cellSize: CGSize? = nil
-    private var _itemsPerRow: CGFloat? = nil
     private var _sectionInset: UIEdgeInsets? = nil
     
     init() {
@@ -20,7 +19,6 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
         _collectionViewFlowLayout = UICollectionViewFlowLayout()
         _sectionInset = UIEdgeInsets()
         _cellSize = CGSize.zero
-        _itemsPerRow = 1
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -43,7 +41,7 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
         _sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 75, right: 20)
         _collectionViewFlowLayout?.sectionInset = _sectionInset!
         _collectionViewFlowLayout?.scrollDirection = UICollectionViewScrollDirection.vertical
-        _cellSize = CGSize(width: 70, height: 100)
+        _cellSize = CGSize(width: 100, height: 100)
         _collectionViewFlowLayout?.itemSize = _cellSize!
         
         view = UICollectionView(frame: self.view.frame, collectionViewLayout: _collectionViewFlowLayout!)
@@ -68,11 +66,16 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: EventCell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: EventCell.self), for: indexPath) as! EventCell
         let event: Event = Event()
+        if(indexPath.item == 0){
+            cell.setSelected(selected: true)
+        }
         event.title = "Title \(indexPath.item)"
         cell.setEvents(event: event)
         return cell
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath)  -> CGSize {
+        _cellSize?.width = collectionView.bounds.width
         var cellSize: CGSize = _cellSize!
         return cellSize
     }
@@ -81,6 +84,8 @@ class CalendarCollectionViewController: UIViewController, UICollectionViewDelega
         return _sectionInset!
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return _sectionInset!.left
+        return 0
     }
+    
+    
 }
