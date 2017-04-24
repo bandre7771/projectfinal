@@ -7,21 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		529224C31EABDF22004CC04A /* CalendarCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529224C21EABDF22004CC04A /* CalendarCollectionViewController.swift */; };
+		52D0E6F71EA99D110047801B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52D0E6F61EA99D110047801B /* Default-568h@2x.png */; };
 		52D591591EA56A5900709E5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D591581EA56A5900709E5B /* AppDelegate.swift */; };
 		52D5915B1EA56A5900709E5B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D5915A1EA56A5900709E5B /* ViewController.swift */; };
-		52D5915E1EA56A5900709E5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52D5915C1EA56A5900709E5B /* Main.storyboard */; };
 		52D591601EA56A5900709E5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52D5915F1EA56A5900709E5B /* Assets.xcassets */; };
-		52D591631EA56A5900709E5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52D591611EA56A5900709E5B /* LaunchScreen.storyboard */; };
+		52D5916B1EA674FE00709E5B /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D5916A1EA674FE00709E5B /* Event.swift */; };
+		52D5916D1EA697E700709E5B /* UICollectionReusableViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D5916C1EA697E700709E5B /* UICollectionReusableViews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		529224C21EABDF22004CC04A /* CalendarCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewController.swift; sourceTree = "<group>"; };
+		52D0E6F61EA99D110047801B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		52D591551EA56A5900709E5B /* ProjectFinal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectFinal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D591581EA56A5900709E5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52D5915A1EA56A5900709E5B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		52D5915D1EA56A5900709E5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		52D5915F1EA56A5900709E5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		52D591621EA56A5900709E5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		52D591641EA56A5900709E5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52D5916A1EA674FE00709E5B /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		52D5916C1EA697E700709E5B /* UICollectionReusableViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionReusableViews.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +42,7 @@
 		52D5914C1EA56A5900709E5B = {
 			isa = PBXGroup;
 			children = (
+				52D0E6F61EA99D110047801B /* Default-568h@2x.png */,
 				52D591571EA56A5900709E5B /* ProjectFinal */,
 				52D591561EA56A5900709E5B /* Products */,
 			);
@@ -55,11 +60,12 @@
 			isa = PBXGroup;
 			children = (
 				52D591581EA56A5900709E5B /* AppDelegate.swift */,
+				52D5916A1EA674FE00709E5B /* Event.swift */,
 				52D5915A1EA56A5900709E5B /* ViewController.swift */,
-				52D5915C1EA56A5900709E5B /* Main.storyboard */,
 				52D5915F1EA56A5900709E5B /* Assets.xcassets */,
-				52D591611EA56A5900709E5B /* LaunchScreen.storyboard */,
 				52D591641EA56A5900709E5B /* Info.plist */,
+				52D5916C1EA697E700709E5B /* UICollectionReusableViews.swift */,
+				529224C21EABDF22004CC04A /* CalendarCollectionViewController.swift */,
 			);
 			path = ProjectFinal;
 			sourceTree = "<group>";
@@ -124,9 +130,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D591631EA56A5900709E5B /* LaunchScreen.storyboard in Resources */,
 				52D591601EA56A5900709E5B /* Assets.xcassets in Resources */,
-				52D5915E1EA56A5900709E5B /* Main.storyboard in Resources */,
+				52D0E6F71EA99D110047801B /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,30 +143,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				52D5915B1EA56A5900709E5B /* ViewController.swift in Sources */,
+				52D5916B1EA674FE00709E5B /* Event.swift in Sources */,
+				52D5916D1EA697E700709E5B /* UICollectionReusableViews.swift in Sources */,
+				529224C31EABDF22004CC04A /* CalendarCollectionViewController.swift in Sources */,
 				52D591591EA56A5900709E5B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		52D5915C1EA56A5900709E5B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				52D5915D1EA56A5900709E5B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		52D591611EA56A5900709E5B /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				52D591621EA56A5900709E5B /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		52D591651EA56A5900709E5B /* Debug */ = {
@@ -304,6 +293,7 @@
 				52D591691EA56A5900709E5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
