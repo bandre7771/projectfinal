@@ -25,8 +25,9 @@ class TimeRowHeader: UICollectionReusableView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self._title?.frame.origin.y = self.frame.midY - (_title?.frame.height)!/2 //Center on Y axis
-        self._title?.frame.origin.x = self.frame.maxX - ((_title?.frame.width)! + 5.0)
+        self._title?.frame.origin.y = self.bounds.midY - (_title?.frame.height)!/2 //Center on Y axis
+        self._title?.frame.origin.x = self.bounds.maxX - ((_title?.frame.width)! + 5.0)
+        self._title?.sizeToFit()
     }
     
     func setTime(time: Date) {
@@ -37,6 +38,7 @@ class TimeRowHeader: UICollectionReusableView {
         self._title?.text = dateFormatter.string(from: time)
         self.setNeedsLayout()
     }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -69,6 +71,7 @@ class EventCell: UICollectionViewCell {
         self._title?.numberOfLines = 0
         self._title?.lineBreakMode = NSLineBreakMode.byWordWrapping
         self._title?.backgroundColor = UIColor.clear
+        self._title?.adjustsFontSizeToFitWidth = true
         self.contentView.addSubview(self._title!)
         
         self._event = Event()
@@ -78,10 +81,11 @@ class EventCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        let offset: CGFloat = 10
         _title?.frame.origin = bounds.origin
-        _title?.frame.origin.y = bounds.minY + 10
-        _title?.frame.origin.x = bounds.minX + 10
-        _title?.sizeToFit()
+        _title?.frame.origin.y = bounds.minY + offset
+        _title?.frame.origin.x = bounds.minX + offset
+        _title?.frame.size = CGSize(width: self.bounds.width - offset*2, height: offset*2)
     }
     
     
@@ -111,6 +115,7 @@ class EventCell: UICollectionViewCell {
     func setEvents(event: Event) {
         _event = event
         self._title?.attributedText = NSAttributedString.init(string: event.title!, attributes: titleAttributesHighlighted(highlighted: self.isSelected))
+        self.setNeedsLayout()
     }
     
     func updateColors() {

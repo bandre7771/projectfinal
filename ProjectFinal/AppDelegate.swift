@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.rootViewController = UIViewController()
         window?.makeKeyAndVisible()
-        window?.rootViewController = CalendarCollectionViewController()
+        window?.rootViewController = DayCompositeViewController()
         
         return true
     }

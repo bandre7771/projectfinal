@@ -29,12 +29,16 @@ class CalendarCollectionViewLayout: UICollectionViewLayout {
     
     var numberOfColumns: Int = 1
     
-    private var _cache = [UICollectionViewLayoutAttributes]()
+    private var _cache = [CalendarCollectionViewLayoutAttributes]()
    
     private var _width: CGFloat {
         get {
             return (collectionView?.bounds.width)!
         }
+    }
+    
+    override class var layoutAttributesClass: AnyClass {
+        return CalendarCollectionViewLayoutAttributes.self as AnyClass
     }
     
     override var collectionViewContentSize: CGSize {
@@ -44,8 +48,6 @@ class CalendarCollectionViewLayout: UICollectionViewLayout {
     
     override func prepare() {
         if _cache.isEmpty {
-            let decorationAttributes = UICollectionViewLayoutAttributes(forDecorationViewOfKind: "TimeRowHeader", with: IndexPath(item: 0, section: 0))
-            
             let leftOffset: CGFloat = 25
             let columnWidth = (_width / CGFloat(numberOfColumns)) - leftOffset
             
@@ -55,7 +57,7 @@ class CalendarCollectionViewLayout: UICollectionViewLayout {
                 
             }
             
-            var yOffsets: [CGFloat] = [CGFloat].init(repeating: 0, count: numberOfColumns)
+//            var yOffsets: [CGFloat] = [CGFloat].init(repeating: 0, count: numberOfColumns)
             
             var column = 0
             
@@ -64,12 +66,13 @@ class CalendarCollectionViewLayout: UICollectionViewLayout {
                 let height: CGFloat = (delegate?.collectionView(collectionView!, heightForItemAt: indexPath))!
                 let yOrigin: CGFloat = (delegate?.collectionView(collectionView!, yOriginForItemAt: indexPath))!
                 let frame: CGRect = CGRect(x: xOffsets[column], y: yOrigin, width: columnWidth, height: height)
-                let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+                let attributes = CalendarCollectionViewLayoutAttributes(forCellWith: indexPath)
                 attributes.frame = frame
+                attributes.eventHeight = height
+                attributes.eventYOrigin = yOrigin
                 _cache.append(attributes)
-                yOffsets[column] = yOffsets[column] + height
+//                yOffsets[column] = yOffsets[column] + height
                 column = column >= (numberOfColumns - 1) ? 0 : column + 1
-                
             }
         }
     }
@@ -83,7 +86,24 @@ class CalendarCollectionViewLayout: UICollectionViewLayout {
         }
         return layoutAttributes
     }
+}
+
+class CalendarCollectionViewLayoutAttributes: UICollectionViewLayoutAttributes {
+    var eventHeight: CGFloat = 0
+    var eventYOrigin: CGFloat = 0
+    override func copy(with zone: NSZone? = nil) -> Any {
+        let copy = super.copy(with: zone) as! CalendarCollectionViewLayoutAttributes
+        copy.eventHeight = eventHeight
+        copy.eventYOrigin = eventYOrigin
+        return copy
+    }
     
-    
-    
+    override func isEqual(_ object: Any?) -> Bool {
+        if let attributes = object as? CalendarCollectionViewLayoutAttributes {
+            if attributes.eventHeight == eventHeight && attributes.eventYOrigin == eventYOrigin {
+                return super.isEqual(object)
+            }
+        }
+        return false
+    }
 }
