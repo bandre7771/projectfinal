@@ -22,7 +22,7 @@ class Group {
     // MARK - Public Accessible Variables
     public var name: String {
         get{
-            return name
+            return _name
         }
         set{
             _name = name

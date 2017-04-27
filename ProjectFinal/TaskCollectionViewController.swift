@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TaskCollectionViewController: UIViewController, UITableViewDataSource {
+class TaskCollectionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     override func loadView() {
         let taskTableView = UITableView()
@@ -26,9 +26,17 @@ class TaskCollectionViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell()
         cell.textLabel?.text = UserInfo.Instance.getTask(at: indexPath.row).title
-        //cell.backgroundColor = colorForIndex(indexPath.row)
         
         return cell
+    }
+    
+    // MARK: - UITableViewDelegate Methods
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let taskIndex: Int = indexPath.row
+        let task: Task = UserInfo.Instance.getTask(at: taskIndex)
+        
+        let taskViewController: TaskViewController = TaskViewController(task: task)
+        navigationController?.pushViewController(taskViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
