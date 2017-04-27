@@ -24,8 +24,10 @@ class TimeRowHeader: UICollectionReusableView {
     }
     
     override func layoutSubviews() {
-        self._title?.frame.origin.y = self.frame.midY - (_title?.frame.height)!/2 //Center on Y axis
-        self._title?.frame.origin.x = self.frame.maxX - ((_title?.frame.width)! + 5.0)
+        super.layoutSubviews()
+        self._title?.frame.origin.y = self.bounds.midY - (_title?.frame.height)!/2 //Center on Y axis
+        self._title?.frame.origin.x = self.bounds.maxX - ((_title?.frame.width)! + 5.0)
+        self._title?.sizeToFit()
     }
     
     func setTime(time: Date) {
@@ -36,6 +38,7 @@ class TimeRowHeader: UICollectionReusableView {
         self._title?.text = dateFormatter.string(from: time)
         self.setNeedsLayout()
     }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -66,7 +69,9 @@ class EventCell: UICollectionViewCell {
         
         self._title = UILabel()
         self._title?.numberOfLines = 0
+        self._title?.lineBreakMode = NSLineBreakMode.byWordWrapping
         self._title?.backgroundColor = UIColor.clear
+        self._title?.adjustsFontSizeToFitWidth = true
         self.contentView.addSubview(self._title!)
         
         self._event = Event()
@@ -76,8 +81,11 @@ class EventCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        var r: CGRect = bounds
-        (_title!.frame, r) = r.divided(atDistance: r.height, from: .minYEdge)
+        let offset: CGFloat = 10
+        _title?.frame.origin = bounds.origin
+        _title?.frame.origin.y = bounds.minY + offset
+        _title?.frame.origin.x = bounds.minX + offset
+        _title?.frame.size = CGSize(width: self.bounds.width - offset*2, height: offset*2)
     }
     
     
@@ -107,6 +115,7 @@ class EventCell: UICollectionViewCell {
     func setEvents(event: Event) {
         _event = event
         self._title?.attributedText = NSAttributedString.init(string: event.title!, attributes: titleAttributesHighlighted(highlighted: self.isSelected))
+        self.setNeedsLayout()
     }
     
     func updateColors() {
@@ -160,37 +169,37 @@ class TimeRowHeaderBackground: UICollectionReusableView {
     }
 }
 
-class CurrentTimeIndicator: UICollectionReusableView {
-    private var _time: UILabel? = nil
-    private var _minuteTimer: Timer? = nil
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        self.backgroundColor = UIColor.white
-        
-        self._time = UILabel()
-        self._time?.font = UIFont.boldSystemFont(ofSize: 10.0)
-        self._time?.textColor = hexStringToUIColor(from: "#fd3935", alphaValue: 1)
-        self.addSubview(self._time!)
-        
-//        let calendar: Calendar = Calendar.current
-//        let oneMinuteInFuture: Date = Date.init(timeIntervalSinceNow: 60)
-//        let components: DateComponents = calendar.component(, from: oneMinuteInFuture)
-//        let nextMinuteBoundary = calendar.date(from: components)
-        
-//        self._minuteTimer = Timer.init(fireAt: nextMinuteBoundary, interval: 60, target: self, selector: #selector(), userInfo: nil, repeats: true)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        _time?.frame.size.width = self.frame.width - 10.0
-        _time?.frame.origin.y = self.frame.midY - (_time?.bounds.width)!/2
-    }
-}
-/** 
+//class CurrentTimeIndicator: UICollectionReusableView {
+//    private var _time: UILabel? = nil
+//    private var _minuteTimer: Timer? = nil
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        
+//        self.backgroundColor = UIColor.white
+//        
+//        self._time = UILabel()
+//        self._time?.font = UIFont.boldSystemFont(ofSize: 10.0)
+//        self._time?.textColor = hexStringToUIColor(from: "#fd3935", alphaValue: 1)
+//        self.addSubview(self._time!)
+//        
+////        let calendar: Calendar = Calendar.current
+////        let oneMinuteInFuture: Date = Date.init(timeIntervalSinceNow: 60)
+////        let components: DateComponents = calendar.component(, from: oneMinuteInFuture)
+////        let nextMinuteBoundary = calendar.date(from: components)
+//        
+////        self._minuteTimer = Timer.init(fireAt: nextMinuteBoundary, interval: 60, target: self, selector: #selector(), userInfo: nil, repeats: true)
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//    
+//    override func layoutSubviews() {
+//        _time?.frame.size.width = self.frame.width - 10.0
+//        _time?.frame.origin.y = self.frame.midY - (_time?.bounds.width)!/2
+//    }
+//}
+/**
  Takes in a hex string such as #ffffff and returns a UIColor
  - Author arshad https://gist.github.com/arshad/de147c42d7b3063ef7bc
  */
