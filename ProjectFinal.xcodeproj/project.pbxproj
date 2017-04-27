@@ -70,6 +70,8 @@
 				350B40361EA8071900440220 /* Group.swift */,
 				350B40381EA80AF100440220 /* Note.swift */,
 				35ACDAD01EAEAB4A00C01308 /* UserInfo.swift */,
+				52626F0F1EB14B99003A4FAD /* EventsCalendarCollection.swift */,
+				52D5916A1EA674FE00709E5B /* Event.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -81,6 +83,8 @@
 				35ACDACA1EAE988500C01308 /* TaskCollectionViewController.swift */,
 				35ACDACC1EAE9B1D00C01308 /* TaskViewController.swift */,
 				52D59B661EB1CF5600E5AD8B /* TaskListViewController.swift */,
+				529224C21EABDF22004CC04A /* CalendarCollectionViewController.swift */,
+				52D5915A1EA56A5900709E5B /* ViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -105,16 +109,12 @@
 		52D591571EA56A5900709E5B /* ProjectFinal */ = {
 			isa = PBXGroup;
 			children = (
+				52D591581EA56A5900709E5B /* AppDelegate.swift */,
 				52D59B631EB1C3F200E5AD8B /* View */,
 				350B40311EA7FC3600440220 /* Model */,
 				35ACDAD21EAEAE5C00C01308 /* Controller */,
-				52D591581EA56A5900709E5B /* AppDelegate.swift */,
-				52D5915A1EA56A5900709E5B /* ViewController.swift */,
 				52D5915F1EA56A5900709E5B /* Assets.xcassets */,
 				52D591641EA56A5900709E5B /* Info.plist */,
-				52D5916A1EA674FE00709E5B /* Event.swift */,
-				52626F0F1EB14B99003A4FAD /* EventsCalendarCollection.swift */,
-				529224C21EABDF22004CC04A /* CalendarCollectionViewController.swift */,
 			);
 			path = ProjectFinal;
 			sourceTree = "<group>";
