@@ -128,14 +128,6 @@
 			path = ProjectFinal;
 			sourceTree = "<group>";
 		};
-		52D59B631EB1C3F200E5AD8B /* View */ = {
-			isa = PBXGroup;
-			children = (
-				52D59B611EB1C3E400E5AD8B /* DayCompositeView.swift */,
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -348,6 +340,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.utah.cs4530.ProjectFinal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
