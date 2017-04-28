@@ -53,6 +53,10 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate {
         dayCompositeView.taskListTableView?.taskList = daysTasks
     }
     
+    func taskListUpdated() {
+        refresh()
+    }
+    
     @objc private func swipeRightOccured(swipe: UISwipeGestureRecognizer) {
         UserInfo.Instance.goToPastDay()
         NSLog("swiped right")

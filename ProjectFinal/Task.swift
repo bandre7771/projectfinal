@@ -10,13 +10,13 @@ import UIKit
 
 class Task {
     private var _title: String
-    private var _status: String
-    private var _priority: String
+    private var _status: Bool
+    private var _priority: Int
     private var _date: Date
     private var _group: Group
     private var _notes: Note
     
-    init(title: String, status: String, priority: String, date: Date, group: Group, notes: Note) {
+    init(title: String, status: Bool, priority: Int, date: Date, group: Group, notes: Note) {
         _title = title
         _status = status
         _priority = priority
@@ -27,8 +27,8 @@ class Task {
     
     init() {
         _title = ""
-        _status = ""
-        _priority = ""
+        _status = false
+        _priority = 0
         _date = Date()
         _group = Group()
         _notes = Note()
@@ -45,7 +45,7 @@ class Task {
         }
     }
     
-    public var status: String {
+    public var status: Bool {
         get{
             return _status
         }
@@ -54,7 +54,7 @@ class Task {
         }
     }
     
-    public var priority: String {
+    public var priority: Int {
         get{
             return _priority
         }
