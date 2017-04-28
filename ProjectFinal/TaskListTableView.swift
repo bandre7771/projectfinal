@@ -12,11 +12,20 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
     // MARK: - UIViewController Overrides
     private var _taskList: [Task]
     
+<<<<<<< HEAD:ProjectFinal/TaskListTableView.swift
     
     override init(frame: CGRect, style: UITableViewStyle) {
         _taskList = []
         dataSource = self
         super.init(frame: frame, style: style)
+=======
+    override func viewDidLoad() {
+        title = "Daily Task List View"
+
+        taskListTableView.delegate = self
+        // TODO:Library.Instance.delegate = self
+        taskListTableView.dataSource = self
+>>>>>>> 53645ec84c626eab8a57d09e3caf585ea1682504:ProjectFinal/TaskListViewController.swift
     }
     
     required init?(coder aDecoder: NSCoder) {
