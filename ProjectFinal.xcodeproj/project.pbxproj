@@ -119,19 +119,14 @@
 		52D591571EA56A5900709E5B /* ProjectFinal */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				52D591581EA56A5900709E5B /* AppDelegate.swift */,
 				52D59B631EB1C3F200E5AD8B /* View */,
-=======
 				35C690981EB2538500F932FD /* View */,
->>>>>>> 9ba7be37129357696be5002cd6ffe6294b9e7190
 				350B40311EA7FC3600440220 /* Model */,
 				35ACDAD21EAEAE5C00C01308 /* Controller */,
 				52D5915F1EA56A5900709E5B /* Assets.xcassets */,
 				52D59B6E1EB26AA800E5AD8B /* Tools.swift */,
 				52D591641EA56A5900709E5B /* Info.plist */,
-<<<<<<< HEAD
-=======
 				52D5916A1EA674FE00709E5B /* Event.swift */,
 				52626F0F1EB14B99003A4FAD /* EventsCalendarCollection.swift */,
 				52D5916C1EA697E700709E5B /* UICollectionReusableViews.swift */,
@@ -142,7 +137,6 @@
 			path = ProjectFinal;
 			sourceTree = "<group>";
 		};
-<<<<<<< HEAD
 		52D59B631EB1C3F200E5AD8B /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,8 +145,6 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-=======
->>>>>>> 9ba7be37129357696be5002cd6ffe6294b9e7190
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
