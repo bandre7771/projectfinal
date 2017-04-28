@@ -8,23 +8,19 @@
 
 import UIKit
 
-class TaskListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     // MARK: - UIViewController Overrides
-    override func loadView() {
-        view = UITableView()
+    private var _taskList: [Task]
+    
+    
+    override init(frame: CGRect, style: UITableViewStyle) {
+        _taskList = []
+        dataSource = self
+        super.init(frame: frame, style: style)
     }
     
-    override func viewDidLoad() {
-        title = "Daily Task List View"
-
-        taskListTableView.delegate = self
-        // TODO:Library.Instance.delegate = self
-        taskListTableView.dataSource = self
- 
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        // TODO: ListTableView.reloadData()
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func addPressed() {
@@ -32,19 +28,15 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
         //TODO: Library.Instance.createNewGame()
     }
     
-    private var taskListTableView: UITableView {
-        return view as! UITableView
-    }
-    
     //UITableView Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5//TODO: Library.Instance.count
+        return _taskList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let index = indexPath.row
         let cell: UITableViewCell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-        cell.textLabel?.text = "cell at index: \(index)"
+        cell.textLabel?.text = taskList[index].title
         return cell
     }
     
@@ -69,6 +61,16 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
             let index: Int = indexPath.row
             NSLog("Attempted to delete cell at index: \(index)")
             // TODO: Library.Instance.deleteTaskAtIndex(index)
+        }
+    }
+    
+    public var taskList: [Task] {
+        get{
+            return _taskList
+        }
+        set{
+            _taskList = newValue
+            SetNeedsDisplay()
         }
     }
     

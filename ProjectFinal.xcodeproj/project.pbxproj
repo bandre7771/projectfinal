@@ -24,7 +24,7 @@
 		52D5916D1EA697E700709E5B /* UICollectionReusableViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D5916C1EA697E700709E5B /* UICollectionReusableViews.swift */; };
 		52D59B621EB1C3E400E5AD8B /* DayCompositeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D59B611EB1C3E400E5AD8B /* DayCompositeView.swift */; };
 		52D59B651EB1C64A00E5AD8B /* DayCompositeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D59B641EB1C64A00E5AD8B /* DayCompositeViewController.swift */; };
-		52D59B671EB1CF5600E5AD8B /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D59B661EB1CF5600E5AD8B /* TaskListViewController.swift */; };
+		52D59B671EB1CF5600E5AD8B /* TaskListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D59B661EB1CF5600E5AD8B /* TaskListTableView.swift */; };
 		52D59B6F1EB26AA800E5AD8B /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D59B6E1EB26AA800E5AD8B /* Tools.swift */; };
 		52D634671EAECDAD000BE905 /* CalendarCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D634661EAECDAD000BE905 /* CalendarCollectionViewLayout.swift */; };
 /* End PBXBuildFile section */
@@ -49,7 +49,7 @@
 		52D5916C1EA697E700709E5B /* UICollectionReusableViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionReusableViews.swift; sourceTree = "<group>"; };
 		52D59B611EB1C3E400E5AD8B /* DayCompositeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCompositeView.swift; sourceTree = "<group>"; };
 		52D59B641EB1C64A00E5AD8B /* DayCompositeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCompositeViewController.swift; sourceTree = "<group>"; };
-		52D59B661EB1CF5600E5AD8B /* TaskListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
+		52D59B661EB1CF5600E5AD8B /* TaskListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskListTableView.swift; sourceTree = "<group>"; };
 		52D59B6E1EB26AA800E5AD8B /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		52D634661EAECDAD000BE905 /* CalendarCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,8 +72,6 @@
 				350B40361EA8071900440220 /* Group.swift */,
 				350B40381EA80AF100440220 /* Note.swift */,
 				35ACDAD01EAEAB4A00C01308 /* UserInfo.swift */,
-				52626F0F1EB14B99003A4FAD /* EventsCalendarCollection.swift */,
-				52D5916A1EA674FE00709E5B /* Event.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -84,19 +82,9 @@
 				52D59B641EB1C64A00E5AD8B /* DayCompositeViewController.swift */,
 				35ACDACA1EAE988500C01308 /* TaskCollectionViewController.swift */,
 				35ACDACC1EAE9B1D00C01308 /* TaskViewController.swift */,
-				52D59B661EB1CF5600E5AD8B /* TaskListViewController.swift */,
-				529224C21EABDF22004CC04A /* CalendarCollectionViewController.swift */,
 				52D5915A1EA56A5900709E5B /* ViewController.swift */,
 			);
 			name = Controller;
-			sourceTree = "<group>";
-		};
-		35C690981EB2538500F932FD /* View */ = {
-			isa = PBXGroup;
-			children = (
-				35ACDACE1EAE9B2E00C01308 /* TaskView.swift */,
-			);
-			name = View;
 			sourceTree = "<group>";
 		};
 		52D5914C1EA56A5900709E5B = {
@@ -121,7 +109,6 @@
 			children = (
 				52D591581EA56A5900709E5B /* AppDelegate.swift */,
 				52D59B631EB1C3F200E5AD8B /* View */,
-				35C690981EB2538500F932FD /* View */,
 				350B40311EA7FC3600440220 /* Model */,
 				35ACDAD21EAEAE5C00C01308 /* Controller */,
 				52D5915F1EA56A5900709E5B /* Assets.xcassets */,
@@ -140,6 +127,7 @@
 		52D59B631EB1C3F200E5AD8B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				52D59B661EB1CF5600E5AD8B /* TaskListTableView.swift */,
 				52D59B611EB1C3E400E5AD8B /* DayCompositeView.swift */,
 			);
 			name = View;
@@ -233,7 +221,7 @@
 				35ACDACB1EAE988500C01308 /* TaskCollectionViewController.swift in Sources */,
 				35ACDAD11EAEAB4A00C01308 /* UserInfo.swift in Sources */,
 				52D59B6F1EB26AA800E5AD8B /* Tools.swift in Sources */,
-				52D59B671EB1CF5600E5AD8B /* TaskListViewController.swift in Sources */,
+				52D59B671EB1CF5600E5AD8B /* TaskListTableView.swift in Sources */,
 				350B40391EA80AF100440220 /* Note.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

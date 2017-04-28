@@ -12,11 +12,11 @@ class Task {
     private var _title: String
     private var _status: String
     private var _priority: String
-    private var _date: String
+    private var _date: Date
     private var _group: Group
     private var _notes: Note
     
-    init(title: String, status: String, priority: String, date: String, group: Group, notes: Note) {
+    init(title: String, status: String, priority: String, date: Date, group: Group, notes: Note) {
         _title = title
         _status = status
         _priority = priority
@@ -29,7 +29,7 @@ class Task {
         _title = ""
         _status = ""
         _priority = ""
-        _date = ""
+        _date = Date()
         _group = Group()
         _notes = Note()
     }
@@ -63,7 +63,7 @@ class Task {
         }
     }
     
-    public var date: String {
+    public var date: Date {
         get{
             return _date
         }
