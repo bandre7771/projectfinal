@@ -26,6 +26,7 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate {
     
     override func loadView() {
         view = DayCompositeView()
+        refresh()
     }
     
     override func viewDidLoad() {
@@ -38,6 +39,11 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate {
         swipeL.direction = .left
         view.addGestureRecognizer(swipeR)
         view.addGestureRecognizer(swipeL)
+    }
+    
+    public func refresh() {
+        let daysTasks: [Task] = UserInfo.Instance.getDaysTasks(date: UserInfo.Instance.currentDay)
+        dayCompositeView.taskListTableView?.taskList = daysTasks
     }
     
     private func reloadNavigationBarItems() {
@@ -69,9 +75,12 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate {
         NSLog("swiped left")
     }
     
+    
     // MARK: UserInfoDelegate Methods
     func currentDayChanged() {
         reloadNavigationBarItems()
     }
+    
+    // MARK: 
     
 }

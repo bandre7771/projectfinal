@@ -10,19 +10,18 @@ import UIKit
 
 class DayCompositeView: UIView {
     var calendarCollectionView: CalendarCollectionView? = nil
-    var taskListViewController: TaskListViewController? = nil
+    var taskListTableView: TaskListTableView? = nil
+    private var _taskList: [Task]
+    
     override init(frame: CGRect) {
+        _taskList = []
         super.init(frame: frame)
+        taskListTableView = TaskListTableView()
         calendarCollectionView = CalendarCollectionView()
-        taskListViewController = TaskListViewController()
-        
+        addSubview(taskListTableView!)
         addSubview(calendarCollectionView!)
-        addSubview(taskListView)
     }
     
-    private var taskListView: UITableView {
-        return (taskListViewController?.view)! as! UITableView
-    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -31,9 +30,18 @@ class DayCompositeView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         var r: CGRect = bounds
-        var calSize: CGRect = CGRect.zero
-        (calSize, r) = r.divided(atDistance: r.width*0.50, from: .maxXEdge)
-        calendarCollectionView?.frame = calSize
-        (taskListView.frame, r) = r.divided(atDistance: r.width, from: .maxXEdge)
+        (calendarCollectionView!.frame, r) = r.divided(atDistance: r.width*0.50, from: .maxXEdge)
+        (taskListTableView!.frame, r) = r.divided(atDistance: r.width, from: .maxXEdge)
+    }
+    
+    
+    public var taskList: [Task]{
+        get{
+            return _taskList
+        }
+        set{
+            _taskList = newValue
+            taskListTableView?.taskList = newValue
+        }
     }
 }

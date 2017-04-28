@@ -58,6 +58,17 @@ class UserInfo {
         _dailyNoteList.remove(at: index)
     }
     
+    
+    public func getDaysTasks(date: Date) -> [Task]{
+        var dayTasks: [Task] = []
+        for task in _taskList {
+            if task.date == date {
+                dayTasks.append(task)
+            }
+        }
+        return dayTasks
+    }
+    
     public func goToNextDay() {
         _currentDay = Calendar.current.date(byAdding: .day, value: 1, to: _currentDay!)
         delegate?.currentDayChanged()
