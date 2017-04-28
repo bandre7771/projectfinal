@@ -15,7 +15,7 @@
 		35ACDACF1EAE9B2E00C01308 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ACDACE1EAE9B2E00C01308 /* TaskView.swift */; };
 		35ACDAD11EAEAB4A00C01308 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ACDAD01EAEAB4A00C01308 /* UserInfo.swift */; };
 		52626F101EB14B99003A4FAD /* EventsCalendarCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52626F0F1EB14B99003A4FAD /* EventsCalendarCollection.swift */; };
-		529224C31EABDF22004CC04A /* CalendarCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529224C21EABDF22004CC04A /* CalendarCollectionViewController.swift */; };
+		529224C31EABDF22004CC04A /* CalendarCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529224C21EABDF22004CC04A /* CalendarCollectionView.swift */; };
 		52D0E6F71EA99D110047801B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52D0E6F61EA99D110047801B /* Default-568h@2x.png */; };
 		52D591591EA56A5900709E5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D591581EA56A5900709E5B /* AppDelegate.swift */; };
 		52D5915B1EA56A5900709E5B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D5915A1EA56A5900709E5B /* ViewController.swift */; };
@@ -38,7 +38,7 @@
 		35ACDACE1EAE9B2E00C01308 /* TaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		35ACDAD01EAEAB4A00C01308 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		52626F0F1EB14B99003A4FAD /* EventsCalendarCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsCalendarCollection.swift; sourceTree = "<group>"; };
-		529224C21EABDF22004CC04A /* CalendarCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewController.swift; sourceTree = "<group>"; };
+		529224C21EABDF22004CC04A /* CalendarCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarCollectionView.swift; sourceTree = "<group>"; };
 		52D0E6F61EA99D110047801B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		52D591551EA56A5900709E5B /* ProjectFinal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectFinal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D591581EA56A5900709E5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,7 +81,6 @@
 		35ACDAD21EAEAE5C00C01308 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				529224C21EABDF22004CC04A /* CalendarCollectionViewController.swift */,
 				52D59B641EB1C64A00E5AD8B /* DayCompositeViewController.swift */,
 				35ACDACA1EAE988500C01308 /* TaskCollectionViewController.swift */,
 				35ACDACC1EAE9B1D00C01308 /* TaskViewController.swift */,
@@ -127,8 +126,9 @@
 			children = (
 				52D59B611EB1C3E400E5AD8B /* DayCompositeView.swift */,
 				52D5916C1EA697E700709E5B /* UICollectionReusableViews.swift */,
-				52D634661EAECDAD000BE905 /* CalendarCollectionViewLayout.swift */,
 				35ACDACE1EAE9B2E00C01308 /* TaskView.swift */,
+				52D634661EAECDAD000BE905 /* CalendarCollectionViewLayout.swift */,
+				529224C21EABDF22004CC04A /* CalendarCollectionView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -210,7 +210,7 @@
 				52D5916B1EA674FE00709E5B /* Event.swift in Sources */,
 				52D5916D1EA697E700709E5B /* UICollectionReusableViews.swift in Sources */,
 				52D59B621EB1C3E400E5AD8B /* DayCompositeView.swift in Sources */,
-				529224C31EABDF22004CC04A /* CalendarCollectionViewController.swift in Sources */,
+				529224C31EABDF22004CC04A /* CalendarCollectionView.swift in Sources */,
 				52D59B651EB1C64A00E5AD8B /* DayCompositeViewController.swift in Sources */,
 				35ACDACD1EAE9B1D00C01308 /* TaskViewController.swift in Sources */,
 				35ACDACF1EAE9B2E00C01308 /* TaskView.swift in Sources */,

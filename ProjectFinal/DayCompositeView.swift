@@ -9,19 +9,15 @@
 import UIKit
 
 class DayCompositeView: UIView {
-    var calendarCollectionViewController: CalendarCollectionViewController? = nil
+    var calendarCollectionView: CalendarCollectionView? = nil
     var taskListViewController: TaskListViewController? = nil
     override init(frame: CGRect) {
         super.init(frame: frame)
-        calendarCollectionViewController = CalendarCollectionViewController()
+        calendarCollectionView = CalendarCollectionView()
         taskListViewController = TaskListViewController()
         
-        addSubview(calendarCollectionView)
+        addSubview(calendarCollectionView!)
         addSubview(taskListView)
-    }
-    
-    private var calendarCollectionView: UICollectionView {
-        return (calendarCollectionViewController?.view)! as! UICollectionView
     }
     
     private var taskListView: UITableView {
@@ -35,7 +31,9 @@ class DayCompositeView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         var r: CGRect = bounds
-        (calendarCollectionView.frame, r) = r.divided(atDistance: r.width*0.50, from: .maxXEdge)
+        var frame: CGRect = CGRect.zero
+        (frame, r) = r.divided(atDistance: r.width*0.50, from: .maxXEdge)
+        calendarCollectionView?.frame = frame
         (taskListView.frame, r) = r.divided(atDistance: r.width, from: .maxXEdge)
     }
 }

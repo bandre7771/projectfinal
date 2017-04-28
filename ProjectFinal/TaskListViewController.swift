@@ -20,7 +20,6 @@ class TaskListViewController: UIViewController, UITableViewDataSource, UITableVi
         taskListTableView.delegate = self
         // TODO:Library.Instance.delegate = self
         taskListTableView.dataSource = self
- 
     }
     
     override func viewWillAppear(_ animated: Bool) {

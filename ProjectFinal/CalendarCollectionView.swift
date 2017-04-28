@@ -1,5 +1,5 @@
 //
-//  CalendarCollectionViewController.swift
+//  CalendarCollectionView.swift
 //  ProjectFinal
 //
 //  Created by John Paul Young on 4/22/17.
@@ -8,55 +8,27 @@
 
 import UIKit
 
-class CalendarCollectionView: UICollectionView, CalendarCollectionViewLayoutDelegate {
+class CalendarCollectionView: UICollectionView, UICollectionViewDataSource, CalendarCollectionViewLayoutDelegate {
     private var _cellSize: CGSize? = nil
     private var _sectionInset: UIEdgeInsets? = nil
     private var _calendarCollectionViewLayout: CalendarCollectionViewLayout? = nil
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
-        super.init(frame: frame, collectionViewLayout: layout)
         _calendarCollectionViewLayout = CalendarCollectionViewLayout()
-        _calendarCollectionViewLayout?.delegate = self
         _calendarCollectionViewLayout?.numberOfColumns = 1
-        collectionViewLayout = _calendarCollectionViewLayout!
+        super.init(frame: frame, collectionViewLayout: _calendarCollectionViewLayout!)
+        _calendarCollectionViewLayout?.delegate = self
         _sectionInset = UIEdgeInsets()
         _cellSize = CGSize.zero
         _calendarCollectionViewLayout = CalendarCollectionViewLayout()
-//        dataSource = self
+        dataSource = self
         register(EventCell.self, forCellWithReuseIdentifier: String(describing: EventCell.self))
         backgroundColor = UIColor.white
     }
     
-//    init() {
-//        super.init(frame: nil, collectionViewLayout: nil)
-//        _sectionInset = UIEdgeInsets()
-//        _cellSize = CGSize.zero
-//        _calendarCollectionViewLayout = CalendarCollectionViewLayout()
-//    }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-//    private var collectionView: UICollectionView {
-//        return view as! UICollectionView
-//    }
-    
-//    override func loadView() {
-//        view = UICollectionView(frame: CGRect.zero, collectionViewLayout: CalendarCollectionViewLayout())
-//    }
-    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        _calendarCollectionViewLayout = CalendarCollectionViewLayout()
-//        _calendarCollectionViewLayout?.delegate = self
-//        _calendarCollectionViewLayout?.numberOfColumns = 1
-//        
-//        view = UICollectionView(frame: self.view.frame, collectionViewLayout: _calendarCollectionViewLayout!)
-//        collectionView.dataSource = self
-//        collectionView.register(EventCell.self, forCellWithReuseIdentifier: String(describing: EventCell.self))
-//        collectionView.backgroundColor = UIColor.white
-//    }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return EventsCalendarCollection.Instance.count
