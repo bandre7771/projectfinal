@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DayCompositeViewController: UIViewController, UserInfoDelegate {
+class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTableViewDelegate {
     
     init() {
         super.init(nibName: "DayCompositViewController", bundle: nil)
@@ -51,11 +51,21 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate {
     public func refresh() {
         let daysTasks: [Task] = UserInfo.Instance.getDaysTasks(date: UserInfo.Instance.currentDay)
         dayCompositeView.taskListTableView?.taskList = daysTasks
+        dayCompositeView.taskListTableView?.delegateTask = self
     }
     
+    // MARK - Delegate from user info
     func taskListUpdated() {
         refresh()
     }
+    
+    // MARK - Delegates from TaskListTableView
+    func taskListTableView(table: TaskListTableView, selectedTask task: Task, index: Int) {
+        var taskViewController: TaskViewController = TaskViewController(task: task)
+        navigationController?.pushViewController(taskViewController, animated: true)
+    }
+    
+    
     
     @objc private func swipeRightOccured(swipe: UISwipeGestureRecognizer) {
         UserInfo.Instance.goToPastDay()
