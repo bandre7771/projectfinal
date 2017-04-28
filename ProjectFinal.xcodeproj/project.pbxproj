@@ -136,7 +136,8 @@
 				52626F0F1EB14B99003A4FAD /* EventsCalendarCollection.swift */,
 				52D5916C1EA697E700709E5B /* UICollectionReusableViews.swift */,
 				529224C21EABDF22004CC04A /* CalendarCollectionViewController.swift */,
->>>>>>> 9ba7be37129357696be5002cd6ffe6294b9e7190
+				52D634661EAECDAD000BE905 /* CalendarCollectionViewLayout.swift */,
+				35ACDACE1EAE9B2E00C01308 /* TaskView.swift */,
 			);
 			path = ProjectFinal;
 			sourceTree = "<group>";
@@ -146,9 +147,6 @@
 			isa = PBXGroup;
 			children = (
 				52D59B611EB1C3E400E5AD8B /* DayCompositeView.swift */,
-				35ACDACE1EAE9B2E00C01308 /* TaskView.swift */,
-				52D634661EAECDAD000BE905 /* CalendarCollectionViewLayout.swift */,
-				52D5916C1EA697E700709E5B /* UICollectionReusableViews.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
