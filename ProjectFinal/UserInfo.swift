@@ -9,6 +9,7 @@
 import UIKit
 protocol UserInfoDelegate: class {
     func currentDayChanged(to date: Date)
+    func taskListUpdated()
 }
 
 class UserInfo {
@@ -18,7 +19,7 @@ class UserInfo {
     private var _dailyNoteList: [Note] = []
     private var _currentDay: Date? = nil
     
-    public var delegate: UserInfoDelegate? = nil
+    weak var delegate: UserInfoDelegate? = nil
     
     public static let Instance: UserInfo = UserInfo()
     
@@ -28,14 +29,17 @@ class UserInfo {
     
     public func addTask(task: Task) {
         _taskList.append(task)
+        delegate?.taskListUpdated()
     }
     
     public func removeTask(index: Int) {
         _taskList.remove(at: index)
+        delegate?.taskListUpdated()
     }
     
     public func updateTask(at index: Int, task: Task){
         _taskList[index] = task
+        delegate?.taskListUpdated()
     }
     
     public func getTask(at index: Int) -> Task {
@@ -52,6 +56,7 @@ class UserInfo {
     
     public func addDailyNote(note: Note) {
         _dailyNoteList.append(note)
+        
     }
     
     public func removeDailyNote(at index: Int) {
@@ -61,10 +66,16 @@ class UserInfo {
     
     public func getDaysTasks(date: Date) -> [Task]{
         var dayTasks: [Task] = []
+        var calendar: Calendar = Calendar.init(identifier: .gregorian)
         for task in _taskList {
-            if task.date == date {
+            if calendar.isDate(task.date, equalTo: date, toGranularity: .day) {
                 dayTasks.append(task)
             }
+//            switch date.compare(task.date) {
+//            case .orderedAscending     :   print("Date A is earlier than date B")
+//            case .orderedDescending    :   print("Date A is later than date B")
+//            case .orderedSame          :   dayTasks.append(task)
+//            }
         }
         return dayTasks
     }

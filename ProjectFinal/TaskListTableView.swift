@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol TaskListTableViewDelegate: class {
+    func taskListTableView(table: TaskListTableView, selectedTask task: Task, index: Int)
+}
+
 class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     // MARK: - UIViewController Overrides
     private var _taskList: [Task]
@@ -17,6 +21,8 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
         _taskList = []
         super.init(frame: frame, style: style)
         dataSource = self
+        self.allowsSelection = true
+        self.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -43,6 +49,8 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let index: Int = indexPath.row
         NSLog("Selected cell at index: \(index)")
+        var task: Task = _taskList[index]
+        delegateTask?.taskListTableView(table: self, selectedTask: task, index: index)
         // TODO: implement task edit window here
         /* let game: Game = GameLibrary.Instance.gameAtIndex(gameIndex)
         
@@ -63,6 +71,8 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
             // TODO: Library.Instance.deleteTaskAtIndex(index)
         }
     }
+    
+    weak var delegateTask: TaskListTableViewDelegate? = nil
     
     public var taskList: [Task] {
         get{

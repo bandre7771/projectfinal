@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DayCompositeViewController: UIViewController, UserInfoDelegate {
+class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTableViewDelegate {
     private var _currentDay: Date? = nil
     
     init() {
@@ -55,6 +55,7 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate {
         navigationItem.titleView = UIView()
         let daysTasks: [Task] = UserInfo.Instance.getDaysTasks(date: UserInfo.Instance.currentDay)
         dayCompositeView.taskListTableView?.taskList = daysTasks
+        dayCompositeView.taskListTableView?.delegateTask = self
         dayCompositeView.calendarCollectionView?.events = EventsCalendarCollection.Instance.getAllCurrentEvents()
     }
     
@@ -65,6 +66,19 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate {
         let monthDayYear: String = dateFormatter.string(from: currentDay)
         return monthDayYear
     }
+    
+    // MARK - Delegate from user info
+    func taskListUpdated() {
+        refresh()
+    }
+    
+    // MARK - Delegates from TaskListTableView
+    func taskListTableView(table: TaskListTableView, selectedTask task: Task, index: Int) {
+        var taskViewController: TaskViewController = TaskViewController(task: task)
+        navigationController?.pushViewController(taskViewController, animated: true)
+    }
+    
+    
     
     @objc private func swipeRightOccured(swipe: UISwipeGestureRecognizer) {
         UserInfo.Instance.goToPastDay()
