@@ -59,13 +59,14 @@ class UserInfo {
     }
     
     
-    public func getDaysTasks(date: Date) {
+    public func getDaysTasks(date: Date) -> [Task]{
         var dayTasks: [Task] = []
         for task in _taskList {
             if task.date == date {
                 dayTasks.append(task)
             }
         }
+        return dayTasks
     }
     
     public func goToNextDay() {

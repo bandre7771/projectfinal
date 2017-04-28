@@ -11,7 +11,6 @@ import UIKit
 class DayCompositeViewController: UIViewController, UserInfoDelegate {
     
     init() {
-        _currentDay = Date()
         super.init(nibName: "DayCompositViewController", bundle: nil)
         self.edgesForExtendedLayout = []
         UserInfo.Instance.delegate = self
@@ -50,8 +49,8 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate {
     }
     
     public func refresh() {
-        var daysTasks: [Task] = UserInfo.Instance.getDaysTasks(_currentDay)
-        dayCompositeView.taskListTableView?.taskList = daysTask
+        let daysTasks: [Task] = UserInfo.Instance.getDaysTasks(date: UserInfo.Instance.currentDay)
+        dayCompositeView.taskListTableView?.taskList = daysTasks
     }
     
     @objc private func swipeRightOccured(swipe: UISwipeGestureRecognizer) {

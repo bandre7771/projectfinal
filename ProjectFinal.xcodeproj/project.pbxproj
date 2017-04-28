@@ -84,7 +84,6 @@
 				52D59B641EB1C64A00E5AD8B /* DayCompositeViewController.swift */,
 				35ACDACA1EAE988500C01308 /* TaskCollectionViewController.swift */,
 				35ACDACC1EAE9B1D00C01308 /* TaskViewController.swift */,
-				52D59B661EB1CF5600E5AD8B /* TaskListTableView.swift */,
 				52D5915A1EA56A5900709E5B /* ViewController.swift */,
 			);
 			name = Controller;
@@ -124,10 +123,10 @@
 		52D59B631EB1C3F200E5AD8B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				52D59B661EB1CF5600E5AD8B /* TaskListTableView.swift */,
 				52D59B611EB1C3E400E5AD8B /* DayCompositeView.swift */,
 				52D5916C1EA697E700709E5B /* UICollectionReusableViews.swift */,
 				35ACDACE1EAE9B2E00C01308 /* TaskView.swift */,
+				52D59B661EB1CF5600E5AD8B /* TaskListTableView.swift */,
 				52D634661EAECDAD000BE905 /* CalendarCollectionViewLayout.swift */,
 				529224C21EABDF22004CC04A /* CalendarCollectionView.swift */,
 			);
