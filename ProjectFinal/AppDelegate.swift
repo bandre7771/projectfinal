@@ -26,7 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabs = UITabBarController()
         tabs.viewControllers = [nav1, nav2]
         
-        tabs.tabBar.barTintColor = hexStringToUIColor(from: "#000000", alphaValue: 1)
+        tabs.tabBar.barStyle = .black
+        tabs.tabBar.isTranslucent = false
         UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.blue], for: .selected)
         UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.lightGray], for: .normal)
         

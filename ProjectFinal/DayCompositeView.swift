@@ -31,9 +31,9 @@ class DayCompositeView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         var r: CGRect = bounds
-        var frame: CGRect = CGRect.zero
-        (frame, r) = r.divided(atDistance: r.width*0.50, from: .maxXEdge)
-        calendarCollectionView?.frame = frame
+        var calSize: CGRect = CGRect.zero
+        (calSize, r) = r.divided(atDistance: r.width*0.50, from: .maxXEdge)
+        calendarCollectionView?.frame = calSize
         (taskListView.frame, r) = r.divided(atDistance: r.width, from: .maxXEdge)
     }
 }

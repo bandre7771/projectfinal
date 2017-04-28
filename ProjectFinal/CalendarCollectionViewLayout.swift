@@ -56,11 +56,7 @@ class CalendarCollectionViewLayout: UICollectionViewLayout {
                 xOffsets.append((CGFloat(column) * columnWidth) + leftOffset)
                 
             }
-            
-//            var yOffsets: [CGFloat] = [CGFloat].init(repeating: 0, count: numberOfColumns)
-            
             var column = 0
-            
             for item in 0..<(collectionView?.numberOfItems(inSection: 0))! {
                 let indexPath: IndexPath = IndexPath(item: item, section: 0)
                 let height: CGFloat = (delegate?.collectionView(collectionView!, heightForItemAt: indexPath))!
@@ -71,7 +67,6 @@ class CalendarCollectionViewLayout: UICollectionViewLayout {
                 attributes.eventHeight = height
                 attributes.eventYOrigin = yOrigin
                 _cache.append(attributes)
-//                yOffsets[column] = yOffsets[column] + height
                 column = column >= (numberOfColumns - 1) ? 0 : column + 1
             }
         }

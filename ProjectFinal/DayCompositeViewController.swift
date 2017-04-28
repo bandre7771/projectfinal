@@ -30,21 +30,33 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dayCompositeView.backgroundColor = UIColor.blue
         title = "Today"
-        
-        let task = UIBarButtonItem(title: "Task Search", style: .plain, target: nil, action: nil)
-        let category = UIBarButtonItem(title: "Categories", style: .plain, target: nil, action: nil)
-        let currentDay = UIBarButtonItem(title: "\(UserInfo.Instance.currentDay)", style: .plain, target: nil, action: nil)
-        navigationItem.rightBarButtonItem = task
-        navigationItem.leftBarButtonItems = [category, currentDay]
-
+        reloadNavigationBarItems()
         let swipeR = UISwipeGestureRecognizer(target: self, action: #selector(DayCompositeViewController.swipeRightOccured(swipe:)))
         swipeR.direction = .right
         let swipeL = UISwipeGestureRecognizer(target: self, action: #selector(DayCompositeViewController.swipeLeftOccured(swipe:)))
         swipeL.direction = .left
         view.addGestureRecognizer(swipeR)
         view.addGestureRecognizer(swipeL)
+    }
+    
+    private func reloadNavigationBarItems() {
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.tintColor = UIColor.white
+        let task = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
+        let category = UIBarButtonItem(barButtonSystemItem: .organize, target: nil, action: nil)
+        let currentDay = UIBarButtonItem(title: currentMonthDayYear, style: .plain, target: nil, action: nil)
+        navigationItem.rightBarButtonItem = task
+        navigationItem.leftBarButtonItems = [currentDay, category]
+    }
+    
+    private var currentMonthDayYear: String {
+        let currentDay: Date = UserInfo.Instance.currentDay
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd YYYY"
+        let monthDayYear: String = dateFormatter.string(from: currentDay)
+        return monthDayYear
     }
     
     @objc private func swipeRightOccured(swipe: UISwipeGestureRecognizer) {
@@ -59,7 +71,7 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate {
     
     // MARK: UserInfoDelegate Methods
     func currentDayChanged() {
-        // TODO: notify all subcontrollers and views of the change.
+        reloadNavigationBarItems()
     }
     
 }

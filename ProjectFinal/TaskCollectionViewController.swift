@@ -26,7 +26,6 @@ class TaskCollectionViewController: UIViewController, UITableViewDataSource, UIT
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell()
         cell.textLabel?.text = UserInfo.Instance.getTask(at: indexPath.row).title
-        
         return cell
     }
     
