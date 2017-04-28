@@ -12,13 +12,26 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow()
-        window?.rootViewController = UIViewController()
+        
+        let first = DayCompositeViewController()
+        let nav1 = UINavigationController(rootViewController: first)
+        
+        let second = UIViewController()
+        second.view.backgroundColor = UIColor.green
+        let nav2 = UINavigationController(rootViewController: second)
+        let tabs = UITabBarController()
+        tabs.viewControllers = [nav1, nav2]
+        
+        tabs.tabBar.barTintColor = hexStringToUIColor(from: "#000000", alphaValue: 1)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.blue], for: .selected)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.lightGray], for: .normal)
+        
+        window?.rootViewController = tabs
         window?.makeKeyAndVisible()
-        window?.rootViewController = DayCompositeViewController()
         
         return true
     }

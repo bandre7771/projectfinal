@@ -7,16 +7,24 @@
 //
 
 import UIKit
+protocol UserInfoDelegate: class {
+    func currentDayChanged()
+}
 
 class UserInfo {
     
     private var _taskList: [Task] = []
     private var _taskGroupList: [Group] = []
     private var _dailyNoteList: [Note] = []
+    private var _currentDay: Date? = nil
+    
+    public var delegate: UserInfoDelegate? = nil
     
     public static let Instance: UserInfo = UserInfo()
     
-    private init() { }
+    private init() {
+        _currentDay = Date()
+    }
     
     public func addTask(task: Task) {
         _taskList.append(task)
@@ -50,6 +58,17 @@ class UserInfo {
         _dailyNoteList.remove(at: index)
     }
     
+    public func goToNextDay() {
+        _currentDay = Calendar.current.date(byAdding: .day, value: 1, to: _currentDay!)
+        delegate?.currentDayChanged()
+        NSLog("Day Incremented To: \(String(describing: _currentDay?.description))")
+    }
+    public func goToPastDay() {
+        _currentDay = Calendar.current.date(byAdding: .day, value: -1, to: _currentDay!)
+        delegate?.currentDayChanged()
+        NSLog("Day Decremented To: \(String(describing: _currentDay?.description))")
+    }
+    
     public func searchDailyNotes(word: String) {
         // TODO: add functionality for searching Daily notes for a string
     }
@@ -69,6 +88,15 @@ class UserInfo {
     
     public var TaskGroupList: [Group] {
         return _taskGroupList
+    }
+    
+    public var currentDay: Date {
+        get {
+            return _currentDay!
+        }
+        set {
+            _currentDay = newValue
+        }
     }
     
     
