@@ -9,11 +9,13 @@
 import UIKit
 
 class DayCompositeViewController: UIViewController, UserInfoDelegate {
+    private var _currentDay: Date? = nil
     
     init() {
         super.init(nibName: "DayCompositViewController", bundle: nil)
         self.edgesForExtendedLayout = []
         UserInfo.Instance.delegate = self
+        _currentDay = UserInfo.Instance.currentDay
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,7 +34,7 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Today"
-        reloadNavigationBarItems()
+        refresh()
         let swipeR = UISwipeGestureRecognizer(target: self, action: #selector(DayCompositeViewController.swipeRightOccured(swipe:)))
         swipeR.direction = .right
         let swipeL = UISwipeGestureRecognizer(target: self, action: #selector(DayCompositeViewController.swipeLeftOccured(swipe:)))
@@ -42,11 +44,6 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate {
     }
     
     public func refresh() {
-        let daysTasks: [Task] = UserInfo.Instance.getDaysTasks(date: UserInfo.Instance.currentDay)
-        dayCompositeView.taskListTableView?.taskList = daysTasks
-    }
-    
-    private func reloadNavigationBarItems() {
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.tintColor = UIColor.white
@@ -55,6 +52,10 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate {
         let currentDay = UIBarButtonItem(title: currentMonthDayYear, style: .plain, target: nil, action: nil)
         navigationItem.rightBarButtonItem = task
         navigationItem.leftBarButtonItems = [currentDay, category]
+        navigationItem.titleView = UIView()
+        let daysTasks: [Task] = UserInfo.Instance.getDaysTasks(date: UserInfo.Instance.currentDay)
+        dayCompositeView.taskListTableView?.taskList = daysTasks
+        dayCompositeView.calendarCollectionView?.events = EventsCalendarCollection.Instance.getAllCurrentEvents()
     }
     
     private var currentMonthDayYear: String {
@@ -77,10 +78,10 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate {
     
     
     // MARK: UserInfoDelegate Methods
-    func currentDayChanged() {
-        reloadNavigationBarItems()
+    func currentDayChanged(to date: Date) {
+        EventsCalendarCollection.Instance.currentDayChanged(to: date)
+        _currentDay = date
+        refresh()
     }
-    
-    // MARK: 
     
 }

@@ -28,9 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         tabs.tabBar.barStyle = .black
         tabs.tabBar.isTranslucent = false
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.blue], for: .selected)
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.lightGray], for: .normal)
-        
+                
         window?.rootViewController = tabs
         window?.makeKeyAndVisible()
         

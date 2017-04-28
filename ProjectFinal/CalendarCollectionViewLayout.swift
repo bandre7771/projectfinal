@@ -46,6 +46,11 @@ class CalendarCollectionViewLayout: UICollectionViewLayout {
         return CGSize(width: _width, height: minutesInADay)
     }
     
+    override func invalidateLayout() {
+        super.invalidateLayout()
+        _cache.removeAll()
+    }
+    
     override func prepare() {
         if _cache.isEmpty {
             let leftOffset: CGFloat = 25

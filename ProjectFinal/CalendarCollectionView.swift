@@ -12,6 +12,7 @@ class CalendarCollectionView: UICollectionView, UICollectionViewDataSource, Cale
     private var _cellSize: CGSize? = nil
     private var _sectionInset: UIEdgeInsets? = nil
     private var _calendarCollectionViewLayout: CalendarCollectionViewLayout? = nil
+    private var _events: [Event]? = nil
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         _calendarCollectionViewLayout = CalendarCollectionViewLayout()
@@ -24,6 +25,7 @@ class CalendarCollectionView: UICollectionView, UICollectionViewDataSource, Cale
         dataSource = self
         register(EventCell.self, forCellWithReuseIdentifier: String(describing: EventCell.self))
         backgroundColor = UIColor.white
+        _events = []
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,23 +33,34 @@ class CalendarCollectionView: UICollectionView, UICollectionViewDataSource, Cale
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return EventsCalendarCollection.Instance.count
+        return (_events?.count)!
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: EventCell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: EventCell.self), for: indexPath) as! EventCell
-        let event: Event = EventsCalendarCollection.Instance.eventAtIndex(indexPath.row)
+        let event: Event = _events![indexPath.row]
         cell.setEvents(event: event)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, heightForItemAt indexPath: IndexPath) -> CGFloat {
-        let event = EventsCalendarCollection.Instance.eventAtIndex(indexPath.row)
-        return CGFloat(event.eventLengthInMinutes)
+        let event = _events?[indexPath.row]
+        return CGFloat((event?.eventLengthInMinutes)!)
     }
     func collectionView(_ collectionView: UICollectionView, yOriginForItemAt indexPath: IndexPath) -> CGFloat {
-        let event = EventsCalendarCollection.Instance.eventAtIndex(indexPath.row)
-        return CGFloat(event.eventStartTimeInMinutes)
+        let event = _events?[indexPath.row]
+        return CGFloat((event?.eventStartTimeInMinutes)!)
+    }
+
+    public var events: [Event] {
+        get {
+            return _events!
+        }
+        set {
+            _events = newValue
+            collectionViewLayout.invalidateLayout()
+            reloadData()
+        }
     }
     
 }
