@@ -9,16 +9,18 @@
 import UIKit
 
 protocol TaskListTableViewDelegate: class {
-    func taskListTableView(table: TaskListTableView, selectedTask task: Task, index: Int)
+    func taskListTableView(table: TaskListTableView, selectedTask index: Int)
 }
 
 class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     // MARK: - UIViewController Overrides
     private var _taskList: [Task]
+    private var _currentDay: Date
     
     
     override init(frame: CGRect, style: UITableViewStyle) {
         _taskList = []
+        _currentDay = Date()
         super.init(frame: frame, style: style)
         dataSource = self
         self.allowsSelection = true
@@ -50,7 +52,7 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
         let index: Int = indexPath.row
         NSLog("Selected cell at index: \(index)")
         var task: Task = _taskList[index]
-        delegateTask?.taskListTableView(table: self, selectedTask: task, index: index)
+        delegateTask?.taskListTableView(table: self, selectedTask: index)
         // TODO: implement task edit window here
         /* let game: Game = GameLibrary.Instance.gameAtIndex(gameIndex)
         
@@ -81,6 +83,16 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
         set{
             _taskList = newValue
             setNeedsDisplay()
+            self.reloadData()
+        }
+    }
+    
+    public var currentDay: Date {
+        get{
+            return _currentDay
+        }
+        set{
+            _currentDay = newValue
         }
     }
     

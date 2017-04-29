@@ -8,12 +8,16 @@
 
 import UIKit
 
-class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTableViewDelegate {
+class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTableViewDelegate, TaskViewControllerDelegate {
+    
+    private var _currentTaskIndex: Int
     
     init() {
+        _currentTaskIndex = 0
         super.init(nibName: "DayCompositViewController", bundle: nil)
         self.edgesForExtendedLayout = []
         UserInfo.Instance.delegate = self
+        _currentTaskIndex = 0
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -49,8 +53,7 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
     }
     
     public func refresh() {
-        let daysTasks: [Task] = UserInfo.Instance.getDaysTasks(date: UserInfo.Instance.currentDay)
-        dayCompositeView.taskListTableView?.taskList = daysTasks
+        dayCompositeView.taskListTableView?.taskList = UserInfo.Instance.TaskCollection
         dayCompositeView.taskListTableView?.delegateTask = self
     }
     
@@ -60,9 +63,17 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
     }
     
     // MARK - Delegates from TaskListTableView
-    func taskListTableView(table: TaskListTableView, selectedTask task: Task, index: Int) {
-        var taskViewController: TaskViewController = TaskViewController(task: task)
+    func taskListTableView(table: TaskListTableView, selectedTask index: Int)  {
+        let taskViewController: TaskViewController = TaskViewController(task: UserInfo.Instance.getTask(at: index))
+        taskViewController.delegate = self
         navigationController?.pushViewController(taskViewController, animated: true)
+        _currentTaskIndex = index
+        
+    }
+    
+    func taskViewController(taskViewController: TaskViewController, saveTask: Task) {
+        UserInfo.Instance.updateTask(at: _currentTaskIndex, task: saveTask)
+        navigationController?.popViewController(animated: true)
     }
     
     
@@ -81,6 +92,7 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
     // MARK: UserInfoDelegate Methods
     func currentDayChanged() {
         // TODO: notify all subcontrollers and views of the change.
+        
     }
     
     // MARK: 
