@@ -9,6 +9,7 @@
 import UIKit
 
 class SearchBarView: UIView {
+    
     private var _searchField: UITextField? = nil
     
     override init(frame: CGRect) {
