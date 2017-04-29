@@ -42,7 +42,20 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
     
     //UITableView Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return _taskList.count
+        var count = 0
+        if !_taskList.isEmpty {
+            for(key, _) in _taskList {
+                if count == section {
+                    if let array = _taskList[key] {
+                        if array.count > 0 {
+                            return array.count
+                        }
+                    }
+                }
+                count = count + 1
+            }
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -50,7 +63,9 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
         let cell: UITableViewCell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         let group: String = Array(_taskList.keys)[indexPath.section]
         if var array = taskList[group] {
-            cell.textLabel?.text = array[index].title
+            if index < array.count {
+                cell.textLabel?.text = array[index].title
+            }
         }
         
         //cell.detailTextLabel?.text = taskList[index].title
@@ -71,18 +86,12 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
         return ""
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return _taskList.count
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let firstKey = Array(_taskList.keys)[section]
-        if let array = _taskList[firstKey] {
-            return array.count
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if _taskList.count > 0 {
+            return _taskList.count
         }
         return 0
     }
-
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let index: Int = indexPath.row
@@ -123,7 +132,6 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
         }
         set{
             _taskList = newValue
-            setNeedsDisplay()
             reloadData()
             
         }
