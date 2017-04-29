@@ -22,6 +22,7 @@ class NoteViewController: UIViewController {
         _currentNote = Note
         noteView.text = Note.text
         edgesForExtendedLayout = []
+        title = noteMonthDayYear
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -48,5 +49,10 @@ class NoteViewController: UIViewController {
         delegate?.noteViewController(save: _currentNote!) // To pop view off
     }
     
-
+    private var noteMonthDayYear: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd YYYY"
+        let monthDayYear: String = dateFormatter.string(from: (_currentNote?.date)!)
+        return monthDayYear
+    }
 }
