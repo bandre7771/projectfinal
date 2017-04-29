@@ -10,9 +10,10 @@ import UIKit
 
 protocol TaskViewControllerDelegate: class {
     func taskViewController(taskViewController: TaskViewController, saveTask: Task)
+    func doneEditing()
 }
 
-class TaskViewController: UIViewController {
+class TaskViewController: UIViewController, TaskViewDelegate {
     private var _task: Task
     
     init(task: Task) {
@@ -34,6 +35,7 @@ class TaskViewController: UIViewController {
         taskView.date = _task.date
         taskView.status = _task.status
         taskView.note = _task.notes.text
+        taskView.delegate = self
         
         refresh()
     }
@@ -42,13 +44,17 @@ class TaskViewController: UIViewController {
         super.viewDidLoad()
         
         // Perform any additional setup after loading the view, typically from a nib.
-        var doneButton: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(save))
+        let doneButton: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(save))
         navigationItem.setRightBarButtonItems([doneButton], animated: true)
         // The line below will move the search bar below the nav bar
         navigationController?.navigationBar.isTranslucent = false;
     }
     
     public func save(){
+        delegate?.doneEditing()
+    }
+    
+    func taskUpdated() {    
         let task: Task = Task(title: taskView.title, status: taskView.status, priority: taskView.priority, date: taskView.date, group: taskView.group, notes: Note(text: taskView.note, date: taskView.date))
         
         delegate?.taskViewController(taskViewController: self, saveTask: task)

@@ -24,8 +24,8 @@ class UserInfo: NoteDelegate {
          Event(title: "Demo Event", startHour: 12, startMinute: 0, endHour: 14, endMinute: 0, date: Date()),
          Event(title: "Demo Event", startHour: 16, startMinute: 0, endHour: 17, endMinute: 0, date: Date()),
          Event(title: "Demo Event", startHour: 16, startMinute: 50, endHour: 19, endMinute: 0, date: Date())*/]]
-    private var _taskList: [Task] = []
-    private var _taskGroupList: [Group] = []
+    private var _taskList: [String: [Task]] = [:]
+    private var _taskGroupList: [String] = []
     private var _currentDay: Date? = nil
     
     weak var delegate: UserInfoDelegate? = nil
@@ -34,11 +34,6 @@ class UserInfo: NoteDelegate {
     
     private init() {
         _currentDay = Date()
-        for (_,value) in _dailyDictionary {
-            for task in value {
-                _taskList.append(task)
-            }
-        }
         
         let dayBeforeYesterday = Calendar.current.date(byAdding: .day, value: -2, to: _currentDay!)
         let yesterday = Calendar.current.date(byAdding: .day, value: 1, to: dayBeforeYesterday!)
@@ -59,25 +54,39 @@ class UserInfo: NoteDelegate {
     }
     
     public func addTask(task: Task) {
-        _taskList.append(task)
+        if var array = _taskList[task.group]{
+            array.append(task)
+            _taskList[task.group] = array
+        }
+        else {
+            _taskList[task.group] = [task]
+        }
         delegate?.taskListUpdated()
     }
     
-    public func removeTask(index: Int) {
-        _taskList.remove(at: index)
-        delegate?.taskListUpdated()
+    public func removeTask(index: Int, group: String) {
+        if var array = _taskList[group] {
+            array.remove(at: index)
+            _taskList[group] = array
+        }
     }
     
     public func updateTask(at index: Int, task: Task){
-        _taskList[index] = task
+        if var array = _taskList[task.group] {
+            array[index] = task
+            _taskList[task.group] = array
+        }
         delegate?.taskListUpdated()
     }
     
-    public func getTask(at index: Int) -> Task {
-        return _taskList[index]
+    public func getTask(at index: Int, group: String) -> Task {
+        if var array = _taskList[group]{
+            return array[index]
+        }
+        return Task()
     }
     
-    public func addGroup(group: Group) {
+    public func addGroup(group: String) {
         _taskGroupList.append(group)
     }
     
@@ -86,19 +95,30 @@ class UserInfo: NoteDelegate {
     }
     
     
-    public func getDaysTasks(date: Date) -> [Task]{
-        var dayTasks: [Task] = []
+    public func getDaysTasks(date: Date) -> [String: [Task]]{
+        var dayTasks: [String: [Task]] = [:]
         var calendar: Calendar = Calendar.current
-        for task in _taskList {
-            if calendar.isDate(task.date, equalTo: date, toGranularity: .day) {
-                dayTasks.append(task)
-            }
+        for (group, tasks) in _taskList {
+            if let array = _taskList[group] {
+                for task in array {
+                    if calendar.isDate(task.date, equalTo: date, toGranularity: .day) {
+                        if var array = dayTasks[group]{
+                            array.append(task)
+                            dayTasks[group] = array
+                        }
+                        else {
+                            dayTasks[group] = [task]
+                        }
+                    }
 //            switch date.compare(task.date) {
 //            case .orderedAscending     :   print("Date A is earlier than date B")
 //            case .orderedDescending    :   print("Date A is later than date B")
 //            case .orderedSame          :   dayTasks.append(task)
-//            }
+//          }
+                }
+            }
         }
+        
         return dayTasks
     }
     
@@ -119,16 +139,6 @@ class UserInfo: NoteDelegate {
         delegate?.currentDayChanged(to: date)
     }
     
-    public func currentDayChanged(to date: Date) {
-        _taskList.removeAll()
-        let start = Calendar.current.startOfDay(for: date)
-        if _dailyDictionary[start] != nil {
-            for task in _dailyDictionary[start]! {
-                _taskList.append(task)
-            }
-        }
-    }
-    
     
     public func searchDailyNotes(word: String) {
         // TODO: add functionality for searching Daily notes for a string
@@ -143,11 +153,11 @@ class UserInfo: NoteDelegate {
     }
     
     // MARK - Public Accessible Variables
-    public var TaskCollection: [Task] {
+    public var TaskCollection: [String: [Task]] {
         return _taskList
     }
     
-    public var TaskGroupList: [Group] {
+    public var TaskGroupList: [String] {
         return _taskGroupList
     }
     

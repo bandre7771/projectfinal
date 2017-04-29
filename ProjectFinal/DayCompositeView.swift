@@ -11,10 +11,10 @@ import UIKit
 class DayCompositeView: UIView {
     var calendarCollectionView: CalendarCollectionView? = nil
     var taskListTableView: TaskListTableView? = nil
-    private var _taskList: [Task]
+    private var _taskList: [String:[Task]]
     
     override init(frame: CGRect) {
-        _taskList = []
+        _taskList = [:]
         super.init(frame: frame)
         taskListTableView = TaskListTableView()
         calendarCollectionView = CalendarCollectionView()
@@ -34,7 +34,7 @@ class DayCompositeView: UIView {
         (taskListTableView!.frame, r) = r.divided(atDistance: r.width, from: .maxXEdge)
     }
 
-    public var taskList: [Task] {
+    public var taskList: [String:[Task]] {
         get{
             return _taskList
         }

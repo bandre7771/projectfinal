@@ -7,11 +7,14 @@
 //
 
 import UIKit
+protocol TaskViewDelegate: class {
+    func taskUpdated()
+}
 
-class TaskView: UIView, UITextFieldDelegate{
+class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
     private var _title: String
     private var _date: Date
-    private var _group: Group
+    private var _group: String
     private var _priority: Int
     private var _status: Bool
     private var _note: String
@@ -20,11 +23,12 @@ class TaskView: UIView, UITextFieldDelegate{
         
         _title = ""
         _date = Date()
-        _group = Group()
+        _group = ""
         _priority = 0
         _status = false
         _note = ""
         super.init(frame: frame)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -59,7 +63,7 @@ class TaskView: UIView, UITextFieldDelegate{
         groupTextField.returnKeyType = UIReturnKeyType.done
         groupTextField.clearButtonMode = UITextFieldViewMode.whileEditing
         groupTextField.borderStyle = UITextBorderStyle.roundedRect
-        groupTextField.text = _group.name
+        groupTextField.text = _group
         
         let priorityTextField: UITextField = UITextField(frame: CGRect(x: 10.0, y: 110.0, width: 100, height: 35))
         priorityTextField.placeholder = "Priority"
@@ -79,34 +83,33 @@ class TaskView: UIView, UITextFieldDelegate{
         var statusText = _status ? "Done" : "Not Done"
         statusTextField.text = statusText
         
-        let noteTextField: UITextField = UITextField(frame: CGRect(x: 10.0, y: 190, width: 300, height: 250))
-        noteTextField.placeholder = "Date"
-        noteTextField.keyboardType = UIKeyboardType.default
-        noteTextField.returnKeyType = UIReturnKeyType.done
-        noteTextField.clearButtonMode = UITextFieldViewMode.whileEditing
-        noteTextField.borderStyle = UITextBorderStyle.roundedRect
-        noteTextField.text = dateFormatter.string(from: _date)
-        noteTextField.contentVerticalAlignment = UIControlContentVerticalAlignment.top
+        let noteTextView: UITextView = UITextView(frame: CGRect(x: 10.0, y: 190, width: 300, height: 250))
+        noteTextView.keyboardType = UIKeyboardType.default
+        noteTextView.returnKeyType = UIReturnKeyType.done
+        noteTextView.text = _note
+//        noteTextView.contentVerticalAlignment = UIControlContentVerticalAlignment.top
+        
         
         titleTextField.delegate = self
         dateTextField.delegate = self
         groupTextField.delegate = self
         priorityTextField.delegate = self
         statusTextField.delegate = self
-        noteTextField.delegate = self
+        noteTextView.delegate = self
         self.addSubview(titleTextField)
         self.addSubview(dateTextField)
         self.addSubview(groupTextField)
         self.addSubview(priorityTextField)
         self.addSubview(statusTextField)
-        self.addSubview(noteTextField)
+        self.addSubview(noteTextView)
     }
     
-    /** 
-     Saves the current task in the data model
-    **/
-    public func save(){
-        
+    weak var delegate: TaskViewDelegate? = nil
+    
+    // MARK: TextView Delegates
+    func textViewDidEndEditing(_ textView: UITextView) {
+        _note = textView.text
+        delegate?.taskUpdated()
     }
     
     // MARK: Textfield Delegates
@@ -127,7 +130,7 @@ class TaskView: UIView, UITextFieldDelegate{
             _date = dateFormatter.date(from: textField.text!)!
         }
         else if textField.placeholder == "Group" {
-            _group.name = textField.text!
+            _group = textField.text!
         }
         else if textField.placeholder == "Priority" {
             _priority = Int(textField.text!)!
@@ -135,6 +138,8 @@ class TaskView: UIView, UITextFieldDelegate{
         else if textField.placeholder == "Status" {
             _status = (textField.text! == "Done") ? true : false
         }
+        
+        delegate?.taskUpdated()
         
 //        switch textField.placeholder {
 //        case "Title":
@@ -197,7 +202,7 @@ class TaskView: UIView, UITextFieldDelegate{
         }
     }
     
-    public var group: Group {
+    public var group: String {
         get{
             return _group
         }

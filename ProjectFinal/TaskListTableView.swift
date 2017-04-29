@@ -9,18 +9,22 @@
 import UIKit
 
 protocol TaskListTableViewDelegate: class {
-    func taskListTableView(table: TaskListTableView, selectedTask index: Int)
+    func taskListTableView(table: TaskListTableView, selectedTask index: Int, group: String)
 }
 
 class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     // MARK: - UIViewController Overrides
-    private var _taskList: [Task]
+    private var _taskList: [String:[Task]]
     private var _currentDay: Date
+    private var _currentDayTasks: [String:[Task]]
+    private var _category: String
     
     
     override init(frame: CGRect, style: UITableViewStyle) {
-        _taskList = []
+        _taskList = [:]
         _currentDay = Date()
+        _currentDayTasks = UserInfo.Instance.getDaysTasks(date: _currentDay)
+        _category = ""
         super.init(frame: frame, style: style)
         dataSource = self
         self.allowsSelection = true
@@ -44,15 +48,42 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let index = indexPath.row
         let cell: UITableViewCell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-        cell.textLabel?.text = taskList[index].title
+        let group: String = Array(_taskList.keys)[indexPath.section]
+        if var array = taskList[group] {
+            cell.textLabel?.text = array[index].title
+        }
+        
+        //cell.detailTextLabel?.text = taskList[index].title
+        //cell.textLabel?.textAlignment = .right
+        //cell.detailTextLabel?.textAlignment = .right
+        //cell = label
         return cell
     }
+    
+    func tableView(_ tableView: UITableView!, titleForHeaderInSection section: Int) -> String! {
+        let firstKey = Array(_taskList.keys)[section]
+        return firstKey
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return _taskList.count
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let firstKey = Array(_taskList.keys)[section]
+        if let array = _taskList[firstKey] {
+            return array.count
+        }
+        return 0
+    }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let index: Int = indexPath.row
         NSLog("Selected cell at index: \(index)")
-        var task: Task = _taskList[index]
-        delegateTask?.taskListTableView(table: self, selectedTask: index)
+        //let task: Task = _taskList[index]
+        let group: String = Array(_taskList.keys)[indexPath.section]
+        delegateTask?.taskListTableView(table: self, selectedTask: index, group: group)
         // TODO: implement task edit window here
         /* let game: Game = GameLibrary.Instance.gameAtIndex(gameIndex)
         
@@ -74,16 +105,21 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
         }
     }
     
+    public func getCurrentCategory () {
+        
+    }
+    
     weak var delegateTask: TaskListTableViewDelegate? = nil
     
-    public var taskList: [Task] {
+    public var taskList: [String:[Task]] {
         get{
             return _taskList
         }
         set{
             _taskList = newValue
             setNeedsDisplay()
-            self.reloadData()
+            reloadData()
+            
         }
     }
     
