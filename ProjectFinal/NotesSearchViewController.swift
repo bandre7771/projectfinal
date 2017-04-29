@@ -40,7 +40,7 @@ class NotesSearchViewController: UIViewController {
         navigationController?.navigationBar.tintColor = UIColor.white
         let currentDay = UIBarButtonItem(title: currentMonthDayYear, style: .plain, target: nil, action: nil)
         navigationItem.leftBarButtonItems = [currentDay]
-        notesSearchView.updateSearch(to: UserInfo.Instance.CurrentNoteSearch)
+        notesSearchView.updateSearch(to: UserInfo.Instance.currentNoteSearch)
     }
     
     private var currentMonthDayYear: String {

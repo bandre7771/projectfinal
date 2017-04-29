@@ -19,6 +19,8 @@
 		520202471EB44A940039C16B /* NotesSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520202461EB44A940039C16B /* NotesSearchView.swift */; };
 		520202491EB44CAC0039C16B /* NotesSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520202481EB44CAC0039C16B /* NotesSearchViewController.swift */; };
 		5202024D1EB5004F0039C16B /* DailyNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5202024C1EB5004F0039C16B /* DailyNoteView.swift */; };
+		5202024F1EB51D1C0039C16B /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5202024E1EB51D1C0039C16B /* NoteView.swift */; };
+		520202511EB521C80039C16B /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520202501EB521C80039C16B /* NoteViewController.swift */; };
 		52626F101EB14B99003A4FAD /* EventsCalendarCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52626F0F1EB14B99003A4FAD /* EventsCalendarCollection.swift */; };
 		529224C31EABDF22004CC04A /* CalendarCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529224C21EABDF22004CC04A /* CalendarCollectionView.swift */; };
 		52D0E6F71EA99D110047801B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52D0E6F61EA99D110047801B /* Default-568h@2x.png */; };
@@ -46,6 +48,8 @@
 		520202461EB44A940039C16B /* NotesSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesSearchView.swift; sourceTree = "<group>"; };
 		520202481EB44CAC0039C16B /* NotesSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesSearchViewController.swift; sourceTree = "<group>"; };
 		5202024C1EB5004F0039C16B /* DailyNoteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyNoteView.swift; sourceTree = "<group>"; };
+		5202024E1EB51D1C0039C16B /* NoteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
+		520202501EB521C80039C16B /* NoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		52626F0F1EB14B99003A4FAD /* EventsCalendarCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsCalendarCollection.swift; sourceTree = "<group>"; };
 		529224C21EABDF22004CC04A /* CalendarCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarCollectionView.swift; sourceTree = "<group>"; };
 		52D0E6F61EA99D110047801B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -89,10 +93,11 @@
 		35ACDAD21EAEAE5C00C01308 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				520202481EB44CAC0039C16B /* NotesSearchViewController.swift */,
 				52D59B641EB1C64A00E5AD8B /* DayCompositeViewController.swift */,
+				520202481EB44CAC0039C16B /* NotesSearchViewController.swift */,
 				35ACDACA1EAE988500C01308 /* TaskCollectionViewController.swift */,
 				35ACDACC1EAE9B1D00C01308 /* TaskViewController.swift */,
+				520202501EB521C80039C16B /* NoteViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -132,15 +137,16 @@
 			isa = PBXGroup;
 			children = (
 				52D59B611EB1C3E400E5AD8B /* DayCompositeView.swift */,
+				5202024C1EB5004F0039C16B /* DailyNoteView.swift */,
+				5202024E1EB51D1C0039C16B /* NoteView.swift */,
+				520202441EB446880039C16B /* SearchBarView.swift */,
+				520202461EB44A940039C16B /* NotesSearchView.swift */,
+				520202421EB43CE30039C16B /* NotesListTableView.swift */,
 				52D5916C1EA697E700709E5B /* UICollectionReusableViews.swift */,
 				35ACDACE1EAE9B2E00C01308 /* TaskView.swift */,
 				52D59B661EB1CF5600E5AD8B /* TaskListTableView.swift */,
 				52D634661EAECDAD000BE905 /* CalendarCollectionViewLayout.swift */,
 				529224C21EABDF22004CC04A /* CalendarCollectionView.swift */,
-				520202421EB43CE30039C16B /* NotesListTableView.swift */,
-				520202461EB44A940039C16B /* NotesSearchView.swift */,
-				520202441EB446880039C16B /* SearchBarView.swift */,
-				5202024C1EB5004F0039C16B /* DailyNoteView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -233,6 +239,8 @@
 				52D591591EA56A5900709E5B /* AppDelegate.swift in Sources */,
 				520202451EB446880039C16B /* SearchBarView.swift in Sources */,
 				35ACDACB1EAE988500C01308 /* TaskCollectionViewController.swift in Sources */,
+				520202511EB521C80039C16B /* NoteViewController.swift in Sources */,
+				5202024F1EB51D1C0039C16B /* NoteView.swift in Sources */,
 				520202471EB44A940039C16B /* NotesSearchView.swift in Sources */,
 				35ACDAD11EAEAB4A00C01308 /* UserInfo.swift in Sources */,
 				520202491EB44CAC0039C16B /* NotesSearchViewController.swift in Sources */,

@@ -8,10 +8,16 @@
 
 import UIKit
 
+protocol DailyNoteViewDelegate: class {
+    func noteViewTapped()
+}
+
 class DailyNoteView: UIView {
     
     private var _textView: UILabel? = nil
     private var _selfRect: CGRect? = nil
+    
+    public var delegate: DailyNoteViewDelegate? = nil
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,13 +27,14 @@ class DailyNoteView: UIView {
         _textView?.translatesAutoresizingMaskIntoConstraints = false
         _textView?.backgroundColor = UIColor.white
         _textView?.text = "Tap Here to Add Note"
+        _textView?.adjustsFontSizeToFitWidth = true
+        _textView?.numberOfLines = 0
         addSubview(_textView!)
         let views: [String : UIView] = ["textView": _textView!]
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[textView]-|", options: .alignAllCenterX, metrics: nil, views: views))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[textView]-|", options: .alignAllCenterY, metrics: nil, views: views))
         _selfRect = CGRect.zero
         backgroundColor = UIColor.white
-
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -46,22 +53,24 @@ class DailyNoteView: UIView {
     
     public var text: String {
         get {
-            var result = _textView?.text
-            if result == nil || (result?.isEmpty)! {
-                result = "Tap Here to Add Note"
-            }
-            return result!
+            return (_textView?.text)!
         } set {
-            _textView?.text = newValue
+            var result = newValue
+            if result.isEmpty {
+                result = "Tap Here to Add Note"
+                _textView?.textColor = UIColor.lightGray
+            } else {
+                _textView?.textColor = UIColor.black
+            }
+            _textView?.text = result
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch: UITouch = touches.first!
         let touchPoint = touch.location(in: self)
-        
         if (bounds.contains(touchPoint)) {
-            // Delegate to let the conroller know to open the note
+            delegate?.noteViewTapped()
             NSLog("Tapped note")
         }
     }
