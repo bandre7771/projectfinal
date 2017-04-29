@@ -26,9 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabs = UITabBarController()
         tabs.viewControllers = [nav1, nav2]
         
-        tabs.tabBar.barTintColor = hexStringToUIColor(from: "#000000", alphaValue: 1)
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.blue], for: .selected)
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.lightGray], for: .normal)
+        tabs.tabBar.barStyle = .black
+        tabs.tabBar.isTranslucent = false
+                
         
         let task1: Task = Task(title: "test1", status: false, priority: 5, date: Date(), group: Group.init(name: "School"), notes: Note(text: "end of semester", date: Date()))
         let task2: Task = Task(title: "test2", status: false, priority: 5, date: Date(), group: Group.init(name: "School"), notes: Note(text: "end of semester", date: Date()))

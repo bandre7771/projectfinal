@@ -8,7 +8,7 @@
 
 import UIKit
 protocol UserInfoDelegate: class {
-    func currentDayChanged()
+    func currentDayChanged(to date: Date)
     func taskListUpdated()
 }
 
@@ -82,12 +82,12 @@ class UserInfo {
     
     public func goToNextDay() {
         _currentDay = Calendar.current.date(byAdding: .day, value: 1, to: _currentDay!)
-        delegate?.currentDayChanged()
+        delegate?.currentDayChanged(to: _currentDay!)
         NSLog("Day Incremented To: \(String(describing: _currentDay?.description))")
     }
     public func goToPastDay() {
         _currentDay = Calendar.current.date(byAdding: .day, value: -1, to: _currentDay!)
-        delegate?.currentDayChanged()
+        delegate?.currentDayChanged(to: _currentDay!)
         NSLog("Day Decremented To: \(String(describing: _currentDay?.description))")
     }
     

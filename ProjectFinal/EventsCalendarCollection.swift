@@ -16,38 +16,35 @@ protocol EventsCalendarCollectionDelegate {
 
 class EventsCalendarCollection: EventDelegate {
     private var _events: [Event] = []
-    
+    private var _dailyDictionary: [Date : [Event]] = [Calendar.current.startOfDay(for: Date()): [Event(title: "Demo Event", startHour: 4, startMinute: 0, endHour: 8, endMinute: 0, date: Date()),
+                                                        Event(title: "Demo Event", startHour: 12, startMinute: 0, endHour: 14, endMinute: 0, date: Date()),
+                                                        Event(title: "Demo Event", startHour: 16, startMinute: 0, endHour: 17, endMinute: 0, date: Date()),
+                                                        Event(title: "Demo Event", startHour: 16, startMinute: 50, endHour: 19, endMinute: 0, date: Date())]]
     private init() {
-        let date = Date()
-        
-        let demoEvent1: Event = Event(title: "Demo Event", startHour: 8, startMinute: 0, endHour: 10, endMinute: 0, date: date)
-        let demoEvent2: Event = Event(title: "Demo Event", startHour: 12, startMinute: 0, endHour: 14, endMinute: 0, date: date)
-        let demoEvent3: Event = Event(title: "Demo Event", startHour: 16, startMinute: 0, endHour: 17, endMinute: 0, date: date)
-        let demoEvent4: Event = Event(title: "Demo Event", startHour: 16, startMinute: 50, endHour: 19, endMinute: 0, date: date)
-        
-        _events.append(demoEvent1)
-        _events.append(demoEvent2)
-        _events.append(demoEvent3)
-        _events.append(demoEvent4)
-   }
-    
-    
+
+        for (_,value) in _dailyDictionary {
+            for event in value {
+                _events.append(event)
+            }
+        }
+    }
+
     // MARK: - Public Variables
     public static let Instance: EventsCalendarCollection = EventsCalendarCollection()
-    
+
     public var delegate: EventsCalendarCollectionDelegate? = nil
-    
+
     public var count: Int {
         return _events.count
     }
-    
+
     // MARK: - Public Methods
     public func createNewEvent(event: Event) {
         event.delegates.append(self)
         _events.append(event)
         delegate?.eventCreatedAtIndex(_events.count - 1)
     }
-    
+
     public func deleteEventAtIndex(_ index: Int) {
         if(index >= 0 && index < _events.count) {
             _events.remove(at: index)
@@ -56,11 +53,15 @@ class EventsCalendarCollection: EventDelegate {
             NSLog("Could not remove event")
         }
     }
-    
+
     public func eventAtIndex(_ index: Int) -> Event {
         return _events[index]
     }
     
+    public func getAllCurrentEvents() -> [Event] {
+        return _events
+    }
+
     // MARK: - Persistence Methods
     public func load() {
         //TODO: Implement Persistance Load
@@ -69,6 +70,16 @@ class EventsCalendarCollection: EventDelegate {
         //TODO: Implement Persistance Save
     }
     
+    public func currentDayChanged(to date: Date) {
+        _events.removeAll()
+        let start = Calendar.current.startOfDay(for: date)
+        if _dailyDictionary[start] != nil {
+            for event in _dailyDictionary[start]! {
+                _events.append(event)
+            }
+        }
+    }
+
     // MARK: - EventDelegate Methods
     func eventChanged(_ event: Event) {
         let eventIndex: Int? = _events.index(where: {searchEvent in searchEvent === event})
