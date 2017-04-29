@@ -131,23 +131,4 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
             _currentDay = newValue
         }
     }
-    
-    // MARK: - GameLibraryDelegate Methods
-    // TODO: impement following methods for tasks
-//    func gameCreatedAtIndex(_ index: Int) {
-//        GameLibrary.Instance.save()
-//        gameListTableView.reloadData()
-//    }
-//    
-//    func gameDeletedAtIndex(_ index: Int) {
-//        GameLibrary.Instance.save()
-//        gameListTableView.reloadData()
-//    }
-//    
-//    func gameBoardChangedAtIndex(_ index: Int) {
-//        GameLibrary.Instance.save()
-//        let indexPath: IndexPath = IndexPath(row: index, section: 0)
-//        gameListTableView.reloadRows(at: [indexPath], with: .none)
-//    }
-
 }
