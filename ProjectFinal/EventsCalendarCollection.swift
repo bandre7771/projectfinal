@@ -21,7 +21,6 @@ class EventsCalendarCollection: EventDelegate {
                                                         Event(title: "Demo Event", startHour: 16, startMinute: 0, endHour: 17, endMinute: 0, date: Date()),
                                                         Event(title: "Demo Event", startHour: 16, startMinute: 50, endHour: 19, endMinute: 0, date: Date())]]
     private init() {
-
         for (_,value) in _dailyDictionary {
             for event in value {
                 _events.append(event)
