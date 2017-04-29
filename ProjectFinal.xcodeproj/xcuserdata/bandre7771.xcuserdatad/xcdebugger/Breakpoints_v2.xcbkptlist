@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "69"
             endingLineNumber = "69"
-            landmarkName = "getDaysTasks(date:)"
+            landmarkName = "addDailyNote(note:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -86,7 +86,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ProjectFinal/DayCompositeViewController.swift"
@@ -111,7 +111,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "42"
             endingLineNumber = "42"
-            landmarkName = "updateTask(at:task:)"
+            landmarkName = "addTask(task:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
