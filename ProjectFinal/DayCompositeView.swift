@@ -7,12 +7,17 @@
 //
 
 import UIKit
+protocol DayCompositeViewDelegate: class {
+    func dailyNoteViewTapped()
+}
 
-class DayCompositeView: UIView {
+class DayCompositeView: UIView, DailyNoteViewDelegate {
     var calendarCollectionView: CalendarCollectionView? = nil
     var taskListTableView: TaskListTableView? = nil
     var dailyNoteView: DailyNoteView? = nil
     private var _taskList: [String:[Task]]
+    
+    public var delegate: DayCompositeViewDelegate? = nil
     
     override init(frame: CGRect) {
         _taskList = [:]
@@ -20,7 +25,7 @@ class DayCompositeView: UIView {
         taskListTableView = TaskListTableView()
         calendarCollectionView = CalendarCollectionView()
         dailyNoteView = DailyNoteView()
-        
+        dailyNoteView?.delegate = self
         addSubview(taskListTableView!)
         addSubview(calendarCollectionView!)
         addSubview(dailyNoteView!)
@@ -48,4 +53,9 @@ class DayCompositeView: UIView {
             taskListTableView?.taskList = newValue
         }
     }
+    
+    func noteViewTapped() {
+        delegate?.dailyNoteViewTapped()
+    }
+    
 }

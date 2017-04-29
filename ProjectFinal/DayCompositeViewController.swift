@@ -8,10 +8,10 @@
 
 import UIKit
 
-class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTableViewDelegate, TaskViewControllerDelegate {
-
-    private var _currentDay: Date? = nil
+class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTableViewDelegate, TaskViewControllerDelegate, NoteViewControllerDelegate, DayCompositeViewDelegate {
     
+    private var _currentDay: Date? = nil
+    private var _currentNote: Note? = nil
     private var _currentTaskIndex: Int
     
     init() {
@@ -21,6 +21,8 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         UserInfo.Instance.delegate = self
         _currentDay = UserInfo.Instance.currentDay
         _currentTaskIndex = 0
+        _currentNote = Note()
+        dayCompositeView.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -61,6 +63,15 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         dayCompositeView.taskListTableView?.taskList = UserInfo.Instance.TaskCollection
         dayCompositeView.taskListTableView?.delegateTask = self
         dayCompositeView.calendarCollectionView?.events = EventsCalendarCollection.Instance.getAllCurrentEvents()
+        dayCompositeView.dailyNoteView?.text = ""
+        _currentNote = Note(text: "", date: _currentDay!)
+        for note in UserInfo.Instance.notes {
+            if Calendar.current.startOfDay(for: note.date) == Calendar.current.startOfDay(for: _currentDay!) {
+                _currentNote = note
+                dayCompositeView.dailyNoteView?.text = (_currentNote?.text)!
+                break
+            }
+        }
     }
     
     private var currentMonthDayYear: String {
@@ -71,7 +82,7 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         return monthDayYear
     }
     
-    // MARK - Delegate from user info
+    // MARK: Delegate from user info
     func taskListUpdated() {
         refresh()
     }
@@ -98,7 +109,6 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
     }
     
     
-    
     @objc private func swipeRightOccured(swipe: UISwipeGestureRecognizer) {
         UserInfo.Instance.goToPastDay()
         NSLog("swiped right")
@@ -113,12 +123,24 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         UserInfo.Instance.goToDay(date: Date())
     }
     
-    
     // MARK: UserInfoDelegate Methods
     func currentDayChanged(to date: Date) {
         EventsCalendarCollection.Instance.currentDayChanged(to: date)
         _currentDay = date
         refresh()
+    }
+    
+    // MARK: NoteViewControllerDelegate methods
+    func noteViewController(save note: Note) {
+        UserInfo.Instance.addOrUpdateNote(note)
+        navigationController?.popViewController(animated: true)
+    }
+    
+    // MARK: DayCompositeViewDelegate methods
+    func dailyNoteViewTapped() {
+        let noteViewController: NoteViewController = NoteViewController(Note: _currentNote!)
+        noteViewController.delegate = self
+        navigationController?.pushViewController(noteViewController , animated: true)
     }
     
 }

@@ -8,27 +8,18 @@
 
 import UIKit
 
-protocol NoteDelegate {
-    func noteChanged(_ note: Note)
-}
-
-
 class Note {
     private var _text: String
     private var _date: Date
     
-    public var delegates: [NoteDelegate]? = nil
-    
     init(text: String, date: Date) {
         _text = text
         _date = date
-        delegates = []
     }
     
     init(){
         _text = ""
         _date = Date()
-        delegates = []
     }
     
     // MARK - Public Accessible Variables

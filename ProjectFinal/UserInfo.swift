@@ -13,13 +13,12 @@ protocol UserInfoDelegate: class {
     func notesListChanged(_ notes: [Note])
 }
 
-class UserInfo: NoteDelegate {
+class UserInfo {
     
     private var _currentNoteSearch: [Note] = []
     
-    private var _notes: [Note] = [Note.init(text: "This note is a demo note for today!", date: Date())]
+    private var _notes: [Note] = [Note.init(text: "This note is a demo note for today! This is text to make it longer. Is this enough text hmmm maybe. We'll find out... Turns out it was but I want to make it even longer. Not stopping now lol lol.", date: Date())]
 
-    
     private var _dailyDictionary: [Date : [Task]] = [Calendar.current.startOfDay(for: Date()): [/*Event(title: "Demo Event", startHour: 4, startMinute: 0, endHour: 8, endMinute: 0, date: Date()),
          Event(title: "Demo Event", startHour: 12, startMinute: 0, endHour: 14, endMinute: 0, date: Date()),
          Event(title: "Demo Event", startHour: 16, startMinute: 0, endHour: 17, endMinute: 0, date: Date()),
@@ -47,6 +46,7 @@ class UserInfo: NoteDelegate {
         _notes.append(Note.init(text: "Tomorrows demo note!", date: tomorrow!))
         _notes.append(Note.init(text: "The day after tomorrow's note!", date: dayAfterTomorrow!))
         _notes.append(Note.init(text: "Testing", date: dayAfterAfterTomorrow!))
+        
         
         for note in _notes {
             _currentNoteSearch.append(note)
@@ -170,11 +170,7 @@ class UserInfo: NoteDelegate {
             _currentDay = newValue
         }
     }
-    
-    
 
-    
-    
     // MARK - Note Public Accessible Variables
     public var noteCount: Int {
         return _notes.count
@@ -184,40 +180,39 @@ class UserInfo: NoteDelegate {
         return _currentNoteSearch.count
     }
     
-    public var CurrentNoteSearch: [Note] {
+    public var currentNoteSearch: [Note] {
         return _currentNoteSearch
     }
     
-    public func createNewNote(note: Note) {
-        note.delegates?.append(self)
-        _notes.append(note)
-//        delegate?.noteCreatedAtIndex(_notes.count - 1)
+    public var notes: [Note] {
+        return _notes
     }
     
-    public func deleteNoteAtIndex(_ index: Int) {
+    public func addNewNote(note: Note) {
+        _notes.append(note)
+    }
+    
+    public func removeNoteAtIndex(_ index: Int) {
         if(index >= 0 && index < _notes.count) {
             _notes.remove(at: index)
-//            delegate?.noteDeletedAtIndex(index)
         } else {
             NSLog("Could not remove note")
         }
     }
-    
-    public func noteAtIndex(_ index: Int) -> Note {
-        return _notes[index]
-    }
-    
+
     public func currentSearchChanged(to search: String) {
         _currentNoteSearch.removeAll()
         // TODO: Add regex
     }
     
-    // MARK: - NoteDelegate Methods
-    func noteChanged(_ note: Note) {
-//        let index: Int? = _notes.index(where: {searchNote in searchNote === note})
-//        if index != nil {
-//            delegate?.noteChangedAtIndex(index!)
-//        }
+    public func addOrUpdateNote(_ note: Note) {
+        let index: Int? = _notes.index(where: {searchNote in searchNote === note})
+        if index != nil {
+            _notes[index!] = note
+        } else {
+            addNewNote(note: note)
+        }
+        delegate?.notesListChanged(_notes)
     }
     
     

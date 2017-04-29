@@ -27,8 +27,7 @@ class SearchBarView: UIView {
         
         let views: [String : UIView] = ["searchField": _searchField!]
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[searchField]-|", options: .alignAllCenterX, metrics: nil, views: views))
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[searchField]-|", options: .alignAllCenterY, metrics: nil, views: views))
-
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[searchField]-|", options: .alignAllCenterY, metrics: nil, views: views))
     }
     
     required init?(coder aDecoder: NSCoder) {
