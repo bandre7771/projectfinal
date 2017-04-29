@@ -9,269 +9,46 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ProjectFinal/CalendarCollectionView.swift"
-            timestampString = "515108368.863677"
+            filePath = "ProjectFinal/EventsCalendarCollection.swift"
+            timestampString = "515175028.558803"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "collectionView(_:numberOfItemsInSection:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ProjectFinal/CalendarCollectionView.swift"
-            timestampString = "515108370.778227"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "collectionView(_:cellForItemAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ProjectFinal/CalendarCollectionView.swift"
-            timestampString = "515108405.365667"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "collectionView(_:heightForItemAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ProjectFinal/CalendarCollectionView.swift"
-            timestampString = "515108587.676435"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "events"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ProjectFinal/CalendarCollectionViewLayout.swift"
-            timestampString = "515109036.395209"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "prepare()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ProjectFinal/CalendarCollectionViewLayout.swift"
-            timestampString = "515108612.763605"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "collectionViewContentSize"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ProjectFinal/CalendarCollectionViewLayout.swift"
-            timestampString = "515108615.061932"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "layoutAttributesClass"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ProjectFinal/CalendarCollectionViewLayout.swift"
-            timestampString = "515109036.395209"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "CalendarCollectionViewLayoutAttributes"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "EventsCalendarCollection"
             landmarkType = "3">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "ProjectFinal.CalendarCollectionViewLayoutAttributes.eventHeight.getter : CoreGraphics.CGFloat"
+                  symbolName = "ProjectFinal.EventsCalendarCollection.__deallocating_deinit"
                   moduleName = "ProjectFinal"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/John/Documents/School/CS_4530/Projects/ProjectFinal/ProjectFinal/CalendarCollectionViewLayout.swift"
-                  timestampString = "515110485.995036"
+                  urlString = "file:///Users/John/Documents/School/CS_4530/Projects/ProjectFinal/ProjectFinal/EventsCalendarCollection.swift"
+                  timestampString = "515176092.443809"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "92"
-                  endingLineNumber = "92"
-                  offsetFromSymbolStart = "20">
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "ProjectFinal.CalendarCollectionViewLayoutAttributes.eventHeight.setter : CoreGraphics.CGFloat"
+                  symbolName = "ProjectFinal.EventsCalendarCollection.deinit"
                   moduleName = "ProjectFinal"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/John/Documents/School/CS_4530/Projects/ProjectFinal/ProjectFinal/CalendarCollectionViewLayout.swift"
-                  timestampString = "515110485.996965"
+                  urlString = "file:///Users/John/Documents/School/CS_4530/Projects/ProjectFinal/ProjectFinal/EventsCalendarCollection.swift"
+                  timestampString = "515176092.446763"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "92"
-                  endingLineNumber = "92"
-                  offsetFromSymbolStart = "25">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ProjectFinal.CalendarCollectionViewLayoutAttributes.init () -&gt; ProjectFinal.CalendarCollectionViewLayoutAttributes"
-                  moduleName = "ProjectFinal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/John/Documents/School/CS_4530/Projects/ProjectFinal/ProjectFinal/CalendarCollectionViewLayout.swift"
-                  timestampString = "515110485.998884"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "92"
-                  endingLineNumber = "92"
-                  offsetFromSymbolStart = "15">
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ProjectFinal/CalendarCollectionViewLayout.swift"
-            timestampString = "515109036.395209"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "layoutAttributesForElements(in:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ProjectFinal/CalendarCollectionViewLayout.swift"
-            timestampString = "515109036.395209"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "isEqual(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ProjectFinal.CalendarCollectionViewLayoutAttributes.isEqual (Swift.Optional&lt;Any&gt;) -&gt; Swift.Bool"
-                  moduleName = "ProjectFinal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/John/Documents/School/CS_4530/Projects/ProjectFinal/ProjectFinal/CalendarCollectionViewLayout.swift"
-                  timestampString = "515110486.008379"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "102"
-                  endingLineNumber = "102"
-                  offsetFromSymbolStart = "23">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ProjectFinal.CalendarCollectionViewLayoutAttributes.isEqual (Swift.Optional&lt;Any&gt;) -&gt; Swift.Bool"
-                  moduleName = "ProjectFinal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/John/Documents/School/CS_4530/Projects/ProjectFinal/ProjectFinal/CalendarCollectionViewLayout.swift"
-                  timestampString = "515110486.010162"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "102"
-                  endingLineNumber = "102"
-                  offsetFromSymbolStart = "345">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ProjectFinal/EventsCalendarCollection.swift"
-            timestampString = "515109880.134868"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "getAllCurrentEvents()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ProjectFinal/EventsCalendarCollection.swift"
-            timestampString = "515109877.408978"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "currentDayChanged(to:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

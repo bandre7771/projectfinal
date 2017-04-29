@@ -9,6 +9,7 @@
 import UIKit
 
 class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTableViewDelegate, TaskViewControllerDelegate {
+
     private var _currentDay: Date? = nil
     
     private var _currentTaskIndex: Int
@@ -53,11 +54,10 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         navigationController?.navigationBar.tintColor = UIColor.white
         let task = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
         let category = UIBarButtonItem(barButtonSystemItem: .organize, target: nil, action: nil)
-        let currentDay = UIBarButtonItem(title: currentMonthDayYear, style: .plain, target: nil, action: nil)
+        let currentDay = UIBarButtonItem(title: currentMonthDayYear, style: .plain, target: self, action: #selector(goToToday))
         navigationItem.rightBarButtonItem = task
         navigationItem.leftBarButtonItems = [currentDay, category]
         navigationItem.titleView = UIView()
-        let daysTasks: [Task] = UserInfo.Instance.getDaysTasks(date: UserInfo.Instance.currentDay)
         dayCompositeView.taskListTableView?.taskList = UserInfo.Instance.TaskCollection
         dayCompositeView.taskListTableView?.delegateTask = self
         dayCompositeView.calendarCollectionView?.events = EventsCalendarCollection.Instance.getAllCurrentEvents()
@@ -76,13 +76,16 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         refresh()
     }
     
+    func notesListChanged(_ notes: [Note]) {
+        refresh()
+    }
+    
     // MARK - Delegates from TaskListTableView
     func taskListTableView(table: TaskListTableView, selectedTask index: Int)  {
         let taskViewController: TaskViewController = TaskViewController(task: UserInfo.Instance.getTask(at: index))
         taskViewController.delegate = self
         navigationController?.pushViewController(taskViewController, animated: true)
         _currentTaskIndex = index
-        
     }
     
     func taskViewController(taskViewController: TaskViewController, saveTask: Task) {
@@ -100,6 +103,10 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
     @objc private func swipeLeftOccured(swipe: UISwipeGestureRecognizer) {
         UserInfo.Instance.goToNextDay()
         NSLog("swiped left")
+    }
+    
+    @objc private func goToToday() {
+        UserInfo.Instance.goToDay(date: Date())
     }
     
     
