@@ -61,8 +61,14 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let firstKey = Array(_taskList.keys)[section]
-        return firstKey
+        var count = 0
+        for(key, _) in _taskList {
+            if count == section {
+                return key
+            }
+            count = count + 1
+        }
+        return ""
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
