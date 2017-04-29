@@ -47,3 +47,21 @@ class Note {
         }
     }
 }
+
+extension Note: Comparable {
+    
+    static func == (lhs: Note, rhs: Note) -> Bool {
+        return lhs.date == rhs.date && lhs.text == lhs.text
+    }
+    
+    static func < (lhs: Note, rhs: Note) -> Bool {
+        return lhs.date < rhs.date ||
+            (lhs.date == rhs.date && lhs.text < rhs.text)
+    }
+    
+    static func >(lhs: Note, rhs: Note) -> Bool {
+        return lhs.date > rhs.date ||
+            (lhs.date == rhs.date && lhs.text > rhs.text)
+    }
+
+}

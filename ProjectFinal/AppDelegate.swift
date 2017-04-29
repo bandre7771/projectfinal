@@ -29,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         tabs.tabBar.barStyle = .black
         tabs.tabBar.isTranslucent = false
-                
         
         let task1: Task = Task(title: "test1", status: false, priority: 5, date: Date(), group: "School", notes: Note(text: "end of semester", date: Date()))
         let task2: Task = Task(title: "test2", status: false, priority: 5, date: Date(), group: "School", notes: Note(text: "end of semester", date: Date()))

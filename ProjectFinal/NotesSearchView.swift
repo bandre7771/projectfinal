@@ -34,6 +34,6 @@ class NotesSearchView: UIView {
     }
     
     public func updateSearch(to notes: [Note]) {
-        _noteListTableView?.notes = notes
+        _noteListTableView?.notes = notes.sorted(by: >)
     }
 }
