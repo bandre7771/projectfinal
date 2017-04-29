@@ -49,7 +49,7 @@ class NotesListTableView: UITableView, UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let index: Int = indexPath.row
         NSLog("Selected cell at index: \(index)")
-        let note: Note = _notes![index]
+        //let note: Note = _notes![index]
         
         // TODO: implement note edit window here
         /* let noteViewController: NoteViewController = NoteViewController(note: note)
