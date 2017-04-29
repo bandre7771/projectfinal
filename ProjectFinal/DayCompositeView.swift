@@ -33,9 +33,8 @@ class DayCompositeView: UIView {
         (calendarCollectionView!.frame, r) = r.divided(atDistance: r.width*0.50, from: .maxXEdge)
         (taskListTableView!.frame, r) = r.divided(atDistance: r.width, from: .maxXEdge)
     }
-    
-    
-    public var taskList: [Task]{
+
+    public var taskList: [Task] {
         get{
             return _taskList
         }

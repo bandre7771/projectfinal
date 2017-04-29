@@ -9,41 +9,41 @@
 
 import UIKit
 
-class TimeRowHeader: UICollectionReusableView {
-    private var _title: UILabel? = nil
-    private var _time: Date? = nil
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = UIColor.clear
-        self._title = UILabel()
-        self._title?.backgroundColor = UIColor.clear
-        self._title?.font = UIFont.systemFont(ofSize: 12.0)
-        self._title?.text = "No Title"
-        self.addSubview(self._title!)
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self._title?.frame.origin.y = self.bounds.midY - (_title?.frame.height)!/2 //Center on Y axis
-        self._title?.frame.origin.x = self.bounds.maxX - ((_title?.frame.width)! + 5.0)
-        self._title?.sizeToFit()
-    }
-    
-    func setTime(time: Date) {
-        _time = time
-        let dateFormatter: DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "h a"
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US") as Locale!
-        self._title?.text = dateFormatter.string(from: time)
-        self.setNeedsLayout()
-    }
-    
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
+//class TimeRowHeader: UICollectionReusableView {
+//    private var _title: UILabel? = nil
+//    private var _time: Date? = nil
+//    
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        self.backgroundColor = UIColor.clear
+//        self._title = UILabel()
+//        self._title?.backgroundColor = UIColor.clear
+//        self._title?.font = UIFont.systemFont(ofSize: 12.0)
+//        self._title?.text = "No Title"
+//        self.addSubview(self._title!)
+//    }
+//    
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        self._title?.frame.origin.y = self.bounds.midY - (_title?.frame.height)!/2 //Center on Y axis
+//        self._title?.frame.origin.x = self.bounds.maxX - ((_title?.frame.width)! + 5.0)
+//        self._title?.sizeToFit()
+//    }
+//    
+//    func setTime(time: Date) {
+//        _time = time
+//        let dateFormatter: DateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "h a"
+//        dateFormatter.locale = NSLocale(localeIdentifier: "en_US") as Locale!
+//        self._title?.text = dateFormatter.string(from: time)
+//        self.setNeedsLayout()
+//    }
+//    
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//}
 
 class EventCell: UICollectionViewCell {
     private var _title: UILabel? = nil
@@ -157,17 +157,17 @@ class EventCell: UICollectionViewCell {
         return selected ? UIColor.white : hexStringToUIColor(from: "#21729c", alphaValue: 1.0)
     }
 }
-
-class TimeRowHeaderBackground: UICollectionReusableView {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = UIColor.white
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
+//
+//class TimeRowHeaderBackground: UICollectionReusableView {
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        self.backgroundColor = UIColor.white
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//}
 
 //class CurrentTimeIndicator: UICollectionReusableView {
 //    private var _time: UILabel? = nil

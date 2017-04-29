@@ -18,7 +18,7 @@ class CalendarCollectionViewLayout: UICollectionViewLayout {
     override init() {
         super.init()
         let nib: UINib = UINib(nibName: "TimeRowHeader", bundle: nil)
-        register(nib, forDecorationViewOfKind: String(describing: TimeRowHeader.self))
+//        register(nib, forDecorationViewOfKind: String(describing: TimeRowHeader.self))
     }
     
     required init?(coder aDecoder: NSCoder) {

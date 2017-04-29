@@ -10,9 +10,15 @@ import UIKit
 protocol UserInfoDelegate: class {
     func currentDayChanged(to date: Date)
     func taskListUpdated()
+    func notesListChanged(_ notes: [Note])
 }
 
-class UserInfo {
+class UserInfo: NoteDelegate {
+    
+    private var _currentNoteSearch: [Note] = []
+    
+    private var _notes: [Note] = [Note.init(text: "This note is a demo note for today!", date: Date())]
+
     
     private var _dailyDictionary: [Date : [Task]] = [Calendar.current.startOfDay(for: Date()): [/*Event(title: "Demo Event", startHour: 4, startMinute: 0, endHour: 8, endMinute: 0, date: Date()),
          Event(title: "Demo Event", startHour: 12, startMinute: 0, endHour: 14, endMinute: 0, date: Date()),
@@ -20,7 +26,6 @@ class UserInfo {
          Event(title: "Demo Event", startHour: 16, startMinute: 50, endHour: 19, endMinute: 0, date: Date())*/]]
     private var _taskList: [Task] = []
     private var _taskGroupList: [Group] = []
-    private var _dailyNoteList: [Note] = []
     private var _currentDay: Date? = nil
     
     weak var delegate: UserInfoDelegate? = nil
@@ -33,6 +38,23 @@ class UserInfo {
             for task in value {
                 _taskList.append(task)
             }
+        }
+        
+        let dayBeforeYesterday = Calendar.current.date(byAdding: .day, value: -2, to: _currentDay!)
+        let yesterday = Calendar.current.date(byAdding: .day, value: 1, to: dayBeforeYesterday!)
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: _currentDay!)
+        let dayAfterTomorrow = Calendar.current.date(byAdding: .day, value: 1, to: tomorrow!)
+        let dayAfterAfterTomorrow = Calendar.current.date(byAdding: .day, value: 2, to: tomorrow!)
+
+        
+        _notes.append(Note.init(text: "The day before yesterday's demo note!", date: dayBeforeYesterday!))
+        _notes.append(Note.init(text: "Yesterdays demo note!", date: yesterday!))
+        _notes.append(Note.init(text: "Tomorrows demo note!", date: tomorrow!))
+        _notes.append(Note.init(text: "The day after tomorrow's note!", date: dayAfterTomorrow!))
+        _notes.append(Note.init(text: "Testing", date: dayAfterAfterTomorrow!))
+        
+        for note in _notes {
+            _currentNoteSearch.append(note)
         }
     }
     
@@ -63,15 +85,6 @@ class UserInfo {
         _taskGroupList.remove(at: index)
     }
     
-    public func addDailyNote(note: Note) {
-        _dailyNoteList.append(note)
-        
-    }
-    
-    public func removeDailyNote(at index: Int) {
-        _dailyNoteList.remove(at: index)
-    }
-    
     
     public func getDaysTasks(date: Date) -> [Task]{
         var dayTasks: [Task] = []
@@ -98,6 +111,12 @@ class UserInfo {
         _currentDay = Calendar.current.date(byAdding: .day, value: -1, to: _currentDay!)
         delegate?.currentDayChanged(to: _currentDay!)
         NSLog("Day Decremented To: \(String(describing: _currentDay?.description))")
+    }
+    
+    public func goToDay(date: Date) {
+        _currentDay = date
+        NSLog("Day changed To: \(String(describing: _currentDay?.description))")
+        delegate?.currentDayChanged(to: date)
     }
     
     public func currentDayChanged(to date: Date) {
@@ -142,11 +161,61 @@ class UserInfo {
     }
     
     
-    // MARK - Public Accessible Variables
-    public var dailyNoteList: [Note]{
-        return _dailyNoteList
+
+    
+    
+    // MARK - Note Public Accessible Variables
+    public var noteCount: Int {
+        return _notes.count
     }
-
-
+    
+    public var searchNoteCount: Int {
+        return _currentNoteSearch.count
+    }
+    
+    public var CurrentNoteSearch: [Note] {
+        return _currentNoteSearch
+    }
+    
+    public func createNewNote(note: Note) {
+        note.delegates?.append(self)
+        _notes.append(note)
+//        delegate?.noteCreatedAtIndex(_notes.count - 1)
+    }
+    
+    public func deleteNoteAtIndex(_ index: Int) {
+        if(index >= 0 && index < _notes.count) {
+            _notes.remove(at: index)
+//            delegate?.noteDeletedAtIndex(index)
+        } else {
+            NSLog("Could not remove note")
+        }
+    }
+    
+    public func noteAtIndex(_ index: Int) -> Note {
+        return _notes[index]
+    }
+    
+    public func currentSearchChanged(to search: String) {
+        _currentNoteSearch.removeAll()
+        // TODO: Add regex
+    }
+    
+    // MARK: - NoteDelegate Methods
+    func noteChanged(_ note: Note) {
+//        let index: Int? = _notes.index(where: {searchNote in searchNote === note})
+//        if index != nil {
+//            delegate?.noteChangedAtIndex(index!)
+//        }
+    }
+    
+    
+    // MARK: - Persistence Methods
+    public func load() {
+        //TODO: Implement Persistance Load
+    }
+    public func save() {
+        //TODO: Implement Persistance Save
+    }
     
 }

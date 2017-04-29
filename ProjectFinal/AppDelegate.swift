@@ -20,9 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let first = DayCompositeViewController()
         let nav1 = UINavigationController(rootViewController: first)
         
-        let second = UIViewController()
-        second.view.backgroundColor = UIColor.green
+        let second = NotesSearchViewController()
+        second.title = "Notes"
         let nav2 = UINavigationController(rootViewController: second)
+        
         let tabs = UITabBarController()
         tabs.viewControllers = [nav1, nav2]
         
