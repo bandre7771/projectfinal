@@ -69,6 +69,7 @@ class UserInfo: NoteDelegate {
             array.remove(at: index)
             _taskList[group] = array
         }
+        delegate?.taskListUpdated()
     }
     
     public func updateTask(at index: Int, task: Task){
@@ -97,8 +98,8 @@ class UserInfo: NoteDelegate {
     
     public func getDaysTasks(date: Date) -> [String: [Task]]{
         var dayTasks: [String: [Task]] = [:]
-        var calendar: Calendar = Calendar.current
-        for (group, tasks) in _taskList {
+        let calendar: Calendar = Calendar.current
+        for (group, _) in _taskList {
             if let array = _taskList[group] {
                 for task in array {
                     if calendar.isDate(task.date, equalTo: date, toGranularity: .day) {

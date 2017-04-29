@@ -80,7 +80,7 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
         statusTextField.returnKeyType = UIReturnKeyType.done
         statusTextField.clearButtonMode = UITextFieldViewMode.whileEditing
         statusTextField.borderStyle = UITextBorderStyle.roundedRect
-        var statusText = _status ? "Done" : "Not Done"
+        let statusText = _status ? "Done" : "Not Done"
         statusTextField.text = statusText
         
         let noteTextView: UITextView = UITextView(frame: CGRect(x: 10.0, y: 190, width: 300, height: 250))

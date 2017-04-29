@@ -17,7 +17,7 @@ protocol CalendarCollectionViewLayoutDelegate: class {
 class CalendarCollectionViewLayout: UICollectionViewLayout {
     override init() {
         super.init()
-        let nib: UINib = UINib(nibName: "TimeRowHeader", bundle: nil)
+        //let nib: UINib = UINib(nibName: "TimeRowHeader", bundle: nil)
 //        register(nib, forDecorationViewOfKind: String(describing: TimeRowHeader.self))
     }
     

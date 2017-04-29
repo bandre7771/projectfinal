@@ -60,7 +60,7 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
         return cell
     }
     
-    func tableView(_ tableView: UITableView!, titleForHeaderInSection section: Int) -> String! {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let firstKey = Array(_taskList.keys)[section]
         return firstKey
     }
