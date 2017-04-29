@@ -26,7 +26,7 @@
                   moduleName = "ProjectFinal"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/John/Documents/School/CS_4530/Projects/ProjectFinal/ProjectFinal/EventsCalendarCollection.swift"
-                  timestampString = "515193404.305707"
+                  timestampString = "515201776.555558"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -41,7 +41,7 @@
                   moduleName = "ProjectFinal"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/John/Documents/School/CS_4530/Projects/ProjectFinal/ProjectFinal/EventsCalendarCollection.swift"
-                  timestampString = "515193404.308775"
+                  timestampString = "515201776.557555"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -49,6 +49,22 @@
                   offsetFromSymbolStart = "4">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ProjectFinal/NotesSearchView.swift"
+            timestampString = "515200880.657735"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "searchBarView(to:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

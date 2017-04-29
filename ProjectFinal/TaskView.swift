@@ -168,7 +168,7 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        print("TextField should snd editing method called")
+        print("TextField should end editing method called")
         return true;
     }
     

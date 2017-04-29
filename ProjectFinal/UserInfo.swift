@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 protocol UserInfoDelegate: class {
     func currentDayChanged(to date: Date)
     func taskListUpdated()
@@ -27,7 +28,8 @@ class UserInfo {
     private var _taskGroupList: [String] = []
     private var _currentDay: Date? = nil
     
-    weak var delegate: UserInfoDelegate? = nil
+    weak var delegateDayComposite: UserInfoDelegate? = nil
+    weak var delegateNotesSearch: UserInfoDelegate? = nil
     
     public static let Instance: UserInfo = UserInfo()
     
@@ -61,7 +63,7 @@ class UserInfo {
         else {
             _taskList[task.group] = [task]
         }
-        delegate?.taskListUpdated()
+        delegateDayComposite?.taskListUpdated()
     }
     
     public func removeTask(index: Int, group: String) {
@@ -76,7 +78,7 @@ class UserInfo {
             array[index] = task
             _taskList[task.group] = array
         }
-        delegate?.taskListUpdated()
+        delegateDayComposite?.taskListUpdated()
     }
     
     public func getTask(at index: Int, group: String) -> Task {
@@ -124,19 +126,19 @@ class UserInfo {
     
     public func goToNextDay() {
         _currentDay = Calendar.current.date(byAdding: .day, value: 1, to: _currentDay!)
-        delegate?.currentDayChanged(to: _currentDay!)
+        delegateDayComposite?.currentDayChanged(to: _currentDay!)
         NSLog("Day Incremented To: \(String(describing: _currentDay?.description))")
     }
     public func goToPastDay() {
         _currentDay = Calendar.current.date(byAdding: .day, value: -1, to: _currentDay!)
-        delegate?.currentDayChanged(to: _currentDay!)
+        delegateDayComposite?.currentDayChanged(to: _currentDay!)
         NSLog("Day Decremented To: \(String(describing: _currentDay?.description))")
     }
     
     public func goToDay(date: Date) {
         _currentDay = date
         NSLog("Day changed To: \(String(describing: _currentDay?.description))")
-        delegate?.currentDayChanged(to: date)
+        delegateDayComposite?.currentDayChanged(to: date)
     }
     
     
@@ -175,33 +177,12 @@ class UserInfo {
         return _notes.count
     }
     
-    public var searchNoteCount: Int {
-        return _currentNoteSearch.count
-    }
-    
-    public var currentNoteSearch: [Note] {
-        return _currentNoteSearch
-    }
-    
     public var notes: [Note] {
         return _notes
     }
     
     public func addNewNote(note: Note) {
         _notes.append(note)
-    }
-    
-    public func removeNoteAtIndex(_ index: Int) {
-        if(index >= 0 && index < _notes.count) {
-            _notes.remove(at: index)
-        } else {
-            NSLog("Could not remove note")
-        }
-    }
-
-    public func currentSearchChanged(to search: String) {
-        _currentNoteSearch.removeAll()
-        // TODO: Add regex
     }
     
     public func addOrUpdateNote(_ note: Note) {
@@ -211,7 +192,9 @@ class UserInfo {
         } else {
             addNewNote(note: note)
         }
-        delegate?.notesListChanged(_notes)
+        _currentNoteSearch = _notes
+        delegateDayComposite?.notesListChanged(_notes)
+        delegateNotesSearch?.notesListChanged(_currentNoteSearch)
     }
     
     

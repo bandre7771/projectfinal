@@ -18,7 +18,7 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         _currentTaskIndex = 0
         super.init(nibName: "DayCompositViewController", bundle: nil)
         self.edgesForExtendedLayout = []
-        UserInfo.Instance.delegate = self
+        UserInfo.Instance.delegateDayComposite = self
         _currentDay = UserInfo.Instance.currentDay
         _currentTaskIndex = 0
         _currentNote = Note()
@@ -82,15 +82,6 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         return monthDayYear
     }
     
-    // MARK: Delegate from user info
-    func taskListUpdated() {
-        refresh()
-    }
-    
-    func notesListChanged(_ notes: [Note]) {
-        refresh()
-    }
-    
     // MARK - Delegates from TaskListTableView
     func taskListTableView(table: TaskListTableView, selectedTask index: Int, group: String)  {
         let taskViewController: TaskViewController = TaskViewController(task: UserInfo.Instance.getTask(at: index, group: group))
@@ -107,7 +98,6 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
     func doneEditing() {
         navigationController?.popViewController(animated: true)
     }
-    
     
     @objc private func swipeRightOccured(swipe: UISwipeGestureRecognizer) {
         UserInfo.Instance.goToPastDay()
@@ -127,6 +117,14 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
     func currentDayChanged(to date: Date) {
         EventsCalendarCollection.Instance.currentDayChanged(to: date)
         _currentDay = date
+        refresh()
+    }
+    
+    func taskListUpdated() {
+        refresh()
+    }
+    
+    func notesListChanged(_ notes: [Note]) {
         refresh()
     }
     

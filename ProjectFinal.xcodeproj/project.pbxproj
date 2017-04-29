@@ -103,11 +103,9 @@
 			isa = PBXGroup;
 			children = (
 				52D59B611EB1C3E400E5AD8B /* DayCompositeView.swift */,
-				5202024C1EB5004F0039C16B /* DailyNoteView.swift */,
-				52D5916C1EA697E700709E5B /* UICollectionReusableViews.swift */,
-				52D634661EAECDAD000BE905 /* CalendarCollectionViewLayout.swift */,
-				529224C21EABDF22004CC04A /* CalendarCollectionView.swift */,
 				52D59B661EB1CF5600E5AD8B /* TaskListTableView.swift */,
+				520202541EB53FAE0039C16B /* CalendarCollectionView */,
+				5202024C1EB5004F0039C16B /* DailyNoteView.swift */,
 			);
 			name = DayCompositeView;
 			sourceTree = "<group>";
@@ -120,6 +118,16 @@
 				520202421EB43CE30039C16B /* NotesListTableView.swift */,
 			);
 			name = NotesSearchView;
+			sourceTree = "<group>";
+		};
+		520202541EB53FAE0039C16B /* CalendarCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				52D634661EAECDAD000BE905 /* CalendarCollectionViewLayout.swift */,
+				529224C21EABDF22004CC04A /* CalendarCollectionView.swift */,
+				52D5916C1EA697E700709E5B /* UICollectionReusableViews.swift */,
+			);
+			name = CalendarCollectionView;
 			sourceTree = "<group>";
 		};
 		52D5914C1EA56A5900709E5B = {

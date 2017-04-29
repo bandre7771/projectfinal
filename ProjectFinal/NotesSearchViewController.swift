@@ -8,11 +8,15 @@
 
 import UIKit
 
-class NotesSearchViewController: UIViewController {
+class NotesSearchViewController: UIViewController, UserInfoDelegate, NotesSearchViewDelegate {
+    
+    private var _currentSearch: [Note]? = nil
     
     init() {
         super.init(nibName: "DayCompositViewController", bundle: nil)
+        UserInfo.Instance.delegateNotesSearch = self
         self.edgesForExtendedLayout = []
+        _currentSearch = []
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,23 +35,44 @@ class NotesSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Notes"
+        notesSearchView.delegate = self
+        _currentSearch = UserInfo.Instance.notes
         refresh()
     }
     
     public func refresh() {
         navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.tintColor = UIColor.white
-        let currentDay = UIBarButtonItem(title: currentMonthDayYear, style: .plain, target: nil, action: nil)
-        navigationItem.leftBarButtonItems = [currentDay]
-        notesSearchView.updateSearch(to: UserInfo.Instance.currentNoteSearch)
+        let clearSearch = UIBarButtonItem(title: "Clear Search", style: .plain, target: self, action: #selector(clearCurrentSearch))
+        navigationItem.rightBarButtonItem = clearSearch
+        notesSearchView.updateSearch(to: _currentSearch!)
     }
     
-    private var currentMonthDayYear: String {
-        let currentDay: Date = UserInfo.Instance.currentDay
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd YYYY"
-        let monthDayYear: String = dateFormatter.string(from: currentDay)
-        return monthDayYear
+    // Private search releated methods
+    private func currentSearchChanged(to search: String) {
+        _currentSearch?.removeAll()
+        // TODO: Add regex
+        for note in UserInfo.Instance.notes {
+            let lowerCaseNoteText: String = note.text.lowercased()
+            let lowerCaseSearch: String = search.lowercased()
+            if lowerCaseNoteText.contains(lowerCaseSearch) {
+                _currentSearch?.append(note)
+            }
+        }
+        refresh()
     }
+    @objc private func clearCurrentSearch() {
+        _currentSearch = UserInfo.Instance.notes
+        refresh()
+    }
+
+    // MARK: NoteSearchViewDelegateMethods
+    func noteSearchView(to search: String) {
+        currentSearchChanged(to: search)
+    }
+    
+    // MARK: UserInfoDelegate Methods
+    func currentDayChanged(to date: Date) {}
+    func taskListUpdated() {}
+    func notesListChanged(_ notes: [Note]) { refresh() }
 }

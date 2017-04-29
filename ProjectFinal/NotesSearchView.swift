@@ -8,14 +8,21 @@
 
 import UIKit
 
-class NotesSearchView: UIView {
+protocol NotesSearchViewDelegate: class {
+    func noteSearchView(to search: String)
+}
+
+class NotesSearchView: UIView, SearchBarViewDelegate {
     private var _searchBarView: SearchBarView? = nil
     private var _noteListTableView: NotesListTableView? = nil
+    
+    weak var delegate: NotesSearchViewDelegate? = nil
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         _searchBarView = SearchBarView()
+        _searchBarView?.delegate = self
         addSubview(_searchBarView!)
         
         _noteListTableView = NotesListTableView()
@@ -35,5 +42,10 @@ class NotesSearchView: UIView {
     
     public func updateSearch(to notes: [Note]) {
         _noteListTableView?.notes = notes.sorted(by: >)
+    }
+    
+    func searchBarView(to search: String) {
+        delegate?.noteSearchView(to: search)
+        NSLog("Current note search: \(search)")
     }
 }
