@@ -86,6 +86,7 @@ class TaskView: UIView, UITextFieldDelegate{
         noteTextField.clearButtonMode = UITextFieldViewMode.whileEditing
         noteTextField.borderStyle = UITextBorderStyle.roundedRect
         noteTextField.text = dateFormatter.string(from: _date)
+        noteTextField.contentVerticalAlignment = UIControlContentVerticalAlignment.top
         
         titleTextField.delegate = self
         dateTextField.delegate = self
