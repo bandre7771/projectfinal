@@ -9,7 +9,6 @@
 import UIKit
 
 protocol UserInfoDelegate: class {
-    func currentDayChanged(to date: Date)
     func taskListUpdated()
     func notesListChanged(_ notes: [Note])
 }
@@ -26,7 +25,6 @@ class UserInfo {
          Event(title: "Demo Event", startHour: 16, startMinute: 50, endHour: 19, endMinute: 0, date: Date())*/]]
     private var _taskList: [String: [Task]] = [:]
     private var _taskGroupList: [String] = []
-    private var _currentDay: Date? = nil
     
     weak var delegateDayComposite: UserInfoDelegate? = nil
     weak var delegateNotesSearch: UserInfoDelegate? = nil
@@ -34,11 +32,9 @@ class UserInfo {
     public static let Instance: UserInfo = UserInfo()
     
     private init() {
-        _currentDay = Date()
-        
-        let dayBeforeYesterday = Calendar.current.date(byAdding: .day, value: -2, to: _currentDay!)
+        let dayBeforeYesterday = Calendar.current.date(byAdding: .day, value: -2, to: Date())
         let yesterday = Calendar.current.date(byAdding: .day, value: 1, to: dayBeforeYesterday!)
-        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: _currentDay!)
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())
         let dayAfterTomorrow = Calendar.current.date(byAdding: .day, value: 1, to: tomorrow!)
         let dayAfterAfterTomorrow = Calendar.current.date(byAdding: .day, value: 2, to: tomorrow!)
 
@@ -71,7 +67,7 @@ class UserInfo {
             array.remove(at: index)
             _taskList[group] = array
         }
-        delegate?.taskListUpdated()
+        delegateDayComposite?.taskListUpdated()
     }
     
     public func updateTask(at index: Int, task: Task){
@@ -125,24 +121,6 @@ class UserInfo {
         return dayTasks
     }
     
-    public func goToNextDay() {
-        _currentDay = Calendar.current.date(byAdding: .day, value: 1, to: _currentDay!)
-        delegateDayComposite?.currentDayChanged(to: _currentDay!)
-        NSLog("Day Incremented To: \(String(describing: _currentDay?.description))")
-    }
-    public func goToPastDay() {
-        _currentDay = Calendar.current.date(byAdding: .day, value: -1, to: _currentDay!)
-        delegateDayComposite?.currentDayChanged(to: _currentDay!)
-        NSLog("Day Decremented To: \(String(describing: _currentDay?.description))")
-    }
-    
-    public func goToDay(date: Date) {
-        _currentDay = date
-        NSLog("Day changed To: \(String(describing: _currentDay?.description))")
-        delegateDayComposite?.currentDayChanged(to: date)
-    }
-    
-    
     public func searchDailyNotes(word: String) {
         // TODO: add functionality for searching Daily notes for a string
     }
@@ -162,15 +140,6 @@ class UserInfo {
     
     public var TaskGroupList: [String] {
         return _taskGroupList
-    }
-    
-    public var currentDay: Date {
-        get {
-            return _currentDay!
-        }
-        set {
-            _currentDay = newValue
-        }
     }
 
     // MARK - Note Public Accessible Variables

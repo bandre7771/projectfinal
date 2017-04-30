@@ -26,7 +26,6 @@ class NoteView: UIView {
         let views: [String : UIView] = ["noteTextField": _noteTextField!]
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[noteTextField]|", options: .alignAllCenterX, metrics: nil, views: views))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[noteTextField]|", options: .alignAllCenterY, metrics: nil, views: views))
-
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -6,54 +6,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ProjectFinal/EventsCalendarCollection.swift"
-            timestampString = "515175028.558803"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "12"
-            endingLineNumber = "12"
-            landmarkName = "EventsCalendarCollection"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ProjectFinal.EventsCalendarCollection.__deallocating_deinit"
-                  moduleName = "ProjectFinal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/John/Documents/School/CS_4530/Projects/ProjectFinal/ProjectFinal/EventsCalendarCollection.swift"
-                  timestampString = "515201776.555558"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "4">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ProjectFinal.EventsCalendarCollection.deinit"
-                  moduleName = "ProjectFinal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/John/Documents/School/CS_4530/Projects/ProjectFinal/ProjectFinal/EventsCalendarCollection.swift"
-                  timestampString = "515201776.557555"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "4">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"

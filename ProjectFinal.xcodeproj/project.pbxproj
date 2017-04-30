@@ -21,6 +21,8 @@
 		5202024F1EB51D1C0039C16B /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5202024E1EB51D1C0039C16B /* NoteView.swift */; };
 		520202511EB521C80039C16B /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520202501EB521C80039C16B /* NoteViewController.swift */; };
 		52626F101EB14B99003A4FAD /* EventsCalendarCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52626F0F1EB14B99003A4FAD /* EventsCalendarCollection.swift */; };
+		527C52EB1EB55EF700CAC728 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527C52EA1EB55EF700CAC728 /* DatePickerViewController.swift */; };
+		527C52ED1EB5600D00CAC728 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527C52EC1EB5600D00CAC728 /* DatePickerView.swift */; };
 		529224C31EABDF22004CC04A /* CalendarCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529224C21EABDF22004CC04A /* CalendarCollectionView.swift */; };
 		52D0E6F71EA99D110047801B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52D0E6F61EA99D110047801B /* Default-568h@2x.png */; };
 		52D591591EA56A5900709E5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D591581EA56A5900709E5B /* AppDelegate.swift */; };
@@ -49,6 +51,8 @@
 		5202024E1EB51D1C0039C16B /* NoteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		520202501EB521C80039C16B /* NoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		52626F0F1EB14B99003A4FAD /* EventsCalendarCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsCalendarCollection.swift; sourceTree = "<group>"; };
+		527C52EA1EB55EF700CAC728 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
+		527C52EC1EB5600D00CAC728 /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		529224C21EABDF22004CC04A /* CalendarCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarCollectionView.swift; sourceTree = "<group>"; };
 		52D0E6F61EA99D110047801B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		52D591551EA56A5900709E5B /* ProjectFinal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectFinal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +99,7 @@
 				520202481EB44CAC0039C16B /* NotesSearchViewController.swift */,
 				35ACDACC1EAE9B1D00C01308 /* TaskViewController.swift */,
 				520202501EB521C80039C16B /* NoteViewController.swift */,
+				527C52EA1EB55EF700CAC728 /* DatePickerViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 				520202531EB53DCA0039C16B /* NotesSearchView */,
 				35ACDACE1EAE9B2E00C01308 /* TaskView.swift */,
 				5202024E1EB51D1C0039C16B /* NoteView.swift */,
+				527C52EC1EB5600D00CAC728 /* DatePickerView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -245,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52D634671EAECDAD000BE905 /* CalendarCollectionViewLayout.swift in Sources */,
+				527C52ED1EB5600D00CAC728 /* DatePickerView.swift in Sources */,
 				52D5916B1EA674FE00709E5B /* Event.swift in Sources */,
 				52D5916D1EA697E700709E5B /* UICollectionReusableViews.swift in Sources */,
 				520202431EB43CE30039C16B /* NotesListTableView.swift in Sources */,
@@ -264,6 +271,7 @@
 				520202471EB44A940039C16B /* NotesSearchView.swift in Sources */,
 				35ACDAD11EAEAB4A00C01308 /* UserInfo.swift in Sources */,
 				520202491EB44CAC0039C16B /* NotesSearchViewController.swift in Sources */,
+				527C52EB1EB55EF700CAC728 /* DatePickerViewController.swift in Sources */,
 				52D59B6F1EB26AA800E5AD8B /* Tools.swift in Sources */,
 				52D59B671EB1CF5600E5AD8B /* TaskListTableView.swift in Sources */,
 				350B40391EA80AF100440220 /* Note.swift in Sources */,

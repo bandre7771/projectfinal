@@ -51,15 +51,17 @@ class NotesSearchViewController: UIViewController, UserInfoDelegate, NotesSearch
     // Private search releated methods
     private func currentSearchChanged(to search: String) {
         _currentSearch?.removeAll()
-        // TODO: Add regex
-        for note in UserInfo.Instance.notes {
-            let lowerCaseNoteText: String = note.text.lowercased()
-            let lowerCaseSearch: String = search.lowercased()
-            if lowerCaseNoteText.contains(lowerCaseSearch) {
-                _currentSearch?.append(note)
+        let lowerCaseSearch: String = search.lowercased()
+        if !lowerCaseSearch.isEmpty {
+            for note in UserInfo.Instance.notes {
+                let lowerCaseNoteText: String = note.text.lowercased()
+                if lowerCaseNoteText.contains(lowerCaseSearch) {
+                    _currentSearch?.append(note)
+                }
             }
+            refresh()
         }
-        refresh()
+
     }
     @objc private func clearCurrentSearch() {
         _currentSearch = UserInfo.Instance.notes
