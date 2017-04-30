@@ -29,6 +29,7 @@ class TaskViewController: UIViewController, TaskViewDelegate {
     override func loadView() {
         let taskView: TaskView = TaskView()
         view = taskView
+        title = "Task"
         taskView.title = _task.title
         taskView.group = _task.group
         taskView.priority = _task.priority

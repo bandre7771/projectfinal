@@ -54,12 +54,11 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.tintColor = UIColor.white
-        let task = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
-        let add = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
+        let searchTask = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
+        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewTask))
         let calendar = UIBarButtonItem(title: currentMonthDayYear, style: .plain, target: self, action: #selector(chooseDay))
         let today = UIBarButtonItem(title: "Today", style: .plain, target: self, action: #selector(goToToday))
-        let addTask = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewTask))
-        navigationItem.rightBarButtonItem = task
+        navigationItem.rightBarButtonItem = searchTask
         navigationItem.leftBarButtonItems = [calendar, add, today]
         navigationItem.titleView = UIView()
         
