@@ -57,7 +57,9 @@ class UserInfo {
             _taskList[task.group] = array
         }
         else {
-            _taskList[task.group] = [task]
+            if !task.group.isEmpty {
+                _taskList[task.group] = [task]
+            }
         }
         delegateDayComposite?.taskListUpdated()
     }
@@ -72,8 +74,16 @@ class UserInfo {
     
     public func updateTask(at index: Int, task: Task){
         if var array = _taskList[task.group] {
-            array[index] = task
-            _taskList[task.group] = array
+            if index < array.count {
+                array[index] = task
+                _taskList[task.group] = array
+            }
+            
+        }
+        else {
+            if !task.group.isEmpty {
+                _taskList[task.group] = [task]
+            }
         }
         delegateDayComposite?.taskListUpdated()
     }
