@@ -57,8 +57,9 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         let task = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
         let category = UIBarButtonItem(barButtonSystemItem: .organize, target: nil, action: nil)
         let currentDay = UIBarButtonItem(title: currentMonthDayYear, style: .plain, target: self, action: #selector(goToToday))
+        let addTask = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewTask))
         navigationItem.rightBarButtonItem = task
-        navigationItem.leftBarButtonItems = [currentDay, category]
+        navigationItem.leftBarButtonItems = [currentDay, category, addTask]
         navigationItem.titleView = UIView()
         dayCompositeView.taskListTableView?.taskList = UserInfo.Instance.TaskCollection
         dayCompositeView.taskListTableView?.delegateTask = self
@@ -80,6 +81,14 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         dateFormatter.dateFormat = "MMM dd YYYY"
         let monthDayYear: String = dateFormatter.string(from: currentDay)
         return monthDayYear
+    }
+    
+    func addNewTask(){
+        let task: Task = Task()
+        UserInfo.Instance.addTask(task: task)
+        let taskViewController: TaskViewController = TaskViewController(task: task)
+        taskViewController.delegate = self
+        navigationController?.pushViewController(taskViewController, animated: true)
     }
     
     // MARK - Delegates from TaskListTableView
