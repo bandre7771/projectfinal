@@ -44,10 +44,10 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
     //UITableView Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count = 0
-        if !_taskList.isEmpty {
-            for(key, _) in _taskList {
+        if !_currentDayTasks.isEmpty {
+            for(key, _) in _currentDayTasks {
                 if count == section {
-                    if let array = _taskList[key] {
+                    if let array = _currentDayTasks[key] {
                         if array.count > 0 {
                             return array.count
                         }
@@ -62,7 +62,7 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let index = indexPath.row
         let cell: UITableViewCell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-        let group: String = Array(_taskList.keys)[indexPath.section]
+        let group: String = Array(_currentDayTasks.keys)[indexPath.section]
         if var array = taskList[group] {
             if index < array.count {
                 cell.textLabel?.text = array[index].title
@@ -78,7 +78,7 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         var count = 0
-        for(key, _) in _taskList {
+        for(key, _) in _currentDayTasks {
             if count == section {
                 return key
             }
@@ -88,8 +88,8 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if _taskList.count > 0 {
-            return _taskList.count
+        if _currentDayTasks.count > 0 {
+            return _currentDayTasks.count
         }
         return 0
     }
@@ -98,7 +98,7 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
         let index: Int = indexPath.row
         NSLog("Selected cell at index: \(index)")
         //let task: Task = _taskList[index]
-        let group: String = Array(_taskList.keys)[indexPath.section]
+        let group: String = Array(_currentDayTasks.keys)[indexPath.section]
         delegateTask?.taskListTableView(table: self, selectedTask: index, group: group)
         // TODO: implement task edit window here
         /* let game: Game = GameLibrary.Instance.gameAtIndex(gameIndex)
@@ -117,7 +117,7 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
         if(editingStyle == UITableViewCellEditingStyle.delete){
             let index: Int = indexPath.row
             NSLog("Attempted to delete cell at index: \(index)")
-            let group: String = Array(_taskList.keys)[indexPath.section]
+            let group: String = Array(_currentDayTasks.keys)[indexPath.section]
             delegateTask?.taskListTableView(table: self, removeTask: index, group: group)
             // TODO: Library.Instance.deleteTaskAtIndex(index)
         }
@@ -145,6 +145,8 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
         }
         set{
             _currentDay = newValue
+            _currentDayTasks = UserInfo.Instance.getDaysTasks(date: _currentDay)
+            reloadData()
         }
     }
 }
