@@ -64,6 +64,7 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         
         dayCompositeView.taskListTableView?.taskList = UserInfo.Instance.TaskCollection
         dayCompositeView.taskListTableView?.delegateTask = self
+        dayCompositeView.taskListTableView?.currentDay = _currentDay!
         dayCompositeView.calendarCollectionView?.events = EventsCalendarCollection.Instance.getAllEventsForCurrentDay()
         dayCompositeView.dailyNoteView?.text = ""
         _currentNote = Note(text: "", date: currentDay)
@@ -123,11 +124,13 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
     
     @objc private func swipeRightOccured(swipe: UISwipeGestureRecognizer) {
         currentDay = Calendar.current.date(byAdding: .day, value: -1, to: currentDay)!
+        refresh()
         NSLog("swiped right")
     }
     
     @objc private func swipeLeftOccured(swipe: UISwipeGestureRecognizer) {
         currentDay = Calendar.current.date(byAdding: .day, value: 1, to: currentDay)!
+        refresh()
         NSLog("swiped left")
     }
     
