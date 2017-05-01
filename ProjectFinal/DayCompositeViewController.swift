@@ -109,19 +109,7 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
     }
     
     
-    
-    // MARK - Delegates from TaskViewController
-    func taskViewController(taskViewController: TaskViewController, newTask: Task, oldTask: Task) {
-        if UserInfo.Instance.taskExists(task: oldTask) {
-            UserInfo.Instance.removeTask(task: oldTask)
-        }
-        UserInfo.Instance.addTask(task: newTask)
-    }
-    
-    func doneEditing(updated task: Task) {
-        navigationController?.popViewController(animated: true)
-    }
-    
+
     @objc private func swipeRightOccured(swipe: UISwipeGestureRecognizer) {
         currentDay = Calendar.current.date(byAdding: .day, value: -1, to: currentDay)!
         refresh()
@@ -188,5 +176,18 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
             refresh()
         }
     }
+    
+    // MARK - Delegates from TaskViewController
+    func taskViewController(taskViewController: TaskViewController, newTask: Task, oldTask: Task) {
+        if UserInfo.Instance.taskExists(task: oldTask) {
+            UserInfo.Instance.removeTask(task: oldTask)
+        }
+        UserInfo.Instance.addTask(task: newTask)
+    }
+    
+    func doneEditing(updated task: Task) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     
 }
