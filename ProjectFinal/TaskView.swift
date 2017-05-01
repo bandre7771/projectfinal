@@ -163,6 +163,25 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         print("While entering the characters this method gets called")
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = DateFormatter.Style.none
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        
+        if textField.placeholder == "Title" {
+            _task.title = textField.text!
+        }
+        else if textField.placeholder == "Date" {
+            _task.date = dateFormatter.date(from: textField.text!)!
+        }
+        else if textField.placeholder == "Group" {
+            _task.group = textField.text!
+        }
+        else if textField.placeholder == "Priority" {
+            _task.priority = Int(textField.text!)!
+        }
+        else if textField.placeholder == "Status" {
+            _task.status = (textField.text! == "Done") ? true : false
+        }
         return true;
     }
     

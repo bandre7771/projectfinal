@@ -10,7 +10,6 @@ import UIKit
 
 protocol TaskViewControllerDelegate: class {
     func taskViewController(taskViewController: TaskViewController, newTask: Task, oldTask: Task)
-    func doneEditing(updated task: Task)
 }
 
 class TaskViewController: UIViewController {
