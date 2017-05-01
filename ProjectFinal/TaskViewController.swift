@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TaskViewControllerDelegate: class {
-    func taskViewController(taskViewController: TaskViewController, saveTask: Task)
+    func taskViewController(taskViewController: TaskViewController, newTask: Task, oldTask: Task)
     func doneEditing(updated task: Task)
 }
 
@@ -56,10 +56,10 @@ class TaskViewController: UIViewController, TaskViewDelegate {
         delegate?.doneEditing(updated: task)
     }
     
-    func taskUpdated() {    
+    func taskUpdated() {
         let task: Task = Task(title: taskView.title, status: taskView.status, priority: taskView.priority, date: taskView.date, group: taskView.group, notes: Note(text: taskView.note, date: taskView.date))
         
-        delegate?.taskViewController(taskViewController: self, saveTask: task)
+        delegate?.taskViewController(taskViewController: self, newTask: task, oldTask: _task)
     }
     
     weak var delegate: TaskViewControllerDelegate? = nil

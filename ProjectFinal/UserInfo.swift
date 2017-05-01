@@ -72,6 +72,17 @@ class UserInfo {
         delegateDayComposite?.taskListUpdated()
     }
     
+    public func removeTask(task: Task) {
+        if var array = _taskList[task.group] {
+            for (index, itask) in array.enumerated(){
+                if array[index].title == task.title && array[index].priority == task.priority {
+                    array.remove(at: index)
+                    _taskList[task.group] = array
+                }
+            }
+        }
+    }
+    
     public func updateTask(at index: Int, task: Task){
         if var array = _taskList[task.group] {
             if index < array.count {
