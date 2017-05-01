@@ -8,16 +8,22 @@
 
 import UIKit
 
+protocol NotesListTableViewDelegate: class {
+    func notesListTableView(updated note: Note)
+}
+
 class NotesListTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
     // MARK: - UIViewController Overrides
     private var _notes: [Note]? = nil
+    
+    public var delegateNotesList: NotesListTableViewDelegate? = nil
     
     override init(frame: CGRect, style: UITableViewStyle) {
         _notes = []
         super.init(frame: frame, style: style)
         dataSource = self
+        delegate = self
         self.allowsSelection = true
-        self.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -49,12 +55,7 @@ class NotesListTableView: UITableView, UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let index: Int = indexPath.row
         NSLog("Selected cell at index: \(index)")
-        //let note: Note = _notes![index]
-        
-        // TODO: implement note edit window here
-        /* let noteViewController: NoteViewController = NoteViewController(note: note)
-         navigationController?.pushViewController(noteViewController, animated: true)
-         */
+        delegateNotesList?.notesListTableView(updated: _notes![index])
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -86,5 +87,4 @@ class NotesListTableView: UITableView, UITableViewDataSource, UITableViewDelegat
             self.reloadData()
         }
     }
-
 }
