@@ -28,6 +28,7 @@ class UserInfo {
     
     weak var delegateDayComposite: UserInfoDelegate? = nil
     weak var delegateNotesSearch: UserInfoDelegate? = nil
+    weak var delegateTasksSearch: UserInfoDelegate? = nil
     
     public static let Instance: UserInfo = UserInfo()
     
@@ -71,6 +72,17 @@ class UserInfo {
         }
         delegateDayComposite?.taskListUpdated()
     }
+    
+    public func getIndexOf(_ task: Task) -> Int {
+        for (group, _) in _taskList {
+            let index: Int? = _taskList[group]?.index(where: {searchTasks in searchTasks == task})//_taskList[group]?.index(where: {searchTasks in searchTasks === task } )
+            if index != nil {
+                return index!
+            }
+        }
+        return -1
+    }
+    
     
     public func removeTask(task: Task) {
         if var array = _taskList[task.group] {

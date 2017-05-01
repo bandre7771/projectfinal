@@ -54,7 +54,7 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.tintColor = UIColor.white
-        let searchTask = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
+        let searchTask = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchForTask))
         let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewTask))
         let calendar = UIBarButtonItem(title: currentMonthDayYear, style: .plain, target: self, action: #selector(chooseDay))
         let today = UIBarButtonItem(title: "Today", style: .plain, target: self, action: #selector(goToToday))
@@ -81,6 +81,10 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         dateFormatter.dateFormat = "MMM dd YYYY"
         let monthDayYear: String = dateFormatter.string(from: currentDay)
         return monthDayYear
+    }
+    
+    func searchForTask() {
+        navigationController?.pushViewController(TasksSearchViewController(), animated: true)
     }
     
     func addNewTask(){

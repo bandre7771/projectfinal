@@ -48,7 +48,7 @@ class NotesSearchViewController: UIViewController, UserInfoDelegate, NotesSearch
         notesSearchView.updateSearch(to: _currentSearch!)
     }
     
-    // Private search releated methods
+    // Private search related methods
     private func currentSearchChanged(to search: String) {
         _currentSearch?.removeAll()
         let lowerCaseSearch: String = search.lowercased()

@@ -136,7 +136,6 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
         set{
             _taskList = newValue
             reloadData()
-            
         }
     }
     

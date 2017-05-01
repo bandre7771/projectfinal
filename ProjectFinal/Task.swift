@@ -89,5 +89,30 @@ class Task {
             _notes = newValue
         }
     }
+}
+
+extension Task: Comparable {
+    
+    static func == (lhs: Task, rhs: Task) -> Bool {
+        return lhs.title == rhs.title &&
+            lhs.status == rhs.status &&
+            lhs.priority == rhs.priority &&
+            lhs.date == rhs.date &&
+            lhs.group == rhs.group &&
+            lhs.notes == rhs.notes
+        
+    }
+    
+    static func < (lhs: Task, rhs: Task) -> Bool {
+        return lhs.date < rhs.date ||
+            (lhs.date == rhs.date && lhs.priority < rhs.priority) ||
+            (lhs.priority == rhs.priority && lhs.title < rhs.title)
+    }
+    
+    static func >(lhs: Task, rhs: Task) -> Bool {
+        return lhs.date > rhs.date ||
+            (lhs.date == rhs.date && lhs.priority > rhs.priority) ||
+            (lhs.priority == rhs.priority && lhs.title > rhs.title)
+    }
     
 }
