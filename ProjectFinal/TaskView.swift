@@ -18,6 +18,7 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
     private var _priority: Int
     private var _status: Bool
     private var _note: String
+    private var _statusText: UILabel
     
     override init(frame: CGRect) {
         
@@ -27,6 +28,7 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
         _priority = 0
         _status = false
         _note = ""
+        _statusText = UILabel()
         super.init(frame: frame)
         
     }
@@ -73,15 +75,21 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
         priorityTextField.borderStyle = UITextBorderStyle.roundedRect
         priorityTextField.text = _priority.description
         
+        let statusSwitch: UISwitch = UISwitch(frame: CGRect(x: 10.0, y: 150.0, width: 40, height: 35))
+        statusSwitch.addTarget(self, action: #selector(statusChanged), for: .valueChanged)
+        statusSwitch.setOn(_status, animated: true)
         
-        let statusTextField: UITextField = UITextField(frame: CGRect(x: 10.0, y: 150.0, width: 100, height: 35))
-        statusTextField.placeholder = "Status"
-        statusTextField.keyboardType = UIKeyboardType.default
-        statusTextField.returnKeyType = UIReturnKeyType.done
-        statusTextField.clearButtonMode = UITextFieldViewMode.whileEditing
-        statusTextField.borderStyle = UITextBorderStyle.roundedRect
-        let statusText = _status ? "Done" : "Not Done"
-        statusTextField.text = statusText
+        _statusText = UILabel(frame: CGRect(x: 70.0, y: 150.0, width: 100, height: 35))
+        _statusText.text = _status ? "Done" : "Not Done"
+        _statusText.textColor = UIColor.white
+//        let statusTextField: UITextField = UITextField(frame: CGRect(x: 10.0, y: 150.0, width: 100, height: 35))
+//        statusTextField.placeholder = "Status"
+//        statusTextField.keyboardType = UIKeyboardType.default
+//        statusTextField.returnKeyType = UIReturnKeyType.done
+//        statusTextField.clearButtonMode = UITextFieldViewMode.whileEditing
+//        statusTextField.borderStyle = UITextBorderStyle.roundedRect
+//        let statusText = _status ? "Done" : "Not Done"
+//        statusTextField.text = statusText
         
         let noteTextView: UITextView = UITextView(frame: CGRect(x: 10.0, y: 190, width: 300, height: 250))
         noteTextView.keyboardType = UIKeyboardType.default
@@ -94,13 +102,14 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
         dateTextField.delegate = self
         groupTextField.delegate = self
         priorityTextField.delegate = self
-        statusTextField.delegate = self
+        //statusTextField.delegate = self
         noteTextView.delegate = self
         self.addSubview(titleTextField)
         self.addSubview(dateTextField)
         self.addSubview(groupTextField)
         self.addSubview(priorityTextField)
-        self.addSubview(statusTextField)
+        self.addSubview(statusSwitch)
+        self.addSubview(_statusText)
         self.addSubview(noteTextView)
     }
     
@@ -166,6 +175,14 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
         print("TextField should return method called")
         textField.resignFirstResponder();
         return true;
+    }
+    
+    func statusChanged(mySwitch: UISwitch) {
+        _status = mySwitch.isOn
+        if _title != "" && _group != "" {
+            delegate?.taskUpdated()
+        }
+        _statusText.text = _status ? "Done" : "Not Done"
     }
     
     // MARK - Public access vars
