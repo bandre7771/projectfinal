@@ -9,7 +9,7 @@
 import UIKit
 
 class TasksSearchViewController: UIViewController, UserInfoDelegate, TasksSearchViewDelegate, TaskViewControllerDelegate {
-    
+
     private var _currentSearch: [Task]? = nil
     private var _allTasks: [Task]? = nil
     
@@ -105,7 +105,11 @@ class TasksSearchViewController: UIViewController, UserInfoDelegate, TasksSearch
         navigationController?.popViewController(animated: true)
     }
     
-    func doneEditing() {
+    func doneEditing(updated task: Task) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    func taskViewController(taskViewController: TaskViewController, newTask: Task, oldTask: Task) {
+        
     }
 }
