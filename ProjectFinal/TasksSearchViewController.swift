@@ -99,17 +99,13 @@ class TasksSearchViewController: UIViewController, UserInfoDelegate, TasksSearch
     func notesListChanged(_ notes: [Note]) {}
     
     // MARK: TaskViewControllerDelegate Methods
-    func taskViewController(taskViewController: TaskViewController, saveTask: Task) {
-        let index: Int = UserInfo.Instance.getIndexOf(saveTask)
-        UserInfo.Instance.updateTask(at: index, task: saveTask)
-        navigationController?.popViewController(animated: true)
+    func taskViewController(taskViewController: TaskViewController, newTask: Task, oldTask: Task) {
+        if UserInfo.Instance.taskExists(task: oldTask) {
+            UserInfo.Instance.removeTask(task: oldTask)
+        }
+        UserInfo.Instance.addTask(task: newTask)
     }
-    
     func doneEditing(updated task: Task) {
         navigationController?.popViewController(animated: true)
-    }
-    
-    func taskViewController(taskViewController: TaskViewController, newTask: Task, oldTask: Task) {
-        
     }
 }

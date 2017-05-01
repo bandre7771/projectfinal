@@ -60,6 +60,7 @@ class UserInfo {
         else if !task.group.isEmpty{
             _taskList[task.group] = [task]
         }
+        delegateTasksSearch?.taskListUpdated()
         delegateDayComposite?.taskListUpdated()
     }
     
@@ -70,23 +71,14 @@ class UserInfo {
                 _taskList[group] = array
             }
         }
+        delegateTasksSearch?.taskListUpdated()
         delegateDayComposite?.taskListUpdated()
-    }
-    
-    public func getIndexOf(_ task: Task) -> Int {
-        for (group, _) in _taskList {
-            let index: Int? = _taskList[group]?.index(where: {searchTasks in searchTasks == task})//_taskList[group]?.index(where: {searchTasks in searchTasks === task } )
-            if index != nil {
-                return index!
-            }
-        }
-        return -1
     }
     
     
     public func removeTask(task: Task) {
         if var array = _taskList[task.group] {
-            for (index, itask) in array.enumerated(){
+            for (index, itask) in array.enumerated() {
                 if array[index].title == task.title && array[index].priority == task.priority {
                     array.remove(at: index)
                     _taskList[task.group] = array
@@ -108,6 +100,7 @@ class UserInfo {
                 _taskList[task.group] = [task]
             }
         }
+        delegateTasksSearch?.taskListUpdated()
         delegateDayComposite?.taskListUpdated()
     }
     
