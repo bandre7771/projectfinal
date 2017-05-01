@@ -95,7 +95,11 @@ class TasksSearchViewController: UIViewController, UserInfoDelegate, TasksSearch
     }
     
     // MARK: UserInfoDelegate Methods
-    func taskListUpdated() { refresh() }
+    func taskListUpdated() {
+        _allTasks = arrayFrom(task: UserInfo.Instance.TaskCollection)
+        _currentSearch = _allTasks
+        refresh()
+    }
     func notesListChanged(_ notes: [Note]) {}
     
     // MARK: TaskViewControllerDelegate Methods

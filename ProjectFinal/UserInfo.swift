@@ -75,7 +75,6 @@ class UserInfo {
         delegateDayComposite?.taskListUpdated()
     }
     
-    
     public func removeTask(task: Task) {
         if var array = _taskList[task.group] {
             for (index, itask) in array.enumerated() {
@@ -190,6 +189,8 @@ class UserInfo {
     
     public func addNewNote(note: Note) {
         _notes.append(note)
+        delegateDayComposite?.notesListChanged(_notes)
+        delegateNotesSearch?.notesListChanged(_currentNoteSearch)
     }
     
     public func addOrUpdateNote(_ note: Note) {
