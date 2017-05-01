@@ -99,12 +99,21 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         _currentTaskIndex = index
     }
     
+    func taskListTableView(table: TaskListTableView, removeTask index: Int, group: String) {
+        UserInfo.Instance.removeTask(index: index, group: group)
+    }
+    
+    
+    
     // MARK - Delegates from TaskViewController
     func taskViewController(taskViewController: TaskViewController, saveTask: Task) {
         UserInfo.Instance.updateTask(at: _currentTaskIndex, task: saveTask)
     }
     
-    func doneEditing() {
+    func doneEditing(updated task: Task) {
+        if !UserInfo.Instance.taskExists(task: task) {
+            UserInfo.Instance.addTask(task: task)
+        }
         navigationController?.popViewController(animated: true)
     }
     

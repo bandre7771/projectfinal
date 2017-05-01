@@ -140,21 +140,6 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
         }
         
         delegate?.taskUpdated()
-        
-//        switch textField.placeholder {
-//        case "Title":
-//            _title = textField.text!
-//        case "Date":
-//            _date = dateFormatter.date(from: textField.text!)!
-//        case "Group":
-//            _group.name = textField.text!
-//        case "Priority":
-//            _priority = Int(textField.text!)!
-//        case "Status":
-//            _status = (textField.text! == "Done") ? true : false
-//        default:
-//            break
-//        }
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {

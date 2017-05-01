@@ -10,6 +10,7 @@ import UIKit
 
 protocol TaskListTableViewDelegate: class {
     func taskListTableView(table: TaskListTableView, selectedTask index: Int, group: String)
+    func taskListTableView(table: TaskListTableView, removeTask index: Int, group: String)
 }
 
 class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
@@ -116,6 +117,8 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
         if(editingStyle == UITableViewCellEditingStyle.delete){
             let index: Int = indexPath.row
             NSLog("Attempted to delete cell at index: \(index)")
+            let group: String = Array(_taskList.keys)[indexPath.section]
+            delegateTask?.taskListTableView(table: self, removeTask: index, group: group)
             // TODO: Library.Instance.deleteTaskAtIndex(index)
         }
     }

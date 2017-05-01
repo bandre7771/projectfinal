@@ -56,18 +56,18 @@ class UserInfo {
             array.append(task)
             _taskList[task.group] = array
         }
-        else {
-            if !task.group.isEmpty {
-                _taskList[task.group] = [task]
-            }
+        else if !task.group.isEmpty{
+            _taskList[task.group] = [task]
         }
         delegateDayComposite?.taskListUpdated()
     }
     
     public func removeTask(index: Int, group: String) {
         if var array = _taskList[group] {
-            array.remove(at: index)
-            _taskList[group] = array
+            if index < array.count {
+                array.remove(at: index)
+                _taskList[group] = array
+            }
         }
         delegateDayComposite?.taskListUpdated()
     }
@@ -129,6 +129,17 @@ class UserInfo {
         }
         
         return dayTasks
+    }
+    
+    public func taskExists(task: Task) -> Bool {
+        for (group, taskArray) in _taskList {
+            for task1 in taskArray {
+                if task1.title == task.title && group == task.group{
+                    return true
+                }
+            }
+        }
+        return false
     }
     
     public func searchDailyNotes(word: String) {
