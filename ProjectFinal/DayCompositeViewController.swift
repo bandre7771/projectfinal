@@ -183,11 +183,6 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
             UserInfo.Instance.removeTask(task: oldTask)
         }
         UserInfo.Instance.addTask(task: newTask)
-    }
-    
-    func doneEditing(updated task: Task) {
         navigationController?.popViewController(animated: true)
     }
-    
-    
 }

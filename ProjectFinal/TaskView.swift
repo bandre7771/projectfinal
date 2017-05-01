@@ -7,27 +7,26 @@
 //
 
 import UIKit
-protocol TaskViewDelegate: class {
-    func taskUpdated()
-}
 
 class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
-    private var _title: String
-    private var _date: Date
-    private var _group: String
-    private var _priority: Int
-    private var _status: Bool
-    private var _note: String
+//    private var _title: String
+//    private var _date: Date
+//    private var _group: String
+//    private var _priority: Int
+//    private var _status: Bool
+//    private var _note: String
     private var _statusText: UILabel
     
+    private var _task: Task
+    
     override init(frame: CGRect) {
-        
-        _title = ""
-        _date = Date()
-        _group = ""
-        _priority = 0
-        _status = false
-        _note = ""
+        _task = Task()
+        _task.title = ""
+        _task.date = Date()
+        _task.group = ""
+        _task.priority = 0
+        _task.status = false
+        _task.notes.text = ""
         _statusText = UILabel()
         super.init(frame: frame)
         
@@ -44,7 +43,7 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
         titleTextField.returnKeyType = UIReturnKeyType.done
         titleTextField.clearButtonMode = UITextFieldViewMode.whileEditing
         titleTextField.borderStyle = UITextBorderStyle.roundedRect
-        titleTextField.text = _title
+        titleTextField.text = _task.title
         
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = DateFormatter.Style.none
@@ -56,7 +55,7 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
         dateTextField.returnKeyType = UIReturnKeyType.done
         dateTextField.clearButtonMode = UITextFieldViewMode.whileEditing
         dateTextField.borderStyle = UITextBorderStyle.roundedRect
-        dateTextField.text = dateFormatter.string(from: _date)
+        dateTextField.text = dateFormatter.string(from: _task.date)
         
         
         let groupTextField: UITextField = UITextField(frame: CGRect(x: 10.0, y: 70.0, width: 100, height: 35))
@@ -65,7 +64,7 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
         groupTextField.returnKeyType = UIReturnKeyType.done
         groupTextField.clearButtonMode = UITextFieldViewMode.whileEditing
         groupTextField.borderStyle = UITextBorderStyle.roundedRect
-        groupTextField.text = _group
+        groupTextField.text = _task.group
         
         let priorityTextField: UITextField = UITextField(frame: CGRect(x: 10.0, y: 110.0, width: 100, height: 35))
         priorityTextField.placeholder = "Priority"
@@ -73,14 +72,14 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
         priorityTextField.returnKeyType = UIReturnKeyType.done
         priorityTextField.clearButtonMode = UITextFieldViewMode.whileEditing
         priorityTextField.borderStyle = UITextBorderStyle.roundedRect
-        priorityTextField.text = _priority.description
+        priorityTextField.text = _task.priority.description
         
         let statusSwitch: UISwitch = UISwitch(frame: CGRect(x: 10.0, y: 150.0, width: 40, height: 35))
         statusSwitch.addTarget(self, action: #selector(statusChanged), for: .valueChanged)
-        statusSwitch.setOn(_status, animated: true)
+        statusSwitch.setOn(_task.status, animated: true)
         
         _statusText = UILabel(frame: CGRect(x: 70.0, y: 150.0, width: 100, height: 35))
-        _statusText.text = _status ? "Done" : "Not Done"
+        _statusText.text = _task.status ? "Done" : "Not Done"
         _statusText.textColor = UIColor.white
 //        let statusTextField: UITextField = UITextField(frame: CGRect(x: 10.0, y: 150.0, width: 100, height: 35))
 //        statusTextField.placeholder = "Status"
@@ -94,7 +93,7 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
         let noteTextView: UITextView = UITextView(frame: CGRect(x: 10.0, y: 190, width: 300, height: 250))
         noteTextView.keyboardType = UIKeyboardType.default
         noteTextView.returnKeyType = UIReturnKeyType.done
-        noteTextView.text = _note
+        noteTextView.text = _task.notes.text
 //        noteTextView.contentVerticalAlignment = UIControlContentVerticalAlignment.top
         
         
@@ -113,12 +112,10 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
         self.addSubview(noteTextView)
     }
     
-    weak var delegate: TaskViewDelegate? = nil
     
     // MARK: TextView Delegates
     func textViewDidEndEditing(_ textView: UITextView) {
-        _note = textView.text
-        delegate?.taskUpdated()
+        _task.notes.text = textView.text
     }
     
     // MARK: Textfield Delegates
@@ -133,22 +130,20 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
         dateFormatter.dateStyle = DateFormatter.Style.medium
         
         if textField.placeholder == "Title" {
-             _title = textField.text!
+             _task.title = textField.text!
         }
         else if textField.placeholder == "Date" {
-            _date = dateFormatter.date(from: textField.text!)!
+            _task.date = dateFormatter.date(from: textField.text!)!
         }
         else if textField.placeholder == "Group" {
-            _group = textField.text!
+            _task.group = textField.text!
         }
         else if textField.placeholder == "Priority" {
-            _priority = Int(textField.text!)!
+            _task.priority = Int(textField.text!)!
         }
         else if textField.placeholder == "Status" {
-            _status = (textField.text! == "Done") ? true : false
+            _task.status = (textField.text! == "Done") ? true : false
         }
-        
-        delegate?.taskUpdated()
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -178,66 +173,71 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
     }
     
     func statusChanged(mySwitch: UISwitch) {
-        _status = mySwitch.isOn
-        if _title != "" && _group != "" {
-            delegate?.taskUpdated()
-        }
-        _statusText.text = _status ? "Done" : "Not Done"
+        _task.status = mySwitch.isOn
+        _statusText.text = _task.status ? "Done" : "Not Done"
     }
     
     // MARK - Public access vars
-    public var title: String {
+    public var task: Task {
         get{
-            return _title
+            return _task
         }
         set{
-            _title = newValue
+            _task = newValue
         }
     }
-    
-    public var date: Date {
-        get{
-            return _date
-        }
-        set{
-            _date = newValue
-        }
-    }
-    
-    public var group: String {
-        get{
-            return _group
-        }
-        set{
-            _group = newValue
-        }
-    }
-    
-    public var priority: Int {
-        get{
-            return _priority
-        }
-        set{
-            _priority = newValue
-        }
-    }
-    
-    public var status: Bool {
-        get{
-            return _status
-        }
-        set{
-            _status = newValue
-        }
-    }
-    
-    public var note: String {
-        get{
-            return _note
-        }
-        set{
-            _note = newValue
-        }
-    }
+//    public var title: String {
+//        get{
+//            return _title
+//        }
+//        set{
+//            _title = newValue
+//        }
+//    }
+//    
+//    public var date: Date {
+//        get{
+//            return _date
+//        }
+//        set{
+//            _date = newValue
+//        }
+//    }
+//    
+//    public var group: String {
+//        get{
+//            return _group
+//        }
+//        set{
+//            _group = newValue
+//        }
+//    }
+//    
+//    public var priority: Int {
+//        get{
+//            return _priority
+//        }
+//        set{
+//            _priority = newValue
+//        }
+//    }
+//    
+//    public var status: Bool {
+//        get{
+//            return _status
+//        }
+//        set{
+//            _status = newValue
+//        }
+//    }
+//    
+//    public var note: String {
+//        get{
+//            return _note
+//        }
+//        set{
+//            _note = newValue
+//        }
+//    }
     
 }

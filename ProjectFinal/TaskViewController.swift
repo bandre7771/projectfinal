@@ -13,7 +13,7 @@ protocol TaskViewControllerDelegate: class {
     func doneEditing(updated task: Task)
 }
 
-class TaskViewController: UIViewController, TaskViewDelegate {
+class TaskViewController: UIViewController {
     private var _task: Task
     
     init(task: Task) {
@@ -30,13 +30,12 @@ class TaskViewController: UIViewController, TaskViewDelegate {
         let taskView: TaskView = TaskView()
         view = taskView
         title = "Task"
-        taskView.title = _task.title
-        taskView.group = _task.group
-        taskView.priority = _task.priority
-        taskView.date = _task.date
-        taskView.status = _task.status
-        taskView.note = _task.notes.text
-        taskView.delegate = self
+        taskView.task.title = _task.title
+        taskView.task.group = _task.group
+        taskView.task.priority = _task.priority
+        taskView.task.date = _task.date
+        taskView.task.status = _task.status
+        taskView.task.notes.text = _task.notes.text
         
         refresh()
     }
@@ -52,15 +51,16 @@ class TaskViewController: UIViewController, TaskViewDelegate {
     }
     
     public func save(){
-        let task: Task = Task(title: taskView.title, status: taskView.status, priority: taskView.priority, date: taskView.date, group: taskView.group, notes: Note(text: taskView.note, date: taskView.date))
-        delegate?.doneEditing(updated: task)
-    }
-    
-    func taskUpdated() {
-        let task: Task = Task(title: taskView.title, status: taskView.status, priority: taskView.priority, date: taskView.date, group: taskView.group, notes: Note(text: taskView.note, date: taskView.date))
-        
+        let task: Task = taskView.task //Task(title: taskView.title, status: taskView.status, priority: taskView.priority, date: taskView.date, group: taskView.group, notes: Note(text: taskView.note, date: taskView.date))
+        //delegate?.doneEditing(updated: task)
         delegate?.taskViewController(taskViewController: self, newTask: task, oldTask: _task)
     }
+    
+//    func taskUpdated() {
+//        let task: Task = taskView.task //Task(title: taskView.title, status: taskView.status, priority: taskView.priority, date: taskView.date, group: taskView.group, notes: Note(text: taskView.note, date: taskView.date))
+//        
+//        
+//    }
     
     weak var delegate: TaskViewControllerDelegate? = nil
     
