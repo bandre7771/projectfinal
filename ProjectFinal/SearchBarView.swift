@@ -83,4 +83,5 @@ class SearchBarView: UIView, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
 }

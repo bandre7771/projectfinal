@@ -10,9 +10,10 @@ import UIKit
 
 protocol NotesSearchViewDelegate: class {
     func noteSearchView(to search: String)
+    func noteSearchView(updated note: Note)
 }
 
-class NotesSearchView: UIView, SearchBarViewDelegate {
+class NotesSearchView: UIView, SearchBarViewDelegate, NotesListTableViewDelegate {
     private var _searchBarView: SearchBarView? = nil
     private var _noteListTableView: NotesListTableView? = nil
     
@@ -26,6 +27,7 @@ class NotesSearchView: UIView, SearchBarViewDelegate {
         addSubview(_searchBarView!)
         
         _noteListTableView = NotesListTableView()
+        _noteListTableView?.delegateNotesList = self
         addSubview(_noteListTableView!)
     }
     
@@ -48,4 +50,9 @@ class NotesSearchView: UIView, SearchBarViewDelegate {
         delegate?.noteSearchView(to: search)
         NSLog("Current note search: \(search)")
     }
+    
+    func notesListTableView(updated note: Note) {
+        delegate?.noteSearchView(updated: note)
+    }
+
 }

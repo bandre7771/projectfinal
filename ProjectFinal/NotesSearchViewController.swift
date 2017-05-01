@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotesSearchViewController: UIViewController, UserInfoDelegate, NotesSearchViewDelegate {
+class NotesSearchViewController: UIViewController, UserInfoDelegate, NotesSearchViewDelegate, NoteViewControllerDelegate {
     
     private var _currentSearch: [Note]? = nil
     
@@ -60,9 +60,11 @@ class NotesSearchViewController: UIViewController, UserInfoDelegate, NotesSearch
                 }
             }
             refresh()
+        } else {
+            clearCurrentSearch()
         }
-
     }
+    
     @objc private func clearCurrentSearch() {
         _currentSearch = UserInfo.Instance.notes
         refresh()
@@ -73,8 +75,19 @@ class NotesSearchViewController: UIViewController, UserInfoDelegate, NotesSearch
         currentSearchChanged(to: search)
     }
     
+    func noteSearchView(updated note: Note) {
+        let noteViewController: NoteViewController = NoteViewController(Note: note)
+        noteViewController.delegate = self
+        navigationController?.pushViewController(noteViewController , animated: true)
+    }
+    
     // MARK: UserInfoDelegate Methods
-    func currentDayChanged(to date: Date) {}
     func taskListUpdated() {}
     func notesListChanged(_ notes: [Note]) { refresh() }
+
+    // MARK: NoteViewControllerDelegate Methods
+    func noteViewController(save note: Note) {
+        UserInfo.Instance.addOrUpdateNote(note)
+        navigationController?.popViewController(animated: true)
+    }
 }

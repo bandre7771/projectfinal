@@ -44,7 +44,7 @@ class NoteViewController: UIViewController {
         navigationItem.rightBarButtonItem = save
     }
     
-    public func saveNote(){
+    public func saveNote() {
         _currentNote?.text = noteView.text
         delegate?.noteViewController(save: _currentNote!) // To pop view off
     }

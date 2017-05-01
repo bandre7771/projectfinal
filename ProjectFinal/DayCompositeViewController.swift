@@ -40,7 +40,7 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Today"
+        title = "Day"
         refresh()
         let swipeR = UISwipeGestureRecognizer(target: self, action: #selector(DayCompositeViewController.swipeRightOccured(swipe:)))
         swipeR.direction = .right
@@ -58,8 +58,8 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewTask))
         let calendar = UIBarButtonItem(title: currentMonthDayYear, style: .plain, target: self, action: #selector(chooseDay))
         let today = UIBarButtonItem(title: "Today", style: .plain, target: self, action: #selector(goToToday))
-        navigationItem.rightBarButtonItem = searchTask
-        navigationItem.leftBarButtonItems = [calendar, add, today]
+        navigationItem.rightBarButtonItems = [today, searchTask]
+        navigationItem.leftBarButtonItems = [calendar, add]
         navigationItem.titleView = UIView()
         
         dayCompositeView.taskListTableView?.taskList = UserInfo.Instance.TaskCollection
