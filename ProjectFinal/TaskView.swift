@@ -8,114 +8,133 @@
 
 import UIKit
 
-class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
-//    private var _title: String
-//    private var _date: Date
-//    private var _group: String
-//    private var _priority: Int
-//    private var _status: Bool
-//    private var _note: String
-    private var _statusText: UILabel
+protocol TaskViewDelegate: class {
+    func taskViewDelegate()
+}
+
+class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate {
+
+    private var _statusText: UILabel? = nil
     
-    private var _task: Task
+    private var _task: Task? = nil
+    private var _titletitleTextField: UITextField? = nil
+    private var _dateLabel: UILabel? = nil
+    private var _titleTextField: UITextField? = nil
+    private var _groupTextField: UITextField? = nil
+    private var _priorityTextField: UITextField? = nil
+    private var _statusSwitch: UISwitch? = nil
+    private var _noteTextView: UITextView? = nil
+    
+    weak var delegate: TaskViewDelegate? = nil
     
     override init(frame: CGRect) {
-        _task = Task()
-        _task.title = ""
-        _task.date = Date()
-        _task.group = ""
-        _task.priority = 0
-        _task.status = false
-        _task.notes.text = ""
-        _statusText = UILabel()
         super.init(frame: frame)
+        _task = Task()
+        _task?.title = ""
+        _task?.date = Date()
+        _task?.group = ""
+        _task?.priority = 0
+        _task?.status = false
+        _task?.notes.text = ""
         
+        _titleTextField = UITextField(frame: CGRect(x: 10.0, y: 30.0, width: 100, height: 35))
+        _titleTextField?.placeholder = "Title"
+        _titleTextField?.keyboardType = UIKeyboardType.default
+        _titleTextField?.returnKeyType = UIReturnKeyType.done
+        _titleTextField?.clearButtonMode = UITextFieldViewMode.whileEditing
+        _titleTextField?.backgroundColor = UIColor.white
+        _titleTextField?.text = _task?.title
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = DateFormatter.Style.none
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        
+        _dateLabel = UILabel()
+        _dateLabel?.backgroundColor = UIColor.white
+        _dateLabel?.text = dateFormatter.string(from: (_task?.date)!)
+        _dateLabel?.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dateTapped))
+        _dateLabel?.addGestureRecognizer(tapGesture)
+
+        _groupTextField = UITextField(frame: CGRect(x: 10.0, y: 70.0, width: 100, height: 35))
+        _groupTextField?.placeholder = "Group"
+        _groupTextField?.keyboardType = UIKeyboardType.default
+        _groupTextField?.returnKeyType = UIReturnKeyType.done
+        _groupTextField?.clearButtonMode = UITextFieldViewMode.whileEditing
+        _groupTextField?.backgroundColor = UIColor.white
+        _groupTextField?.text = _task?.group
+        
+        _priorityTextField = UITextField(frame: CGRect(x: 10.0, y: 110.0, width: 100, height: 35))
+        _priorityTextField?.placeholder = "Priority"
+        _priorityTextField?.keyboardType = UIKeyboardType.default
+        _priorityTextField?.returnKeyType = UIReturnKeyType.done
+        _priorityTextField?.clearButtonMode = UITextFieldViewMode.whileEditing
+        _priorityTextField?.backgroundColor = UIColor.white
+        _priorityTextField?.text = _task?.priority.description
+        
+        _statusSwitch = UISwitch(frame: CGRect(x: 10, y: 150, width: 300, height: 250))
+        _statusSwitch?.addTarget(self, action: #selector(statusChanged), for: .valueChanged)
+        _statusSwitch?.setOn((_task?.status)!, animated: true)
+        
+        _statusText = UILabel(frame: CGRect(x: 70.0, y: 150.0, width: 100, height: 35))
+        _statusText?.text = (_task?.status)! ? "Done" : "Not Done"
+        _statusText?.textColor = UIColor.white
+        
+        _noteTextView = UITextView(frame: CGRect(x: 10.0, y: 190, width: 300, height: 250))
+        _noteTextView?.keyboardType = UIKeyboardType.default
+        _noteTextView?.returnKeyType = UIReturnKeyType.done
+        _noteTextView?.text = _task?.notes.text
+        
+        _titleTextField?.delegate = self
+        _groupTextField?.delegate = self
+        _priorityTextField?.delegate = self
+        _noteTextView?.delegate = self
+        self.addSubview(_titleTextField!)
+        self.addSubview(_dateLabel!)
+        self.addSubview(_groupTextField!)
+        self.addSubview(_priorityTextField!)
+        self.addSubview(_statusSwitch!)
+        self.addSubview(_statusText!)
+        self.addSubview(_noteTextView!)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        var r: CGRect = bounds
+        (_titleTextField!.frame, r) = r.divided(atDistance: r.height*(1/10), from: .minYEdge)
+        (_dateLabel!.frame, r) = r.divided(atDistance: r.height*(1/9), from: .minYEdge)
+        (_groupTextField!.frame, r) = r.divided(atDistance: r.height*(1/8), from: .minYEdge)
+        (_priorityTextField!.frame, r) = r.divided(atDistance: r.height*(1/7), from: .minYEdge)
+        (_statusText!.frame, r) = r.divided(atDistance: r.height*(1/9), from: .minYEdge)
+        (_statusSwitch!.frame, r) = r.divided(atDistance: r.height*(1/6), from: .minYEdge)
+        (_noteTextView!.frame, r) = r.divided(atDistance: r.height, from: .minYEdge)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func draw(_ rect: CGRect){
-        let titleTextField: UITextField = UITextField(frame: CGRect(x: 10.0, y: 30.0, width: 100, height: 35))
-        titleTextField.placeholder = "Title"
-        titleTextField.keyboardType = UIKeyboardType.default
-        titleTextField.returnKeyType = UIReturnKeyType.done
-        titleTextField.clearButtonMode = UITextFieldViewMode.whileEditing
-        titleTextField.borderStyle = UITextBorderStyle.roundedRect
-        titleTextField.text = _task.title
-        
+    func refresh() {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = DateFormatter.Style.none
         dateFormatter.dateStyle = DateFormatter.Style.medium
-        
-        let dateTextField: UITextField = UITextField(frame: CGRect(x: 170.0, y: 30, width: 130, height: 35))
-        dateTextField.placeholder = "Date"
-        dateTextField.keyboardType = UIKeyboardType.default
-        dateTextField.returnKeyType = UIReturnKeyType.done
-        dateTextField.clearButtonMode = UITextFieldViewMode.whileEditing
-        dateTextField.borderStyle = UITextBorderStyle.roundedRect
-        dateTextField.text = dateFormatter.string(from: _task.date)
-        
-        
-        let groupTextField: UITextField = UITextField(frame: CGRect(x: 10.0, y: 70.0, width: 100, height: 35))
-        groupTextField.placeholder = "Group"
-        groupTextField.keyboardType = UIKeyboardType.default
-        groupTextField.returnKeyType = UIReturnKeyType.done
-        groupTextField.clearButtonMode = UITextFieldViewMode.whileEditing
-        groupTextField.borderStyle = UITextBorderStyle.roundedRect
-        groupTextField.text = _task.group
-        
-        let priorityTextField: UITextField = UITextField(frame: CGRect(x: 10.0, y: 110.0, width: 100, height: 35))
-        priorityTextField.placeholder = "Priority"
-        priorityTextField.keyboardType = UIKeyboardType.default
-        priorityTextField.returnKeyType = UIReturnKeyType.done
-        priorityTextField.clearButtonMode = UITextFieldViewMode.whileEditing
-        priorityTextField.borderStyle = UITextBorderStyle.roundedRect
-        priorityTextField.text = _task.priority.description
-        
-        let statusSwitch: UISwitch = UISwitch(frame: CGRect(x: 10.0, y: 150.0, width: 40, height: 35))
-        statusSwitch.addTarget(self, action: #selector(statusChanged), for: .valueChanged)
-        statusSwitch.setOn(_task.status, animated: true)
-        
-        _statusText = UILabel(frame: CGRect(x: 70.0, y: 150.0, width: 100, height: 35))
-        _statusText.text = _task.status ? "Done" : "Not Done"
-        _statusText.textColor = UIColor.white
-//        let statusTextField: UITextField = UITextField(frame: CGRect(x: 10.0, y: 150.0, width: 100, height: 35))
-//        statusTextField.placeholder = "Status"
-//        statusTextField.keyboardType = UIKeyboardType.default
-//        statusTextField.returnKeyType = UIReturnKeyType.done
-//        statusTextField.clearButtonMode = UITextFieldViewMode.whileEditing
-//        statusTextField.borderStyle = UITextBorderStyle.roundedRect
-//        let statusText = _status ? "Done" : "Not Done"
-//        statusTextField.text = statusText
-        
-        let noteTextView: UITextView = UITextView(frame: CGRect(x: 10.0, y: 190, width: 300, height: 250))
-        noteTextView.keyboardType = UIKeyboardType.default
-        noteTextView.returnKeyType = UIReturnKeyType.done
-        noteTextView.text = _task.notes.text
-//        noteTextView.contentVerticalAlignment = UIControlContentVerticalAlignment.top
-        
-        
-        titleTextField.delegate = self
-        dateTextField.delegate = self
-        groupTextField.delegate = self
-        priorityTextField.delegate = self
-        //statusTextField.delegate = self
-        noteTextView.delegate = self
-        self.addSubview(titleTextField)
-        self.addSubview(dateTextField)
-        self.addSubview(groupTextField)
-        self.addSubview(priorityTextField)
-        self.addSubview(statusSwitch)
-        self.addSubview(_statusText)
-        self.addSubview(noteTextView)
+
+        _titleTextField?.text = _task?.title
+        _dateLabel?.text = dateFormatter.string(from: (_task?.date)!)
+        _groupTextField?.text = _task?.group
+        _priorityTextField?.text = _task?.priority.description
+        _statusSwitch?.setOn((_task?.status)!, animated: true)
+        _noteTextView?.text = _task?.notes.text
     }
     
     
+    func dateTapped() {
+        delegate?.taskViewDelegate()
+    }
+    
     // MARK: TextView Delegates
     func textViewDidEndEditing(_ textView: UITextView) {
-        _task.notes.text = textView.text
+        _task?.notes.text = textView.text
     }
     
     // MARK: Textfield Delegates
@@ -130,19 +149,19 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
         dateFormatter.dateStyle = DateFormatter.Style.medium
         
         if textField.placeholder == "Title" {
-             _task.title = textField.text!
+             _task?.title = textField.text!
         }
         else if textField.placeholder == "Date" {
-            _task.date = dateFormatter.date(from: textField.text!)!
+            _task?.date = dateFormatter.date(from: textField.text!)!
         }
         else if textField.placeholder == "Group" {
-            _task.group = textField.text!
+            _task?.group = textField.text!
         }
         else if textField.placeholder == "Priority" {
-            _task.priority = Int(textField.text!)!
+            _task?.priority = Int(textField.text!)!
         }
         else if textField.placeholder == "Status" {
-            _task.status = (textField.text! == "Done") ? true : false
+            _task?.status = (textField.text! == "Done") ? true : false
         }
     }
     
@@ -168,19 +187,19 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
         dateFormatter.dateStyle = DateFormatter.Style.medium
         
         if textField.placeholder == "Title" {
-            _task.title = textField.text!
+            _task?.title = textField.text!
         }
         else if textField.placeholder == "Date" {
-            _task.date = dateFormatter.date(from: textField.text!)!
+            _task?.date = dateFormatter.date(from: textField.text!)!
         }
         else if textField.placeholder == "Group" {
-            _task.group = textField.text!
+            _task?.group = textField.text!
         }
         else if textField.placeholder == "Priority" {
-            _task.priority = Int(textField.text!)!
+            _task?.priority = Int(textField.text!)!
         }
         else if textField.placeholder == "Status" {
-            _task.status = (textField.text! == "Done") ? true : false
+            _task?.status = (textField.text! == "Done") ? true : false
         }
         return true;
     }
@@ -192,71 +211,18 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate{
     }
     
     func statusChanged(mySwitch: UISwitch) {
-        _task.status = mySwitch.isOn
-        _statusText.text = _task.status ? "Done" : "Not Done"
+        _task?.status = mySwitch.isOn
+        _statusText?.text = (_task?.status)! ? "Done" : "Not Done"
     }
     
     // MARK - Public access vars
     public var task: Task {
         get{
-            return _task
+            return _task!
         }
         set{
             _task = newValue
+            refresh()
         }
     }
-//    public var title: String {
-//        get{
-//            return _title
-//        }
-//        set{
-//            _title = newValue
-//        }
-//    }
-//    
-//    public var date: Date {
-//        get{
-//            return _date
-//        }
-//        set{
-//            _date = newValue
-//        }
-//    }
-//    
-//    public var group: String {
-//        get{
-//            return _group
-//        }
-//        set{
-//            _group = newValue
-//        }
-//    }
-//    
-//    public var priority: Int {
-//        get{
-//            return _priority
-//        }
-//        set{
-//            _priority = newValue
-//        }
-//    }
-//    
-//    public var status: Bool {
-//        get{
-//            return _status
-//        }
-//        set{
-//            _status = newValue
-//        }
-//    }
-//    
-//    public var note: String {
-//        get{
-//            return _note
-//        }
-//        set{
-//            _note = newValue
-//        }
-//    }
-    
 }

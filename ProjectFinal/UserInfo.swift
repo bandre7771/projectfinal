@@ -187,10 +187,8 @@ class UserInfo {
         return _notes
     }
     
-    public func addNewNote(note: Note) {
+    private func addNewNote(note: Note) {
         _notes.append(note)
-        delegateDayComposite?.notesListChanged(_notes)
-        delegateNotesSearch?.notesListChanged(_currentNoteSearch)
     }
     
     public func addOrUpdateNote(_ note: Note) {
@@ -204,7 +202,6 @@ class UserInfo {
         delegateDayComposite?.notesListChanged(_notes)
         delegateNotesSearch?.notesListChanged(_currentNoteSearch)
     }
-    
     
     // MARK: - Persistence Methods
     public func load() {
