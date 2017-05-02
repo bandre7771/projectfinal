@@ -40,6 +40,15 @@ class NotesSearchViewController: UIViewController, UserInfoDelegate, NotesSearch
         refresh()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if (UserInfo.Instance.searchViewTutorial) {
+            let alert = UIAlertController(title: "Notes", message: "This page allows you to search through your daily notes and edit them as you please. To add a new note, tap the note preview displayed at the bottom of the day view inside the day tab", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.default, handler: {(action: UIAlertAction) in ()}))
+            self.present(alert, animated: true, completion: nil)
+            UserInfo.Instance.searchViewTutorial = false
+        }
+    }
+    
     public func refresh() {
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.tintColor = UIColor.white

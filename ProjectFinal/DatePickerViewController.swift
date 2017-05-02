@@ -26,6 +26,7 @@ class DatePickerViewController: UIViewController {
     
     override func loadView() {
         view = DatePickerView()
+        title = "Note Details"
     }
     
     override func viewDidLoad() {

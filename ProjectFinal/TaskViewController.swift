@@ -28,7 +28,7 @@ class TaskViewController: UIViewController, TaskViewDelegate, DatePickerViewCont
     
     override func loadView() {
         view = TaskView()
-        title = "Task"
+        title = "Task Details"
         taskView.task.title = _task.title
         taskView.task.group = _task.group
         taskView.task.priority = _task.priority
@@ -43,11 +43,20 @@ class TaskViewController: UIViewController, TaskViewDelegate, DatePickerViewCont
         super.viewDidLoad()
         
         // Perform any additional setup after loading the view, typically from a nib.
-        let doneButton: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(save))
-        navigationItem.setRightBarButtonItems([doneButton], animated: true)
+        let saveButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save))
+        navigationItem.setRightBarButtonItems([saveButton], animated: true)
         // The line below will move the search bar below the nav bar
         navigationController?.navigationBar.isTranslucent = false;
         taskView.refresh()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if (UserInfo.Instance.taskViewTutorial) {
+            let alert = UIAlertController(title: "Tasks Details", message: "This page allows you to add details to a new task or edit them for an existing task.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.default, handler: {(action: UIAlertAction) in ()}))
+            self.present(alert, animated: true, completion: nil)
+            UserInfo.Instance.taskViewTutorial = false
+        }
     }
     
     public func save(){

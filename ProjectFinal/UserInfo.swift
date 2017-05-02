@@ -211,4 +211,9 @@ class UserInfo {
         //TODO: Implement Persistance Save
     }
     
+    // MARK: - Tutorial Flags
+    public var dayViewTutorial: Bool = true
+    public var searchViewTutorial: Bool = true
+    public var taskViewTutorial: Bool = true
+    public var taskSearchViewTutorial: Bool = true
 }
