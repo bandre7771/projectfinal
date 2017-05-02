@@ -26,6 +26,8 @@ class UserInfo {
     private var _taskList: [String: [Task]] = [:]
     private var _taskGroupList: [String] = []
     
+    private var _selectedCategories: [Bool] = []
+    
     weak var delegateDayComposite: UserInfoDelegate? = nil
     weak var delegateNotesSearch: UserInfoDelegate? = nil
     weak var delegateTasksSearch: UserInfoDelegate? = nil
@@ -59,6 +61,7 @@ class UserInfo {
         }
         else if !task.group.isEmpty{
             _taskList[task.group] = [task]
+            _selectedCategories.append(true)
         }
         delegateTasksSearch?.taskListUpdated()
         delegateDayComposite?.taskListUpdated()
@@ -121,8 +124,17 @@ class UserInfo {
     
     public func getDaysTasks(date: Date) -> [String: [Task]]{
         var dayTasks: [String: [Task]] = [:]
+        var categories: [String] = getAllCategories()
+        var areSelectedCategories: [Bool] = getSelectedCategories()
+        
+        var selectedCategories: [String] = []
         let calendar: Calendar = Calendar.current
-        for (group, _) in _taskList {
+        for i in 0..<categories.count {
+            if areSelectedCategories[i] {
+                selectedCategories.append(categories[i])
+            }
+        }
+        for (group) in selectedCategories {
             if let array = _taskList[group] {
                 for task in array {
                     if calendar.isDate(task.date, equalTo: date, toGranularity: .day) {
@@ -203,6 +215,38 @@ class UserInfo {
         _currentNoteSearch = _notes
         delegateDayComposite?.notesListChanged(_notes)
         delegateNotesSearch?.notesListChanged(_currentNoteSearch)
+    }
+    
+    public func getAllCategories() -> [String]{
+        var categories: [String] = []
+        for (group, _) in _taskList {
+            if !categories.contains(group) {
+                categories.append(group)
+            }
+        }
+        return categories
+    }
+    
+    public func getSelectedCategories() -> [Bool] {
+        if _selectedCategories.isEmpty {
+            for _ in 0...getAllCategories().count {
+                _selectedCategories.append(true)
+            }
+            return _selectedCategories
+        }
+        else{
+            return _selectedCategories
+        }
+        
+    }
+    
+    public func selectCategory(index: Int) {
+        if _selectedCategories[index] {
+            _selectedCategories[index] = false
+        }
+        else {
+            _selectedCategories[index] = true
+        }
     }
     
     

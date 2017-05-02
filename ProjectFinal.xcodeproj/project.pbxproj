@@ -10,6 +10,7 @@
 		350B40331EA7FC6B00440220 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B40321EA7FC6B00440220 /* Task.swift */; };
 		350B40371EA8071900440220 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B40361EA8071900440220 /* Group.swift */; };
 		350B40391EA80AF100440220 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B40381EA80AF100440220 /* Note.swift */; };
+		35115CF81EB7F47600F48F9A /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35115CF71EB7F47600F48F9A /* CategoryTableViewController.swift */; };
 		35ACDACD1EAE9B1D00C01308 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ACDACC1EAE9B1D00C01308 /* TaskViewController.swift */; };
 		35ACDACF1EAE9B2E00C01308 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ACDACE1EAE9B2E00C01308 /* TaskView.swift */; };
 		35ACDAD11EAEAB4A00C01308 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35ACDAD01EAEAB4A00C01308 /* UserInfo.swift */; };
@@ -43,6 +44,7 @@
 		350B40321EA7FC6B00440220 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		350B40361EA8071900440220 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		350B40381EA80AF100440220 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		35115CF71EB7F47600F48F9A /* CategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		35ACDACC1EAE9B1D00C01308 /* TaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		35ACDACE1EAE9B2E00C01308 /* TaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		35ACDAD01EAEAB4A00C01308 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				52D59B641EB1C64A00E5AD8B /* DayCompositeViewController.swift */,
 				520202481EB44CAC0039C16B /* NotesSearchViewController.swift */,
 				529D69B91EB7D4AE00A8C8BB /* TasksSearchViewController.swift */,
+				35115CF71EB7F47600F48F9A /* CategoryTableViewController.swift */,
 				35ACDACC1EAE9B1D00C01308 /* TaskViewController.swift */,
 				520202501EB521C80039C16B /* NoteViewController.swift */,
 				527C52EA1EB55EF700CAC728 /* DatePickerViewController.swift */,
@@ -288,6 +291,7 @@
 				520202451EB446880039C16B /* SearchBarView.swift in Sources */,
 				520202511EB521C80039C16B /* NoteViewController.swift in Sources */,
 				5202024F1EB51D1C0039C16B /* NoteView.swift in Sources */,
+				35115CF81EB7F47600F48F9A /* CategoryTableViewController.swift in Sources */,
 				520202471EB44A940039C16B /* NotesSearchView.swift in Sources */,
 				35ACDAD11EAEAB4A00C01308 /* UserInfo.swift in Sources */,
 				520202491EB44CAC0039C16B /* NotesSearchViewController.swift in Sources */,

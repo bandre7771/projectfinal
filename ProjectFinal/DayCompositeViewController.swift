@@ -8,7 +8,9 @@
 
 import UIKit
 
-class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTableViewDelegate, TaskViewControllerDelegate, NoteViewControllerDelegate, DayCompositeViewDelegate, DatePickerViewControllerDelegate {
+class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTableViewDelegate, TaskViewControllerDelegate, NoteViewControllerDelegate, DayCompositeViewDelegate, DatePickerViewControllerDelegate, CategoryTableViewControllerDelegate {
+    
+
     
     private var _currentDay: Date? = nil
     private var _currentNote: Note? = nil
@@ -57,9 +59,11 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         let searchTask = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchForTask))
         let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewTask))
         let calendar = UIBarButtonItem(title: currentMonthDayYear, style: .plain, target: self, action: #selector(chooseDay))
+        
+        let category = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(chooseCategories))
         let today = UIBarButtonItem(title: "Today", style: .plain, target: self, action: #selector(goToToday))
         navigationItem.rightBarButtonItems = [today, searchTask]
-        navigationItem.leftBarButtonItems = [calendar, add]
+        navigationItem.leftBarButtonItems = [calendar, add, category]
         navigationItem.titleView = UIView()
         
         dayCompositeView.taskListTableView?.taskList = UserInfo.Instance.TaskCollection
@@ -94,6 +98,14 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         let taskViewController: TaskViewController = TaskViewController(task: task)
         taskViewController.delegate = self
         navigationController?.pushViewController(taskViewController, animated: true)
+    }
+    
+    func chooseCategories() {
+        let categoryViewController: CategoryTableViewController = CategoryTableViewController()
+        categoryViewController.categories = UserInfo.Instance.getAllCategories()
+        categoryViewController.selected = UserInfo.Instance.getSelectedCategories()
+        categoryViewController.delegateCategory = self
+        navigationController?.pushViewController(categoryViewController, animated: true)
     }
     
     // MARK - Delegates from TaskListTableView
@@ -184,5 +196,10 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         }
         UserInfo.Instance.addTask(task: newTask)
         navigationController?.popViewController(animated: true)
+    }
+    
+    // MARK: Delegate from CategoryTableViewController
+    func categoryTableView(table: CategoryTableViewController, selectedCategory index: Int) {
+          UserInfo.Instance.selectCategory(index: index)
     }
 }
