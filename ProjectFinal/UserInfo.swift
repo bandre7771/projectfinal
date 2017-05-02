@@ -14,15 +14,9 @@ protocol UserInfoDelegate: class {
 }
 
 class UserInfo {
-    
     private var _currentNoteSearch: [Note] = []
-    
-    private var _notes: [Note] = [Note.init(text: "This note is a demo note for today! This is text to make it longer. Is this enough text hmmm maybe. We'll find out... Turns out it was but I want to make it even longer. Not stopping now lol lol.", date: Date())]
+    private var _notes: [Note] = [Note.init(text: "This note is a demo note for today! This is text to make it longer. Is this enough text hmmm maybe. We'll find out... Turns out it was but I want to make it even longer.", date: Date())]
 
-    private var _dailyDictionary: [Date : [Task]] = [Calendar.current.startOfDay(for: Date()): [/*Event(title: "Demo Event", startHour: 4, startMinute: 0, endHour: 8, endMinute: 0, date: Date()),
-         Event(title: "Demo Event", startHour: 12, startMinute: 0, endHour: 14, endMinute: 0, date: Date()),
-         Event(title: "Demo Event", startHour: 16, startMinute: 0, endHour: 17, endMinute: 0, date: Date()),
-         Event(title: "Demo Event", startHour: 16, startMinute: 50, endHour: 19, endMinute: 0, date: Date())*/]]
     private var _taskList: [String: [Task]] = [:]
     private var _taskGroupList: [String] = []
     
@@ -148,11 +142,6 @@ class UserInfo {
                             dayTasks[group] = [task]
                         }
                     }
-//            switch date.compare(task.date) {
-//            case .orderedAscending     :   print("Date A is earlier than date B")
-//            case .orderedDescending    :   print("Date A is later than date B")
-//            case .orderedSame          :   dayTasks.append(task)
-//          }
                 }
             }
         }
@@ -171,17 +160,6 @@ class UserInfo {
         return false
     }
     
-    public func searchDailyNotes(word: String) {
-        // TODO: add functionality for searching Daily notes for a string
-    }
-    
-    public func searchTaskNotes(word: String) {
-        //TODO: Search through each task's notes for the given string
-    }
-    
-    public func searchTasks(word: String) {
-        // TODO: Search through each task by task title for the keyword given.
-    }
     
     // MARK - Public Accessible Variables
     public var TaskCollection: [String: [Task]] {
@@ -247,15 +225,6 @@ class UserInfo {
         else {
             _selectedCategories[index] = true
         }
-    }
-    
-    
-    // MARK: - Persistence Methods
-    public func load() {
-        //TODO: Implement Persistance Load
-    }
-    public func save() {
-        //TODO: Implement Persistance Save
     }
     
     // MARK: - Tutorial Flags

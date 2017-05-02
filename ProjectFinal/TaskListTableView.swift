@@ -35,11 +35,6 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    func addPressed() {
-        NSLog("Add Pressed!")
-        //TODO: Library.Instance.createNewGame()
-    }
     
     //UITableView Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,13 +61,20 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
         if var array = taskList[group] {
             if index < array.count {
                 cell.textLabel?.text = array[index].title
+                var priority: String = ""
+                for _ in 0..<array[index].priority {
+                    priority += "!"
+                }
+                cell.detailTextLabel?.text = priority
+                if array[index].status {
+                    cell.textLabel?.textColor = UIColor.lightGray
+                    cell.detailTextLabel?.textColor = UIColor.lightGray
+                } else {
+                    cell.textLabel?.textColor = UIColor.black
+                    cell.detailTextLabel?.textColor = UIColor.black
+                }
             }
         }
-        
-        //cell.detailTextLabel?.text = taskList[index].title
-        //cell.textLabel?.textAlignment = .right
-        //cell.detailTextLabel?.textAlignment = .right
-        //cell = label
         return cell
     }
     
@@ -97,16 +99,8 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let index: Int = indexPath.row
         NSLog("Selected cell at index: \(index)")
-        //let task: Task = _taskList[index]
         let group: String = Array(_currentDayTasks.keys)[indexPath.section]
         delegateTask?.taskListTableView(table: self, selectedTask: index, group: group)
-        // TODO: implement task edit window here
-        /* let game: Game = GameLibrary.Instance.gameAtIndex(gameIndex)
-        
-        let gameViewController: GameViewController = GameViewController(game: game)
-        navigationController?.pushViewController(gameViewController, animated: true)
-        */
-        
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -119,7 +113,6 @@ class TaskListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
             NSLog("Attempted to delete cell at index: \(index)")
             let group: String = Array(_currentDayTasks.keys)[indexPath.section]
             delegateTask?.taskListTableView(table: self, removeTask: index, group: group)
-            // TODO: Library.Instance.deleteTaskAtIndex(index)
         }
     }
     

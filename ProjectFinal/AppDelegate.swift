@@ -30,10 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabs.tabBar.barStyle = .black
         tabs.tabBar.isTranslucent = false
         
-        let task1: Task = Task(title: "test1", status: false, priority: 5, date: Date(), group: "School", notes: Note(text: "end of semester", date: Date()))
-        let task2: Task = Task(title: "test2", status: false, priority: 5, date: Date(), group: "Work", notes: Note(text: "end of semester", date: Date()))
-        let task3: Task = Task(title: "test3", status: false, priority: 5, date: Date(), group: "Home", notes: Note(text: "end of semester", date: Date()))
-        let task4: Task = Task(title: "hope it works", status: false, priority: 5, date: Date(), group: "School", notes: Note(text: "end of semester", date: Date()))
+        let task1: Task = Task(title: "test1", status: false, priority: 3, date: Date(), group: "School", notes: Note(text: "end of semester", date: Date()))
+        let task2: Task = Task(title: "test2", status: false, priority: 1, date: Date(), group: "Work", notes: Note(text: "end of semester", date: Date()))
+        let task3: Task = Task(title: "test3", status: false, priority: 2, date: Date(), group: "Home", notes: Note(text: "end of semester", date: Date()))
+        let task4: Task = Task(title: "Task A", status: false, priority: 2, date: Date(), group: "School", notes: Note(text: "end of semester", date: Date()))
         
         UserInfo.Instance.addTask(task: task1)
         UserInfo.Instance.addTask(task: task2)

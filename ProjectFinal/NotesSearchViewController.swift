@@ -92,11 +92,15 @@ class NotesSearchViewController: UIViewController, UserInfoDelegate, NotesSearch
     
     // MARK: UserInfoDelegate Methods
     func taskListUpdated() {}
-    func notesListChanged(_ notes: [Note]) { refresh() }
+    func notesListChanged(_ notes: [Note]) {
+        _currentSearch = UserInfo.Instance.notes
+         refresh()
+    }
 
     // MARK: NoteViewControllerDelegate Methods
     func noteViewController(save note: Note) {
         UserInfo.Instance.addOrUpdateNote(note)
         navigationController?.popViewController(animated: true)
+        refresh()
     }
 }

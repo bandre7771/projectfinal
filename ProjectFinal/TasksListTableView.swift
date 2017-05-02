@@ -41,6 +41,13 @@ class TasksListTableView: UITableView, UITableViewDataSource, UITableViewDelegat
         let task: Task = _tasks![index]
         let date = monthDayYear(of: task)
         var taskDesc = (_tasks?[index].title)!
+        if (_tasks?[index].status)! {
+            cell.textLabel?.textColor = UIColor.lightGray
+            cell.detailTextLabel?.textColor = UIColor.lightGray
+        } else {
+            cell.textLabel?.textColor = UIColor.black
+            cell.detailTextLabel?.textColor = UIColor.black
+        }
         let maxCharacters = 20
         
         if (taskDesc.characters.count > maxCharacters) {

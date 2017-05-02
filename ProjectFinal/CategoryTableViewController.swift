@@ -34,7 +34,7 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
         _categories = UserInfo.Instance.getAllCategories()
         _selected = UserInfo.Instance.getSelectedCategories()
         
-        title = "Choose Categories"
+        title = "Categories"
         
         let tableView: UITableView = UITableView()
         view = tableView
@@ -43,7 +43,7 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         if UserInfo.Instance.categoryViewTutorial {
-            let alert = UIAlertController(title: "Welcome", message: "This page displays all the task groups. Choose which tasks you would like to view by tapping the group.", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Categories", message: "This page displays all the task groups. Choose which tasks you would like to view by tapping the group.", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.default, handler: {(action: UIAlertAction) in ()}))
             self.present(alert, animated: true, completion: nil)
             UserInfo.Instance.categoryViewTutorial = false
@@ -90,16 +90,6 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
         
         delegateCategory?.categoryTableView(table: self, selectedCategory: index)
         contentView.reloadData()
-        //let task: Task = _taskList[index]
-        //let group: String = Array(_currentDayTasks.keys)[indexPath.section]
-    
-        //delegateTask?.taskListTableView(table: self, selectedTask: index, group: group)
-        // TODO: implement task edit window here
-        /* let game: Game = GameLibrary.Instance.gameAtIndex(gameIndex)
-         
-         let gameViewController: GameViewController = GameViewController(game: game)
-         navigationController?.pushViewController(gameViewController, animated: true)
-         */
         
     }
     

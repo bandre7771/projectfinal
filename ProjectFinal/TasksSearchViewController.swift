@@ -109,6 +109,7 @@ class TasksSearchViewController: UIViewController, UserInfoDelegate, TasksSearch
         _currentSearch = _allTasks
         refresh()
     }
+    
     func notesListChanged(_ notes: [Note]) {}
     
     // MARK: TaskViewControllerDelegate Methods
@@ -117,8 +118,6 @@ class TasksSearchViewController: UIViewController, UserInfoDelegate, TasksSearch
             UserInfo.Instance.removeTask(task: oldTask)
         }
         UserInfo.Instance.addTask(task: newTask)
-    }
-    func doneEditing(updated task: Task) {
         navigationController?.popViewController(animated: true)
     }
 }

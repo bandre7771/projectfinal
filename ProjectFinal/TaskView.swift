@@ -158,7 +158,9 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate {
             _task?.group = textField.text!
         }
         else if textField.placeholder == "Priority" {
-            _task?.priority = Int(textField.text!)!
+            if Int(textField.text!) != nil && !(textField.text?.isEmpty)! {
+                _task?.priority = Int(textField.text!)!
+            }
         }
         else if textField.placeholder == "Status" {
             _task?.status = (textField.text! == "Done") ? true : false
@@ -196,7 +198,9 @@ class TaskView: UIView, UITextFieldDelegate, UITextViewDelegate {
             _task?.group = textField.text!
         }
         else if textField.placeholder == "Priority" {
-            _task?.priority = Int(textField.text!)!
+            if Int(textField.text!) != nil && !(textField.text?.isEmpty)! {
+                _task?.priority = Int(textField.text!)!
+            }
         }
         else if textField.placeholder == "Status" {
             _task?.status = (textField.text! == "Done") ? true : false
