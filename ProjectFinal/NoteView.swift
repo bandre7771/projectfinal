@@ -32,10 +32,6 @@ class NoteView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func draw(_ rect: CGRect) {
-        //_noteTextField?.placeholder = "Note"
-    }
-    
     public var text: String {
         get {
             return (_noteTextField?.text)!

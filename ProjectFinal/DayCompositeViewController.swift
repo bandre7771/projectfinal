@@ -52,6 +52,15 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
         view.addGestureRecognizer(swipeL)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if (UserInfo.Instance.dayViewTutorial) {
+            let alert = UIAlertController(title: "Welcome", message: "This page displays all of your tasks swipe left or right to change days or tap the date in the upper left corner to select a day to display.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.default, handler: {(action: UIAlertAction) in ()}))
+            self.present(alert, animated: true, completion: nil)
+            UserInfo.Instance.dayViewTutorial = false
+        }
+    }
+    
     public func refresh() {
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.isTranslucent = false

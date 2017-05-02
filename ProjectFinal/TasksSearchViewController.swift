@@ -42,6 +42,15 @@ class TasksSearchViewController: UIViewController, UserInfoDelegate, TasksSearch
         refresh()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if (UserInfo.Instance.taskSearchViewTutorial) {
+            let alert = UIAlertController(title: "Tasks", message: "This page allows you to search through your daily tasks. To add a new task, tap the add button in the top bar of the day view inside the day tab.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.default, handler: {(action: UIAlertAction) in ()}))
+            self.present(alert, animated: true, completion: nil)
+            UserInfo.Instance.taskSearchViewTutorial = false
+        }
+    }
+    
     public func refresh() {
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.tintColor = UIColor.white

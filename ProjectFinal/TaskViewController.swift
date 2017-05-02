@@ -12,7 +12,8 @@ protocol TaskViewControllerDelegate: class {
     func taskViewController(taskViewController: TaskViewController, newTask: Task, oldTask: Task)
 }
 
-class TaskViewController: UIViewController {
+class TaskViewController: UIViewController, TaskViewDelegate, DatePickerViewControllerDelegate  {
+    
     private var _task: Task
     
     init(task: Task) {
@@ -26,27 +27,36 @@ class TaskViewController: UIViewController {
     }
     
     override func loadView() {
-        let taskView: TaskView = TaskView()
-        view = taskView
-        title = "Task"
+        view = TaskView()
+        title = "Task Details"
         taskView.task.title = _task.title
         taskView.task.group = _task.group
         taskView.task.priority = _task.priority
         taskView.task.date = _task.date
         taskView.task.status = _task.status
         taskView.task.notes.text = _task.notes.text
+        taskView.delegate = self
         
-        refresh()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Perform any additional setup after loading the view, typically from a nib.
-        let doneButton: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(save))
-        navigationItem.setRightBarButtonItems([doneButton], animated: true)
+        let saveButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save))
+        navigationItem.setRightBarButtonItems([saveButton], animated: true)
         // The line below will move the search bar below the nav bar
         navigationController?.navigationBar.isTranslucent = false;
+        taskView.refresh()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if (UserInfo.Instance.taskViewTutorial) {
+            let alert = UIAlertController(title: "Tasks Details", message: "This page allows you to add details to a new task or edit them for an existing task.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.default, handler: {(action: UIAlertAction) in ()}))
+            self.present(alert, animated: true, completion: nil)
+            UserInfo.Instance.taskViewTutorial = false
+        }
     }
     
     public func save(){
@@ -61,13 +71,22 @@ class TaskViewController: UIViewController {
 //        
 //    }
     
-    weak var delegate: TaskViewControllerDelegate? = nil
-    
-    public func refresh() {
-        
+    func taskViewDelegate() {
+        let datePickerViewController: DatePickerViewController = DatePickerViewController()
+        datePickerViewController.delegate = self
+        navigationController?.pushViewController(datePickerViewController, animated: true)
     }
+    
+    weak var delegate: TaskViewControllerDelegate? = nil
     
     public var taskView: TaskView {
         return view as! TaskView
     }
+    
+    // MARK: DatePickerViewControllerDelegate methods
+    func datePickerViewControllerMethods(picked date: Date) {
+        taskView.task.date = date
+        taskView.refresh()
+    }
+
 }

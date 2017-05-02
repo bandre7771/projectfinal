@@ -199,10 +199,8 @@ class UserInfo {
         return _notes
     }
     
-    public func addNewNote(note: Note) {
+    private func addNewNote(note: Note) {
         _notes.append(note)
-        delegateDayComposite?.notesListChanged(_notes)
-        delegateNotesSearch?.notesListChanged(_currentNoteSearch)
     }
     
     public func addOrUpdateNote(_ note: Note) {
@@ -258,4 +256,9 @@ class UserInfo {
         //TODO: Implement Persistance Save
     }
     
+    // MARK: - Tutorial Flags
+    public var dayViewTutorial: Bool = true
+    public var searchViewTutorial: Bool = true
+    public var taskViewTutorial: Bool = true
+    public var taskSearchViewTutorial: Bool = true
 }
