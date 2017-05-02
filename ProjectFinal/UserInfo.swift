@@ -263,4 +263,5 @@ class UserInfo {
     public var searchViewTutorial: Bool = true
     public var taskViewTutorial: Bool = true
     public var taskSearchViewTutorial: Bool = true
+    public var categoryViewTutorial: Bool = true
 }

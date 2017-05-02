@@ -42,6 +42,12 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if UserInfo.Instance.categoryViewTutorial {
+            let alert = UIAlertController(title: "Welcome", message: "This page displays all the task groups. Choose which tasks you would like to view by tapping the group.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Got it!", style: UIAlertActionStyle.default, handler: {(action: UIAlertAction) in ()}))
+            self.present(alert, animated: true, completion: nil)
+            UserInfo.Instance.categoryViewTutorial = false
+        }
         contentView.dataSource = self
         contentView.delegate = self
         contentView.allowsSelection = true
@@ -60,11 +66,9 @@ class CategoryTableViewController: UIViewController, UITableViewDataSource, UITa
         let index = indexPath.row
         let cell: UITableViewCell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         
+        cell.textLabel?.text = _categories[index]
         if _selected[index] {
-            cell.textLabel?.text = _categories[index] + "  ✅"
-        }
-        else {
-            cell.textLabel?.text = _categories[index]
+            cell.detailTextLabel?.text = "✅"
         }
         //cell.detailTextLabel?.text = taskList[index].title
         //cell.textLabel?.textAlignment = .right
