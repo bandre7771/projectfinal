@@ -80,10 +80,12 @@ class UserInfo {
     
     public func removeTask(task: Task) {
         if var array = _taskList[task.group] {
-            for (index, _) in array.enumerated() {
-                if array[index].title == task.title && array[index].priority == task.priority {
-                    array.remove(at: index)
-                    _taskList[task.group] = array
+            for (index, _)in array.enumerated() {
+                if index < array.count {
+                    if array[index].title == task.title && array[index].priority == task.priority {
+                        array.remove(at: index)
+                        _taskList[task.group] = array
+                    }
                 }
             }
         }

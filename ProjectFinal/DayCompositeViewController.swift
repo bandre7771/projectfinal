@@ -209,6 +209,7 @@ class DayCompositeViewController: UIViewController, UserInfoDelegate, TaskListTa
     
     // MARK: Delegate from CategoryTableViewController
     func categoryTableView(table: CategoryTableViewController, selectedCategory index: Int) {
-          UserInfo.Instance.selectCategory(index: index)
+        UserInfo.Instance.selectCategory(index: index)
+        refresh()
     }
 }
